@@ -67,14 +67,14 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    implementation 'com.jakewharton.timber:timber:5.0.1'
+    implementation "com.jakewharton.timber:timber:$timber_version"
 
     implementation 'com.airbnb.android:lottie:5.0.3'
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
-    implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
+    implementation "com.google.firebase:firebase-auth-ktx:$firebase_auth_version"
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
