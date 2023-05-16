@@ -8,4 +8,9 @@ interface OnboardingRepository {
         email: String,
         password: String
     ): Result<Boolean>
+
+    suspend fun performLogin(
+        email: String,
+        password: String
+    ): Result<Boolean>
 }

@@ -19,7 +19,7 @@ interface Authenticator {
      * Login Feature
      */
 
-    suspend fun login(email: String, pass: String): Result<FirebaseUser>
+    suspend fun login(email: String, pass: String): Result<Boolean>
 
     /**
      * Returns whether or not there is a user active at the moment.
