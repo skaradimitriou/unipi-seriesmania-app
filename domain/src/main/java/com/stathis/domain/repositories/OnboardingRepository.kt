@@ -13,4 +13,6 @@ interface OnboardingRepository {
         email: String,
         password: String
     ): Result<Boolean>
+
+    suspend fun checkIfUserActive(): Boolean
 }

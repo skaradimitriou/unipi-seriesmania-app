@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/onboarding_nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/introFragment">
 
     <fragment
         android:id="@+id/registerFragment"
@@ -15,4 +15,8 @@
         android:name="com.stathis.seriesmania.ui.onboarding.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.stathis.seriesmania.ui.onboarding.intro.IntroFragment"
+        android:label="IntroFragment" />
 </navigation>
