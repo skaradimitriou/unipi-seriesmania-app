@@ -12,4 +12,8 @@ class OnboardingRepositoryImpl @Inject constructor(
     override suspend fun registerNewUser(email: String, password: String): Result<Boolean> {
         return authenticator.register(email, password)
     }
+
+    override suspend fun performLogin(email: String, password: String): Result<Boolean> {
+        return authenticator.login(email, password)
+    }
 }

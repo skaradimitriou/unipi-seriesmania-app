@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/onboarding_nav"
-    app:startDestination="@id/registerFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.stathis.seriesmania.ui.onboarding.register.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.stathis.seriesmania.ui.onboarding.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" />
 </navigation>

@@ -33,11 +33,11 @@ class AuthenticatorImpl @Inject constructor(
      * Attempts to login a user (email, pass) async and returns the result.
      */
 
-    override suspend fun login(email: String, pass: String): Result<FirebaseUser> {
+    override suspend fun login(email: String, pass: String): Result<Boolean> {
         try {
             val task = auth.signInWithEmailAndPassword(email, pass).await()
             task.user?.let {
-                return Result.Success(it)
+                return Result.Success(true)
             } ?: run {
                 return Result.Failure(GENERIC_ERROR)
             }
