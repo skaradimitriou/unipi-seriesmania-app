@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "406607728127",
+    "project_id": "unipi-seriesmania",
+    "storage_bucket": "unipi-seriesmania.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406607728127:android:0e1946908601bff88eabca",
+        "android_client_info": {
+          "package_name": "com.stathis.domain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406607728127-q1osfitdlvpqo58guqh5cscf82i08d4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5MXQO593i44YoEV_HNzBepvvugL45rbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406607728127-q1osfitdlvpqo58guqh5cscf82i08d4l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text Dimensions -->
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="text_18">18sp</dimen>
+    <dimen name="text_20">20sp</dimen>
+    <dimen name="text_22">22sp</dimen>
+
+    <!-- App General Dimensions -->
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="input_field_height">56dp</dimen>
+
+    <dimen name="dimen_xs">4dp</dimen>
+    <dimen name="dimen_s">8dp</dimen>
+    <dimen name="dimen_m">16dp</dimen>
+    <dimen name="dimen_l">24dp</dimen>
+    <dimen name="dimen_xl">32dp</dimen>
+    <dimen name="dimen_1.5xl">48dp</dimen>
+    <dimen name="dimen_2xl">64dp</dimen>
+    <dimen name="dimen_3xl">96dp</dimen>
+    <dimen name="dimen_4xl">128dp</dimen>
+
+    <dimen name="dimen_1">1dp</dimen>
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_12">12dp</dimen>
+    <dimen name="dimen_40">40dp</dimen>
+    <dimen name="dimen_70">70dp</dimen>
+    <dimen name="image_80">80dp</dimen>
+    <dimen name="dimen_100">100dp</dimen>
+    <dimen name="dimen_200">200dp</dimen>
+    <dimen name="dimen_250">250dp</dimen>
+    <dimen name="dimen_300">300dp</dimen>
+
+</resources>
