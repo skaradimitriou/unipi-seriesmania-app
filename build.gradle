@@ -23,6 +23,9 @@ ext.timber_version = '5.0.1'
 ext.firestore_version = '24.6.0'
 ext.firebase_auth_version = '22.0.0'
 
+ext.retrofitVersion = '2.9.0'
+ext.okhttpLoggingInterceptorVersion = '4.10.0'
+
 
 ext.kotlin_version = '1.5.2'
 ext.coroutines_version = '1.5.2'

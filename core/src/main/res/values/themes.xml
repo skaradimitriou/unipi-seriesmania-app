@@ -14,6 +14,12 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AppRecycler">
+        <item name="android:clipToPadding">false</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="android:paddingBottom">@dimen/dimen_xl</item>
+    </style>
+
     <!-- Text Styles -->
     <style name="text_22_bold_white" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/text_22</item>
