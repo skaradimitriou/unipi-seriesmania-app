@@ -9,4 +9,13 @@ interface SeriesApi {
 
     @GET("tv/popular?$API_KEY")
     suspend fun getPopularSeries(): Response<TvSeriesFeedDto?>
+
+    @GET("tv/top_rated?$API_KEY")
+    suspend fun getTopRatedSeries(): Response<TvSeriesFeedDto?>
+
+    @GET("tv/on_the_air?$API_KEY")
+    suspend fun getOnTheAirSeries(): Response<TvSeriesFeedDto?>
+
+    @GET("tv/airing_today?$API_KEY")
+    suspend fun getAiringTodaySeries(): Response<TvSeriesFeedDto?>
 }

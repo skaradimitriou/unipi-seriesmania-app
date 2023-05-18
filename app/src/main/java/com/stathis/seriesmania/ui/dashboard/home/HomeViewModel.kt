@@ -2,7 +2,7 @@ package com.stathis.seriesmania.ui.dashboard.home
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
-import com.stathis.domain.usecases.dashboard.GetPopularSeriesUseCase
+import com.stathis.domain.combiners.DashboardDataCombiner
 import com.stathis.seriesmania.base.BaseViewModel
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,12 +15,12 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     app: Application,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-    private val popularSeriesUseCase: GetPopularSeriesUseCase
+    private val homeCombiner: DashboardDataCombiner
 ) : BaseViewModel(app) {
 
     fun getData() {
         viewModelScope.launch(dispatcher) {
-            val result = popularSeriesUseCase.invoke()
+            val result = homeCombiner.invoke()
             Timber.d("RESULTS => $result")
         }
     }
