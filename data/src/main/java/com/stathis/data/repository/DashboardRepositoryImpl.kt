@@ -47,8 +47,8 @@ class DashboardRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getAiringTodaySeries(): List<TvSeries> {
-        val request = api.getAiringTodaySeries()
+    override suspend fun getTrendingSeries(): List<TvSeries> {
+        val request = api.getTrendingSeries()
         return if (request.isSuccessful) {
             val result = request.body()
             val data = TvSeriesMapper.toDomainModel(result)

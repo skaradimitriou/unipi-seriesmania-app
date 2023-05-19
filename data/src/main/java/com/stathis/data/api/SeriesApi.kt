@@ -16,6 +16,6 @@ interface SeriesApi {
     @GET("tv/on_the_air?$API_KEY")
     suspend fun getOnTheAirSeries(): Response<TvSeriesFeedDto?>
 
-    @GET("tv/airing_today?$API_KEY")
-    suspend fun getAiringTodaySeries(): Response<TvSeriesFeedDto?>
+    @GET("trending/tv/week?$API_KEY")
+    suspend fun getTrendingSeries(): Response<TvSeriesFeedDto?>
 }

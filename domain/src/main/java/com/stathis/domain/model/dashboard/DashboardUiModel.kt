@@ -6,7 +6,7 @@ import com.stathis.domain.model.UiModel
 data class DashboardUiModel(
     val popularSeries: PopularSeries,
     val topRatedSeries: TopRatedSeries,
-    val onTheAirSeries: OnTheAirSeries,
+    val trendingSeries: TrendingSeries,
     val airingTodaySeries: AiringTodaySeries
 )
 
@@ -28,11 +28,11 @@ data class TopRatedSeries(
     }
 }
 
-data class OnTheAirSeries(
+data class TrendingSeries(
     val results: List<TvSeries>
 ) : UiModel {
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
-        is OnTheAirSeries -> results == obj.results
+        is TrendingSeries -> results == obj.results
         else -> false
     }
 }

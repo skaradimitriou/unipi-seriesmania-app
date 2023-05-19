@@ -5,9 +5,9 @@ import com.stathis.domain.repositories.DashboardRepository
 import com.stathis.domain.usecases.BaseUseCase
 import javax.inject.Inject
 
-class GetOnTheAirTodaySeriesUseCase @Inject constructor(
+class GetTrendingSeriesUseCase @Inject constructor(
     private val repo: DashboardRepository
 ) : BaseUseCase<List<TvSeries>> {
 
-    override suspend fun invoke(vararg args: Any?): List<TvSeries> = repo.getTopRatedSeries()
+    override suspend fun invoke(vararg args: Any?): List<TvSeries> = repo.getTrendingSeries()
 }

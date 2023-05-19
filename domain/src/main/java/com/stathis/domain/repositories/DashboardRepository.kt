@@ -10,5 +10,5 @@ interface DashboardRepository {
 
     suspend fun getOnTheAirSeries(): List<TvSeries>
 
-    suspend fun getAiringTodaySeries(): List<TvSeries>
+    suspend fun getTrendingSeries(): List<TvSeries>
 }

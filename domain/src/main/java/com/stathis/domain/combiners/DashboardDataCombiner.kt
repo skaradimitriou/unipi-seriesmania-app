@@ -2,13 +2,13 @@ package com.stathis.domain.combiners
 
 import com.stathis.domain.model.dashboard.AiringTodaySeries
 import com.stathis.domain.model.dashboard.DashboardUiModel
-import com.stathis.domain.model.dashboard.OnTheAirSeries
 import com.stathis.domain.model.dashboard.PopularSeries
 import com.stathis.domain.model.dashboard.TopRatedSeries
+import com.stathis.domain.model.dashboard.TrendingSeries
 import com.stathis.domain.usecases.dashboard.GetAiringTodaySeriesUseCase
-import com.stathis.domain.usecases.dashboard.GetOnTheAirTodaySeriesUseCase
 import com.stathis.domain.usecases.dashboard.GetPopularSeriesUseCase
 import com.stathis.domain.usecases.dashboard.GetTopRatedSeriesUseCase
+import com.stathis.domain.usecases.dashboard.GetTrendingSeriesUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class DashboardDataCombiner @Inject constructor(
     private val popularSeriesUseCase: GetPopularSeriesUseCase,
     private val topRatedSeriesUseCase: GetTopRatedSeriesUseCase,
-    private val onTheAirTodaySeriesUseCase: GetOnTheAirTodaySeriesUseCase,
+    private val trendingSeriesUseCase: GetTrendingSeriesUseCase,
     private val airingTodaySeriesUseCase: GetAiringTodaySeriesUseCase,
 ) : BaseCombiner<DashboardUiModel> {
 
@@ -27,15 +27,15 @@ class DashboardDataCombiner @Inject constructor(
         val topRatedSeries = TopRatedSeries(
             async { topRatedSeriesUseCase.invoke() }.await()
         )
-        val onTheAirSeries = OnTheAirSeries(
-            async { onTheAirTodaySeriesUseCase.invoke() }.await()
+        val trendingSeries = TrendingSeries(
+            async { trendingSeriesUseCase.invoke() }.await()
         )
         val airingTodaySeries = AiringTodaySeries(
             async { airingTodaySeriesUseCase.invoke() }.await()
         )
 
         return@coroutineScope DashboardUiModel(
-            popularSeries, topRatedSeries, onTheAirSeries, airingTodaySeries
+            popularSeries, topRatedSeries, trendingSeries, airingTodaySeries
         )
     }
 }

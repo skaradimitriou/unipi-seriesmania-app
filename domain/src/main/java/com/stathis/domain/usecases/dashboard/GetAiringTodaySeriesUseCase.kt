@@ -9,5 +9,5 @@ class GetAiringTodaySeriesUseCase @Inject constructor(
     private val repo: DashboardRepository
 ) : BaseUseCase<List<TvSeries>> {
 
-    override suspend fun invoke(vararg args: Any?): List<TvSeries> = repo.getAiringTodaySeries()
+    override suspend fun invoke(vararg args: Any?): List<TvSeries> = repo.getOnTheAirSeries()
 }

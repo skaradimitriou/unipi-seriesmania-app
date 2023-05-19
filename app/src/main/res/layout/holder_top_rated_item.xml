@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.stathis.domain.model.TvSeries" />
+
+        <variable
+            name="callback"
+            type="com.stathis.seriesmania.ui.dashboard.home.adapter.SeriesCallback" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="130dp"
+        android:layout_height="@dimen/dimen_200"
+        app:cardCornerRadius="@dimen/dimen_m">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="@{() -> callback.onSeriesClick(model)}">
+
+            <ImageView
+                android:id="@+id/seriesImgView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:seriesImage="@{model}"
+                tools:src="@mipmap/ic_launcher" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#70000000"
+                app:layout_constraintBottom_toBottomOf="@id/seriesImgView"
+                app:layout_constraintEnd_toEndOf="@id/seriesImgView"
+                app:layout_constraintStart_toStartOf="@id/seriesImgView"
+                app:layout_constraintTop_toTopOf="@id/seriesImgView" />
+
+            <TextView
+                android:id="@+id/titleImgView"
+                style="@style/text_16_bold_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_s"
+                android:gravity="start"
+                android:text="@{model.original_name}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="The Hobbit: The Battle of the Five Armies" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/ratingStarTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_s"
+                app:layout_constraintBottom_toTopOf="@id/titleImgView"
+                app:layout_constraintStart_toStartOf="@id/titleImgView"
+                app:seriesRating="@{model.vote_average}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

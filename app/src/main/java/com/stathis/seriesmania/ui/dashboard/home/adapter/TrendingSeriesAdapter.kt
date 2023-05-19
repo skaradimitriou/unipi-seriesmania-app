@@ -7,26 +7,26 @@ import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.UiModel
 import com.stathis.seriesmania.base.BaseDiffUtil
 import com.stathis.seriesmania.base.BaseViewHolder
-import com.stathis.seriesmania.databinding.HolderTopRatedItemBinding
+import com.stathis.seriesmania.databinding.HolderOntheairItemBinding
 
-class TopRatedSeriesAdapter(
+class TrendingSeriesAdapter(
     private val callback: SeriesCallback
-) : ListAdapter<UiModel, TopRatedSeriesViewHolder>(BaseDiffUtil<UiModel>()) {
+) : ListAdapter<UiModel, TrendingSeriesViewHolder>(BaseDiffUtil<UiModel>()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedSeriesViewHolder {
-        val view = HolderTopRatedItemBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingSeriesViewHolder {
+        val view = HolderOntheairItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return TopRatedSeriesViewHolder(view, callback)
+        return TrendingSeriesViewHolder(view, callback)
     }
 
-    override fun onBindViewHolder(holder: TopRatedSeriesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TrendingSeriesViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }
 
-class TopRatedSeriesViewHolder(
-    private val binding: HolderTopRatedItemBinding,
+class TrendingSeriesViewHolder(
+    private val binding: HolderOntheairItemBinding,
     private val callback: SeriesCallback
 ) : BaseViewHolder(binding) {
 

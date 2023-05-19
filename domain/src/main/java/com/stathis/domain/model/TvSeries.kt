@@ -14,4 +14,6 @@ data class TvSeries(
     val vote_average: Double,
     val overview: String,
     val poster_path: String
-)
+) : UiModel {
+    override fun equalsContent(obj: UiModel): Boolean = false
+}
