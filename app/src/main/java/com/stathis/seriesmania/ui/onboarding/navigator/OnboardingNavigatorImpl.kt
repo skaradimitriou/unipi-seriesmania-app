@@ -13,7 +13,7 @@ class OnboardingNavigatorImpl @Inject constructor(
 ) : Navigator {
 
     override fun navigateTo(screenKey: OnboardingAction) = when (screenKey) {
-        //OnboardingAction.INTRO -> navController.navigate(R.id.introFragment)
+        OnboardingAction.INTRO -> navController.navigate(R.id.introFragment)
         OnboardingAction.LOGIN -> navController.navigate(R.id.loginFragment)
         OnboardingAction.REGISTER -> navController.navigate(R.id.registerFragment)
         else -> Unit

@@ -1,12 +1,22 @@
 package com.stathis.seriesmania.ui.dashboard
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.stathis.seriesmania.R
+import com.stathis.seriesmania.base.BaseActivity
+import com.stathis.seriesmania.databinding.ActivityDashboardBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class DashboardActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
+@AndroidEntryPoint
+class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activity_dashboard) {
+
+    override fun init() {
+        //
+    }
+
+    override fun startOps() {
+        //
+    }
+
+    override fun stopOps() {
+        //
     }
 }

@@ -2,6 +2,7 @@ package com.stathis.seriesmania.base
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.stathis.domain.model.UiModel
 
 abstract class BaseViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 

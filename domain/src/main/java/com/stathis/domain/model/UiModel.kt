@@ -1,4 +1,4 @@
-package com.stathis.seriesmania.base
+package com.stathis.domain.model
 
 interface UiModel {
     fun equalsContent(obj: UiModel): Boolean

@@ -2,8 +2,11 @@ package com.stathis.data.di
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.stathis.core.util.auth.Authenticator
+import com.stathis.data.api.SeriesApi
+import com.stathis.data.repository.DashboardRepositoryImpl
 import com.stathis.data.repository.OnboardingRepositoryImpl
 import com.stathis.data.repository.ProfileRepositoryImpl
+import com.stathis.domain.repositories.DashboardRepository
 import com.stathis.domain.repositories.OnboardingRepository
 import com.stathis.domain.repositories.ProfileRepository
 import dagger.Module
@@ -28,4 +31,10 @@ class RepositoryModule {
         firestore: FirebaseFirestore,
         authenticator: Authenticator
     ): ProfileRepository = ProfileRepositoryImpl(firestore, authenticator)
+
+    @Provides
+    @Singleton
+    fun provideDashboardRepository(
+        api: SeriesApi
+    ): DashboardRepository = DashboardRepositoryImpl(api)
 }
