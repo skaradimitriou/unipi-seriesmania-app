@@ -1,5 +1,9 @@
 package com.stathis.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class TvSeries(
     val original_name: String,
     val genre_ids: List<Int>,
@@ -14,6 +18,6 @@ data class TvSeries(
     val vote_average: Double,
     val overview: String,
     val poster_path: String
-) : UiModel {
+) : UiModel, Parcelable {
     override fun equalsContent(obj: UiModel): Boolean = false
 }

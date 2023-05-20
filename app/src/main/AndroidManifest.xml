@@ -15,6 +15,9 @@
         android:theme="@style/Theme.SeriesMania"
         tools:targetApi="31">
         <activity
+            android:name=".ui.results.ResultsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.dashboard.DashboardActivity"
             android:exported="false" />
         <activity
