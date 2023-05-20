@@ -3,12 +3,8 @@ package com.stathis.data.di
 import com.google.firebase.firestore.FirebaseFirestore
 import com.stathis.core.util.auth.Authenticator
 import com.stathis.data.api.SeriesApi
-import com.stathis.data.repository.DashboardRepositoryImpl
-import com.stathis.data.repository.OnboardingRepositoryImpl
-import com.stathis.data.repository.ProfileRepositoryImpl
-import com.stathis.domain.repositories.DashboardRepository
-import com.stathis.domain.repositories.OnboardingRepository
-import com.stathis.domain.repositories.ProfileRepository
+import com.stathis.data.repository.*
+import com.stathis.domain.repositories.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,4 +33,16 @@ class RepositoryModule {
     fun provideDashboardRepository(
         api: SeriesApi
     ): DashboardRepository = DashboardRepositoryImpl(api)
+
+    @Provides
+    @Singleton
+    fun provideCastRepository(
+        api: SeriesApi
+    ): CastRepository = CastRepositoryImpl(api)
+
+    @Provides
+    @Singleton
+    fun provideReviewsRepository(
+        api: SeriesApi
+    ): ReviewsRepository = ReviewsRepositoryImpl(api)
 }

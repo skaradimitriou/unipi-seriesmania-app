@@ -1,9 +1,12 @@
 package com.stathis.data.api
 
+import com.stathis.data.model.CastFeedDto
+import com.stathis.data.model.ReviewsFeedDto
 import com.stathis.data.model.TvSeriesFeedDto
 import com.stathis.data.util.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface SeriesApi {
 
@@ -18,4 +21,10 @@ interface SeriesApi {
 
     @GET("trending/tv/week?$API_KEY")
     suspend fun getTrendingSeries(): Response<TvSeriesFeedDto?>
+
+    @GET("tv/{tvSeriesId}/credits?$API_KEY")
+    suspend fun getCastForSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<CastFeedDto?>
+
+    @GET("tv/{tvSeriesId}/reviews?$API_KEY")
+    suspend fun getReviewsForSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<ReviewsFeedDto?>
 }
