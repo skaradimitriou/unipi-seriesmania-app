@@ -3,7 +3,7 @@ package com.stathis.core.util.auth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
-import com.stathis.core.util.consts.GENERIC_ERROR
+import com.stathis.core.util.GENERIC_ERROR
 import com.stathis.domain.model.Result
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject

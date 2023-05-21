@@ -17,20 +17,20 @@ import kotlin.math.abs
  * This file contains the binding adapters that are used across the app
  */
 
-@BindingAdapter("imageFromUrl")
-fun ImageView.setImageFromUrl(url: String?) {
+@BindingAdapter("seriesImage")
+fun ImageView.setSeriesImage(series: TvSeries) {
     try {
-        Glide.with(this).load(url).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
-            .into(this)
+        val url = series.poster_path.ifEmpty { series.backdrop_path }
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500$url")
+            .placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(this)
     } catch (e: Exception) {
         setImageResource(R.mipmap.ic_launcher)
     }
 }
 
-@BindingAdapter("seriesImage")
-fun ImageView.setSeriesImage(series: TvSeries) {
+@BindingAdapter("imageUrl")
+fun ImageView.imageUrl(url: String) {
     try {
-        val url = series.poster_path.ifEmpty { series.backdrop_path }
         Glide.with(this).load("https://image.tmdb.org/t/p/w500$url")
             .placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(this)
     } catch (e: Exception) {

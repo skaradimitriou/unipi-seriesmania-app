@@ -1,10 +1,6 @@
 package com.stathis.domain.combiners
 
-import com.stathis.domain.model.dashboard.AiringTodaySeries
-import com.stathis.domain.model.dashboard.DashboardUiModel
-import com.stathis.domain.model.dashboard.PopularSeries
-import com.stathis.domain.model.dashboard.TopRatedSeries
-import com.stathis.domain.model.dashboard.TrendingSeries
+import com.stathis.domain.model.dashboard.*
 import com.stathis.domain.usecases.dashboard.GetAiringTodaySeriesUseCase
 import com.stathis.domain.usecases.dashboard.GetPopularSeriesUseCase
 import com.stathis.domain.usecases.dashboard.GetTopRatedSeriesUseCase
@@ -20,7 +16,7 @@ class DashboardDataCombiner @Inject constructor(
     private val airingTodaySeriesUseCase: GetAiringTodaySeriesUseCase,
 ) : BaseCombiner<DashboardUiModel> {
 
-    override suspend fun invoke(): DashboardUiModel = coroutineScope {
+    override suspend fun invoke(vararg args: Any?): DashboardUiModel = coroutineScope {
         val popularSeries = PopularSeries(
             async { popularSeriesUseCase.invoke() }.await()
         )

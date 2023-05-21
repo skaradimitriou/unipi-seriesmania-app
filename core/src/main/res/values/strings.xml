@@ -30,4 +30,12 @@
     <string name="trending_title">Trending Series</string>
     <string name="airing_today_title">Airing Today Series</string>
 
+    <!-- Details -->
+    <string name="details_screen_title">Πληροφορίες Σειράς</string>
+    <string name="dummy_series_name">Wolverine</string>
+    <string name="dummy_series_release_date">2023–11–02</string>
+    <string name="series_details_description">Description</string>
+    <string name="details_cast_title">Cast</string>
+    <string name="reviews_header">Reviews</string>
+
 </resources>

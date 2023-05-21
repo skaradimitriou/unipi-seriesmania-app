@@ -1,7 +1,10 @@
 package com.stathis.core.ext
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Build.VERSION.SDK_INT
+import android.os.Parcelable
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
@@ -18,4 +21,9 @@ fun AppCompatActivity.onSuccessCameraResult(data: (Bitmap?) -> Unit) = registerF
         val bitmap = result.data?.extras?.get("data") as? Bitmap
         data.invoke(bitmap)
     }
+}
+
+inline fun <reified T : Parcelable> Intent.getParcelable(key: String): T? = when {
+    SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
+    else -> @Suppress("DEPRECATION") getParcelableExtra(key) as? T
 }

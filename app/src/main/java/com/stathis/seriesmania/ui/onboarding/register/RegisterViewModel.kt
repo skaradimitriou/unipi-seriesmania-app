@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.stathis.core.util.consts.GENERIC_ERROR
+import com.stathis.core.util.GENERIC_ERROR
 import com.stathis.domain.model.Result
 import com.stathis.domain.usecases.onboarding.RegisterNewUserUseCase
 import com.stathis.domain.usecases.profile.CreateNewUserProfileUseCase
