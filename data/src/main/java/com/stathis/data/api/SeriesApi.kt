@@ -27,4 +27,10 @@ interface SeriesApi {
 
     @GET("tv/{tvSeriesId}/reviews?$API_KEY")
     suspend fun getReviewsForSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<ReviewsFeedDto?>
+
+    @GET("tv/{tvSeriesId}/similar?$API_KEY")
+    suspend fun getSimilarSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<TvSeriesFeedDto?>
+
+    @GET("tv/{tvSeriesId}/recommendations?$API_KEY")
+    suspend fun getRecommendedSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<TvSeriesFeedDto?>
 }

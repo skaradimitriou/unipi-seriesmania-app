@@ -30,9 +30,9 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideDashboardRepository(
+    fun provideSeriesRepository(
         api: SeriesApi
-    ): DashboardRepository = DashboardRepositoryImpl(api)
+    ): SeriesRepository = SeriesRepositoryImpl(api)
 
     @Provides
     @Singleton

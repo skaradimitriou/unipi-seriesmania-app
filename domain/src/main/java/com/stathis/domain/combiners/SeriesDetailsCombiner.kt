@@ -1,9 +1,9 @@
 package com.stathis.domain.combiners
 
-import com.stathis.domain.model.details.CastModel
-import com.stathis.domain.model.details.DetailsUiModel
-import com.stathis.domain.model.details.ReviewsModel
+import com.stathis.domain.model.details.*
 import com.stathis.domain.usecases.cast.GetCastForSeriesUseCase
+import com.stathis.domain.usecases.general.GetRecommendedSeriesUseCase
+import com.stathis.domain.usecases.general.GetSimilarSeriesUseCase
 import com.stathis.domain.usecases.reviews.GetReviewsForSeriesUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -11,7 +11,9 @@ import javax.inject.Inject
 
 class SeriesDetailsCombiner @Inject constructor(
     private val castUseCase: GetCastForSeriesUseCase,
-    private val reviewsUseCase: GetReviewsForSeriesUseCase
+    private val reviewsUseCase: GetReviewsForSeriesUseCase,
+    private val similarSeriesUseCase: GetSimilarSeriesUseCase,
+    private val recommendedUseCase: GetRecommendedSeriesUseCase,
 ) : BaseCombiner<DetailsUiModel> {
 
     override suspend fun invoke(vararg args: Any?): DetailsUiModel = coroutineScope {
@@ -22,10 +24,18 @@ class SeriesDetailsCombiner @Inject constructor(
         val reviews = ReviewsModel(
             async { reviewsUseCase.invoke(seriesId) }.await()
         )
+        val similarSeries = SimilarModel(
+            async { similarSeriesUseCase.invoke(seriesId) }.await()
+        )
+        val recommendedSeries = RecommendationModel(
+            async { recommendedUseCase.invoke(seriesId) }.await()
+        )
 
         return@coroutineScope DetailsUiModel(
-            cast = cast,
-            reviews = reviews
+            cast,
+            reviews,
+            similarSeries,
+            recommendedSeries
         )
     }
 }

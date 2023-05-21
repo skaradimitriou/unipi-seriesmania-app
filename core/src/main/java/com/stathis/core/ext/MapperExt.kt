@@ -1,6 +1,6 @@
 package com.stathis.core.ext
 
-fun String?.toNotNull() = toString()
+fun String?.toNotNull() = this ?: ""
 
 fun Int?.toNotNull() = this ?: 0
 

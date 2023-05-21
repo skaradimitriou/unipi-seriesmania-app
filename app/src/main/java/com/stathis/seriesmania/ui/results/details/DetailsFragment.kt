@@ -15,14 +15,16 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_details) {
 
     private val viewModel: DetailsViewModel by viewModels()
-    private val adapter = DetailsAdapter()
+    private val adapter = DetailsAdapter {
+        viewModel.getSeriesInfo(it)
+    }
 
     override fun init() {
         setScreenTitle(getString(com.stathis.core.R.string.details_screen_title))
         binding.adapter = adapter
 
         requireActivity().intent.getParcelable<TvSeries>(SERIES)?.let {
-            viewModel.getCastBySeriesId(it)
+            viewModel.getSeriesInfo(it)
         }
     }
 

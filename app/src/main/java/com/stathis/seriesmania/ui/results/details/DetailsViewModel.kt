@@ -21,13 +21,12 @@ class DetailsViewModel @Inject constructor(
     private val combiner: SeriesDetailsCombiner
 ) : BaseViewModel(app) {
 
-
     val details: LiveData<List<UiModel>>
         get() = _details
 
     private val _details = MutableLiveData<List<UiModel>>()
 
-    fun getCastBySeriesId(series: TvSeries) {
+    fun getSeriesInfo(series: TvSeries) {
         viewModelScope.launch(dispatcher) {
             val list = mutableListOf<UiModel>()
             list.add(series)
@@ -36,6 +35,14 @@ class DetailsViewModel @Inject constructor(
 
             if (result.cast.results.isNotEmpty()) {
                 list.add(result.cast)
+            }
+
+            if (result.similar.results.isNotEmpty()) {
+                list.add(result.similar)
+            }
+
+            if (result.recommendations.results.isNotEmpty()) {
+                list.add(result.recommendations)
             }
 
             if (result.reviews.results.isNotEmpty()) {
