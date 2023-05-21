@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="model"
-            type="com.stathis.domain.model.TvSeries" />
+            name="adapter"
+            type="com.stathis.seriesmania.ui.results.details.adapter.DetailsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,94 +15,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.results.details.DetailsFragment">
 
-        <ImageView
-            android:id="@+id/bgImgView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detailsRecycler"
+            style="@style/AppRecycler"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_200"
-            android:contentDescription="@{model.name}"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:seriesImage="@{model}"
-            tools:src="@mipmap/ic_launcher" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="#70000000"
-            app:layout_constraintBottom_toBottomOf="@id/bgImgView"
-            app:layout_constraintTop_toTopOf="@id/bgImgView" />
-
-        <TextView
-            android:id="@+id/titleTxtView"
-            style="@style/text_20_bold_dark_grey"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_m"
-            android:text="@{model.original_name}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/posterImgView"
-            app:layout_constraintTop_toBottomOf="@+id/bgImgView"
-            tools:text="@string/dummy_series_name" />
-
-        <TextView
-            android:id="@+id/releaseDate"
-            style="@style/text_16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dimen_m"
-            android:text="@{model.first_air_date}"
-            app:layout_constraintLeft_toRightOf="@+id/posterImgView"
-            app:layout_constraintTop_toBottomOf="@+id/titleTxtView"
-            tools:text="@string/dummy_series_release_date" />
-
-        <ImageView
-            android:id="@+id/posterImgView"
-            android:layout_width="@dimen/dimen_100"
-            android:layout_height="150dp"
-            android:layout_marginStart="@dimen/dimen_m"
-            android:contentDescription="@{model.original_name}"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@id/releaseDate"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:seriesImage="@{model}"
-            tools:src="@mipmap/ic_launcher" />
-
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="@style/ratingStarTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/releaseDate"
-            app:layout_constraintStart_toEndOf="@id/releaseDate"
-            app:layout_constraintTop_toTopOf="@+id/releaseDate"
-            app:seriesRating="@{model.vote_average}"
-            tools:progress="70" />
-
-        <TextView
-            android:id="@+id/descriptionHeader"
-            style="@style/text_18_bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_m"
-            android:layout_marginTop="@dimen/dimen_m"
-            android:text="@string/series_details_description"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/releaseDate" />
-
-        <TextView
-            android:id="@+id/description"
-            style="@style/text_16"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:alpha="0.7"
-            android:text="@{model.overview}"
-            app:layout_constraintEnd_toEndOf="@id/descriptionHeader"
-            app:layout_constraintStart_toStartOf="@id/descriptionHeader"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionHeader"
-            tools:text="@string/series_details_description" />
+            android:layout_height="match_parent"
+            android:adapter="@{adapter}"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

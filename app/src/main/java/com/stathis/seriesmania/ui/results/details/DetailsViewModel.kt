@@ -1,34 +1,48 @@
 package com.stathis.seriesmania.ui.results.details
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.stathis.domain.usecases.cast.GetCastForSeriesUseCase
-import com.stathis.domain.usecases.reviews.GetReviewsForSeriesUseCase
+import com.stathis.domain.combiners.SeriesDetailsCombiner
+import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.UiModel
 import com.stathis.seriesmania.base.BaseViewModel
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     app: Application,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-    private val castUseCase: GetCastForSeriesUseCase,
-    private val reviewsUseCase: GetReviewsForSeriesUseCase
+    private val combiner: SeriesDetailsCombiner
 ) : BaseViewModel(app) {
 
 
-    fun getCastBySeriesId(seriesId: Int) {
+    val details: LiveData<List<UiModel>>
+        get() = _details
+
+    private val _details = MutableLiveData<List<UiModel>>()
+
+    fun getCastBySeriesId(series: TvSeries) {
         viewModelScope.launch(dispatcher) {
-            val result = castUseCase.invoke(seriesId)
-            Timber.d("CAST => $result")
-        }
-        viewModelScope.launch(dispatcher) {
-            val result = reviewsUseCase.invoke(seriesId)
-            Timber.d("REVIEWS => $result")
+            val list = mutableListOf<UiModel>()
+            list.add(series)
+
+            val result = combiner.invoke(series.id)
+
+            if (result.cast.results.isNotEmpty()) {
+                list.add(result.cast)
+            }
+
+            if (result.reviews.results.isNotEmpty()) {
+                list.add(result.reviews)
+            }
+
+            _details.postValue(list)
         }
     }
 }
