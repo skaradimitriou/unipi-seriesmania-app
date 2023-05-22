@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.stathis.seriesmania.ui.dashboard.profile.uimodel.ProfileHeader" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimen_l">
+
+        <View
+            android:id="@+id/profileBgView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_100"
+            android:background="@color/light_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/profileBgCenterView"
+            android:layout_width="@dimen/dimen_1"
+            android:layout_height="@dimen/dimen_1"
+            app:layout_constraintBottom_toBottomOf="@id/profileBgView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileUserImgView"
+            android:layout_width="@dimen/dimen_3xl"
+            android:layout_height="@dimen/dimen_3xl"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/profileBgCenterView"
+            app:layout_constraintEnd_toEndOf="@id/profileBgCenterView"
+            app:layout_constraintStart_toStartOf="@id/profileBgCenterView"
+            app:layout_constraintTop_toTopOf="@id/profileBgCenterView"
+            app:setProfileImage="@{model.userImg}"
+            tools:src="@drawable/profile_placeholder" />
+
+        <TextView
+            android:id="@+id/profile_user_name"
+            style="@style/text_18_bold_center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/dimen_10"
+            android:text="@{model.username}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/profileUserImgView"
+            app:layout_constraintTop_toBottomOf="@id/profileUserImgView"
+            tools:text="testopoulos" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -51,3 +51,7 @@ fun Fragment.onSuccessCameraResult(data: (Bitmap?) -> Unit) = registerForActivit
         data.invoke(bitmap)
     }
 }
+
+fun Fragment.askUserForAction(title: String, btnTitle: String, onPrimaryBtnClick: () -> Unit) {
+    requireContext().askUserForAction(title, btnTitle, onPrimaryBtnClick)
+}

@@ -10,5 +10,10 @@
         android:name="com.stathis.seriesmania.ui.dashboard.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.stathis.seriesmania.ui.dashboard.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>

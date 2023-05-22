@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.stathis.seriesmania.ui.dashboard.profile.uimodel.ProfileLogoutOption" />
+
+        <variable
+            name="callback"
+            type="com.stathis.seriesmania.ui.dashboard.profile.ProfileScreenCallback" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_l"
+        android:paddingHorizontal="@dimen/dimen_10">
+
+        <Button
+            android:id="@+id/loginBtn"
+            style="@style/AppButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/dimen_l"
+            android:onClick="@{() -> callback.onLogoutClick()}"
+            android:text="@{model.buttonTxt}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/continue_btn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

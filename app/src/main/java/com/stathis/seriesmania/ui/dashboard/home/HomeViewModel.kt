@@ -29,6 +29,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(dispatcher) {
             val result = homeCombiner.invoke()
             val list = listOf(
+                result.profileInfo,
                 result.popularSeries,
                 result.topRatedSeries,
                 result.trendingSeries,
