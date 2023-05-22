@@ -1,15 +1,21 @@
 package com.stathis.domain.combiners
 
-import com.stathis.domain.model.dashboard.*
+import com.stathis.domain.model.dashboard.AiringTodaySeries
+import com.stathis.domain.model.dashboard.DashboardUiModel
+import com.stathis.domain.model.dashboard.PopularSeries
+import com.stathis.domain.model.dashboard.TopRatedSeries
+import com.stathis.domain.model.dashboard.TrendingSeries
 import com.stathis.domain.usecases.dashboard.GetAiringTodaySeriesUseCase
 import com.stathis.domain.usecases.dashboard.GetPopularSeriesUseCase
 import com.stathis.domain.usecases.dashboard.GetTopRatedSeriesUseCase
 import com.stathis.domain.usecases.dashboard.GetTrendingSeriesUseCase
+import com.stathis.domain.usecases.profile.GetProfileInfoUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
 class DashboardDataCombiner @Inject constructor(
+    private val profileInfoUseCase: GetProfileInfoUseCase,
     private val popularSeriesUseCase: GetPopularSeriesUseCase,
     private val topRatedSeriesUseCase: GetTopRatedSeriesUseCase,
     private val trendingSeriesUseCase: GetTrendingSeriesUseCase,
@@ -17,6 +23,8 @@ class DashboardDataCombiner @Inject constructor(
 ) : BaseCombiner<DashboardUiModel> {
 
     override suspend fun invoke(vararg args: Any?): DashboardUiModel = coroutineScope {
+        val profile = async { profileInfoUseCase.invoke() }.await()
+
         val popularSeries = PopularSeries(
             async { popularSeriesUseCase.invoke() }.await()
         )
@@ -31,7 +39,7 @@ class DashboardDataCombiner @Inject constructor(
         )
 
         return@coroutineScope DashboardUiModel(
-            popularSeries, topRatedSeries, trendingSeries, airingTodaySeries
+            profile, popularSeries, topRatedSeries, trendingSeries, airingTodaySeries
         )
     }
 }

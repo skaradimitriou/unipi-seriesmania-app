@@ -2,7 +2,10 @@ package com.stathis.data.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.stathis.core.util.auth.Authenticator
+import com.stathis.data.mappers.UserMapper
+import com.stathis.data.model.UserDto
 import com.stathis.data.util.USERS_DB_PATH
+import com.stathis.domain.model.profile.User
 import com.stathis.domain.repositories.ProfileRepository
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -24,5 +27,19 @@ class ProfileRepositoryImpl @Inject constructor(
 
         val uuid = auth.getActiveUserId()
         firestore.collection(USERS_DB_PATH).document(uuid).set(data).await()
+    }
+
+    override suspend fun getUserProfile(): User {
+        val result = firestore.collection(USERS_DB_PATH)
+            .document(auth.getActiveUserId())
+            .get()
+            .await()
+            .toObject(UserDto::class.java)
+
+        return UserMapper.toDomainModel(result)
+    }
+
+    override suspend fun logout(): Boolean {
+        return auth.logout()
     }
 }

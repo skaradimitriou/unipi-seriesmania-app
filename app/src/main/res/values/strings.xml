@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">SeriesMania</string>
-    <string name="similar_series_title">Similar Series</string>
-    <string name="recommended_series_title">Recommended Series</string>
+
 </resources>

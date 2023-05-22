@@ -11,22 +11,29 @@ import com.stathis.domain.model.dashboard.AiringTodaySeries
 import com.stathis.domain.model.dashboard.PopularSeries
 import com.stathis.domain.model.dashboard.TopRatedSeries
 import com.stathis.domain.model.dashboard.TrendingSeries
+import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.BR
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.base.BaseDiffUtil
 import com.stathis.seriesmania.base.BaseViewHolder
 import com.stathis.seriesmania.databinding.HolderAiringTodaySeriesBinding
+import com.stathis.seriesmania.databinding.HolderDashboardUserBinding
 import com.stathis.seriesmania.databinding.HolderEmptyViewBinding
 import com.stathis.seriesmania.databinding.HolderPopularSeriesBinding
 import com.stathis.seriesmania.databinding.HolderTopRatedSeriesBinding
 import com.stathis.seriesmania.databinding.HolderTrendingSeriesBinding
 
-class HomeAdapter(private val callback: SeriesCallback) :
-    ListAdapter<UiModel, HomeViewHolder>(BaseDiffUtil<UiModel>()) {
+class HomeAdapter(
+    private val callback: DashboardCallback
+) : ListAdapter<UiModel, HomeViewHolder>(BaseDiffUtil<UiModel>()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = when (viewType) {
+            R.layout.holder_dashboard_user -> {
+                HolderDashboardUserBinding.inflate(inflater, parent, false)
+            }
+
             R.layout.holder_popular_series -> {
                 HolderPopularSeriesBinding.inflate(inflater, parent, false)
             }
@@ -53,6 +60,7 @@ class HomeAdapter(private val callback: SeriesCallback) :
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
+        is User -> R.layout.holder_dashboard_user
         is PopularSeries -> R.layout.holder_popular_series
         is TopRatedSeries -> R.layout.holder_top_rated_series
         is TrendingSeries -> R.layout.holder_trending_series
@@ -63,19 +71,24 @@ class HomeAdapter(private val callback: SeriesCallback) :
 
 class HomeViewHolder(
     private val binding: ViewDataBinding,
-    private val callback: SeriesCallback
-) : BaseViewHolder(binding) {
+    private val callback: DashboardCallback
+) : BaseViewHolder(binding), SeriesCallback {
 
     override fun present(data: UiModel) {
         when (data) {
+            is User -> {
+                binding.setVariable(BR.model, data)
+                binding.setVariable(BR.callback, callback)
+            }
+
             is PopularSeries -> {
-                val adapter = PopularSeriesAdapter(callback)
+                val adapter = PopularSeriesAdapter(this)
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
             }
 
             is TopRatedSeries -> {
-                val adapter = TopRatedSeriesAdapter(callback)
+                val adapter = TopRatedSeriesAdapter(this)
                 val decor = HorizontalItemDecoration(20)
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
@@ -83,7 +96,7 @@ class HomeViewHolder(
             }
 
             is TrendingSeries -> {
-                val adapter = TrendingSeriesAdapter(callback)
+                val adapter = TrendingSeriesAdapter(this)
                 val decor = HorizontalItemDecoration(20)
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
@@ -91,7 +104,7 @@ class HomeViewHolder(
             }
 
             is AiringTodaySeries -> {
-                val adapter = AiringTodaySeriesAdapter(callback)
+                val adapter = AiringTodaySeriesAdapter(this)
                 val decor = HorizontalItemDecoration(20)
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
@@ -99,6 +112,15 @@ class HomeViewHolder(
             }
         }
     }
+
+    override fun onSeriesClick(model: TvSeries) {
+        callback.onSeriesClick(model)
+    }
+}
+
+interface DashboardCallback {
+    fun onProfileClick()
+    fun onSeriesClick(model: TvSeries)
 }
 
 fun interface SeriesCallback {
