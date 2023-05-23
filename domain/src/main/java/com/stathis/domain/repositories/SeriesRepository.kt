@@ -1,6 +1,7 @@
 package com.stathis.domain.repositories
 
 import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.genres.Genre
 
 interface SeriesRepository {
 
@@ -11,6 +12,8 @@ interface SeriesRepository {
     suspend fun getOnTheAirSeries(): List<TvSeries>
 
     suspend fun getTrendingSeries(): List<TvSeries>
+
+    suspend fun getSeriesGenres(): List<Genre>
 
     suspend fun getSimilarSeries(seriesId: Int): List<TvSeries>
 

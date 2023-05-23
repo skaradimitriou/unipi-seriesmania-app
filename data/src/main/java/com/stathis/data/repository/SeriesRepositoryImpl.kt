@@ -1,8 +1,10 @@
 package com.stathis.data.repository
 
 import com.stathis.data.api.SeriesApi
+import com.stathis.data.mappers.GenresMapper
 import com.stathis.data.mappers.TvSeriesMapper
 import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.genres.Genre
 import com.stathis.domain.repositories.SeriesRepository
 import timber.log.Timber
 import javax.inject.Inject
@@ -53,6 +55,17 @@ class SeriesRepositoryImpl @Inject constructor(
             val result = request.body()
             val data = TvSeriesMapper.toDomainModel(result)
             data.results
+        } else {
+            Timber.d("FAILED")
+            listOf()
+        }
+    }
+
+    override suspend fun getSeriesGenres(): List<Genre> {
+        val request = api.getSeriesGenres()
+        return if (request.isSuccessful) {
+            val result = request.body()
+            GenresMapper.toDomainModel(result)
         } else {
             Timber.d("FAILED")
             listOf()

@@ -32,6 +32,10 @@
     <string name="user_greeting">Hello</string>
     <string name="dummy_username">testopoulos</string>
 
+    <!-- Discover -->
+    <string name="discover_screen_title">Είδη Σειρών</string>
+    <string name="discover_title">Discover</string>
+
     <!-- Profile Screen -->
     <string name="profile_title">Προφίλ</string>
     <string name="profile_dummy_username">foustanos</string>
