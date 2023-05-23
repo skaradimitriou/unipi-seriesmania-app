@@ -36,7 +36,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun stopOps() {}
 
     override fun onProfileClick() {
-        findNavController().navigate(R.id.profileFragment)
+        findNavController().navigate(R.id.nav_profile)
     }
 
     override fun onSeriesClick(model: TvSeries) {

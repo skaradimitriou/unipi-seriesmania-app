@@ -3,17 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashboard_nav"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/nav_home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:name="com.stathis.seriesmania.ui.dashboard.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
+
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/nav_profile"
         android:name="com.stathis.seriesmania.ui.dashboard.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_discover"
+        android:name="com.stathis.seriesmania.ui.dashboard.discover.DiscoverFragment"
+        android:label="DiscoverFragment"
+        tools:layout="@layout/fragment_discover" />
 
 </navigation>

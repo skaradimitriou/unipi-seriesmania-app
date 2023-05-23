@@ -1,6 +1,7 @@
 package com.stathis.data.api
 
 import com.stathis.data.model.CastFeedDto
+import com.stathis.data.model.GenresFeedDto
 import com.stathis.data.model.ReviewsFeedDto
 import com.stathis.data.model.TvSeriesFeedDto
 import com.stathis.data.util.API_KEY
@@ -21,6 +22,9 @@ interface SeriesApi {
 
     @GET("trending/tv/week?$API_KEY")
     suspend fun getTrendingSeries(): Response<TvSeriesFeedDto?>
+
+    @GET("genre/tv/list?$API_KEY")
+    suspend fun getSeriesGenres(): Response<GenresFeedDto?>
 
     @GET("tv/{tvSeriesId}/credits?$API_KEY")
     suspend fun getCastForSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<CastFeedDto?>

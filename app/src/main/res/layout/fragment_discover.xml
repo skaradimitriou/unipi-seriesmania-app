@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.stathis.seriesmania.ui.dashboard.discover.adapter.GenresAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.dashboard.discover.DiscoverFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/discoverRecycler"
+            style="@style/AppRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adapter="@{adapter}"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_s"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/holder_genres_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
