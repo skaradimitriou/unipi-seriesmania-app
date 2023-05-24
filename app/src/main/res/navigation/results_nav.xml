@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/results_nav"
-    app:startDestination="@id/detailsFragment">
+    app:startDestination="@id/resultsFragment">
 
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.stathis.seriesmania.ui.results.details.DetailsFragment"
         android:label="DetailsFragment"
         tools:layout="@layout/fragment_details" />
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.stathis.seriesmania.ui.results.results.ResultsFragment"
+        android:label="ResultsFragment"
+        tools:layout="@layout/fragment_results" />
 </navigation>

@@ -12,6 +12,10 @@
         <variable
             name="decoration"
             type="androidx.recyclerview.widget.RecyclerView.ItemDecoration" />
+
+        <variable
+            name="callback"
+            type="com.stathis.seriesmania.ui.dashboard.home.adapter.DashboardCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,8 +29,22 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_m"
             android:layout_marginTop="@dimen/dimen_m"
+            android:paddingVertical="@dimen/dimen_s"
             android:text="@string/trending_title"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/showAllTxtView"
+            style="@style/text_18_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_m"
+            android:layout_marginTop="@dimen/dimen_m"
+            android:onClick="@{() -> callback.openAllTrendingSeries()}"
+            android:paddingVertical="@dimen/dimen_s"
+            android:text="@string/all"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView

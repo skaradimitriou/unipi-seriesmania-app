@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.stathis.domain.model.TvSeries" />
+
+        <variable
+            name="callback"
+            type="com.stathis.seriesmania.ui.dashboard.home.adapter.SeriesCallback" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> callback.onSeriesClick(model)}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_m">
+
+            <ImageView
+                android:id="@+id/tvShowImgView"
+                android:layout_width="@dimen/dimen_100"
+                android:layout_height="0dp"
+                android:contentDescription="@{model.name}"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@id/tvShowDescTxtView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:seriesImage="@{model}"
+                tools:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tvShowTitleTxtView"
+                style="@style/text_20_bold_dark_grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:text="@{model.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvShowImgView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/lorem_ipsum_title" />
+
+            <RatingBar
+                android:id="@+id/showRating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_s"
+                android:theme="@style/ratingStarTheme"
+                app:layout_constraintStart_toStartOf="@id/tvShowTitleTxtView"
+                app:layout_constraintTop_toBottomOf="@id/tvShowTitleTxtView"
+                app:seriesRating="@{model.vote_average}"
+                tools:rating="4" />
+
+            <TextView
+                android:id="@+id/genreTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:background="@drawable/round_corners"
+                android:backgroundTint="@color/grey_bg"
+                android:paddingHorizontal="@dimen/dimen_s"
+                android:paddingVertical="@dimen/dimen_s"
+                app:airDate="@{model.first_air_date}"
+                app:layout_constraintStart_toStartOf="@id/tvShowTitleTxtView"
+                app:layout_constraintTop_toBottomOf="@id/showRating"
+                tools:text="ACTION" />
+
+            <TextView
+                android:id="@+id/tvShowDescTxtView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@{model.overview}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvShowTitleTxtView"
+                app:layout_constraintTop_toBottomOf="@id/genreTxtView"
+                app:seriesDescription="@{model.overview}"
+                tools:text="@string/lorem_ipsum" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
