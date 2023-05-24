@@ -32,6 +32,6 @@ object TvSeriesMapper : BaseMapper<TvSeriesFeedDto?, TvSeriesFeed> {
         id = this?.id.toNotNull(),
         vote_average = this?.vote_average.toNotNull(),
         overview = this?.overview.toNotNull(),
-        poster_path = this?.poster_path.toNotNull(),
+        poster_path = this?.poster_path.toNotNull()
     )
 }

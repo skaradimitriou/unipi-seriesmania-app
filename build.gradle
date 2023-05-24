@@ -18,6 +18,8 @@ ext.glide_version = "4.15.0"
 ext.lifecycle_version = '2.6.1'
 ext.navigation_version = '2.5.3'
 ext.timber_version = '5.0.1'
+ext.paging_version = '3.1.1'
+ext.coroutines_version = '1.7.1'
 
 //firebase
 ext.firestore_version = '24.6.0'
@@ -28,7 +30,7 @@ ext.okhttpLoggingInterceptorVersion = '4.10.0'
 
 
 ext.kotlin_version = '1.5.2'
-ext.coroutines_version = '1.5.2'
+
 ext.room_version = '2.4.0-alpha03'
 ext.hilt_version = '2.44'
 ext.retrofit_version = '2.9.0'

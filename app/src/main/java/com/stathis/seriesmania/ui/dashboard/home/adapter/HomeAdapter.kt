@@ -93,6 +93,7 @@ class HomeViewHolder(
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
                 binding.setVariable(BR.decoration, decor)
+                binding.setVariable(BR.callback, callback)
             }
 
             is TrendingSeries -> {
@@ -101,6 +102,7 @@ class HomeViewHolder(
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
                 binding.setVariable(BR.decoration, decor)
+                binding.setVariable(BR.callback, callback)
             }
 
             is AiringTodaySeries -> {
@@ -109,6 +111,7 @@ class HomeViewHolder(
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
                 binding.setVariable(BR.decoration, decor)
+                binding.setVariable(BR.callback, callback)
             }
         }
     }
@@ -121,6 +124,9 @@ class HomeViewHolder(
 interface DashboardCallback {
     fun onProfileClick()
     fun onSeriesClick(model: TvSeries)
+    fun openAllTopRatedSeries()
+    fun openAllTrendingSeries()
+    fun openAllAiringTodaySeries()
 }
 
 fun interface SeriesCallback {

@@ -8,23 +8,38 @@ import com.stathis.data.util.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface SeriesApi {
 
     @GET("tv/popular?$API_KEY")
-    suspend fun getPopularSeries(): Response<TvSeriesFeedDto?>
+    suspend fun getPopularSeries(
+        @Query("page") page: Int = 1
+    ): Response<TvSeriesFeedDto?>
 
     @GET("tv/top_rated?$API_KEY")
-    suspend fun getTopRatedSeries(): Response<TvSeriesFeedDto?>
+    suspend fun getTopRatedSeries(
+        @Query("page") page: Int = 1
+    ): Response<TvSeriesFeedDto?>
 
     @GET("tv/on_the_air?$API_KEY")
-    suspend fun getOnTheAirSeries(): Response<TvSeriesFeedDto?>
+    suspend fun getOnTheAirSeries(
+        @Query("page") page: Int = 1
+    ): Response<TvSeriesFeedDto?>
 
     @GET("trending/tv/week?$API_KEY")
-    suspend fun getTrendingSeries(): Response<TvSeriesFeedDto?>
+    suspend fun getTrendingSeries(
+        @Query("page") page: Int = 1
+    ): Response<TvSeriesFeedDto?>
 
     @GET("genre/tv/list?$API_KEY")
     suspend fun getSeriesGenres(): Response<GenresFeedDto?>
+
+    @GET("discover/tv?$API_KEY")
+    suspend fun getPagedResultsForThisGenre(
+        @Query("with_genres") genreId: String,
+        @Query("page") page: Int
+    ): Response<TvSeriesFeedDto?>
 
     @GET("tv/{tvSeriesId}/credits?$API_KEY")
     suspend fun getCastForSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<CastFeedDto?>
