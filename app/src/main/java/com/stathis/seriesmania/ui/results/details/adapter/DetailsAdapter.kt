@@ -8,6 +8,7 @@ import com.stathis.core.util.decorations.HorizontalItemDecoration
 import com.stathis.core.util.decorations.VerticalItemDecoration
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.UiModel
+import com.stathis.domain.model.cast.Cast
 import com.stathis.domain.model.details.CastModel
 import com.stathis.domain.model.details.RecommendationModel
 import com.stathis.domain.model.details.ReviewsModel
@@ -21,7 +22,7 @@ import com.stathis.seriesmania.ui.dashboard.home.adapter.SeriesCallback
 import com.stathis.seriesmania.ui.dashboard.home.adapter.TopRatedSeriesAdapter
 
 class DetailsAdapter(
-    private val callback: SeriesCallback
+    private val callback: DetailsCallback
 ) : ListAdapter<UiModel, DetailsViewHolder>(BaseDiffUtil<UiModel>()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailsViewHolder {
@@ -63,14 +64,14 @@ class DetailsAdapter(
 
 class DetailsViewHolder(
     private val binding: ViewDataBinding,
-    private val callback: SeriesCallback
-) : BaseViewHolder(binding) {
+    private val callback: DetailsCallback
+) : BaseViewHolder(binding), SeriesCallback, CastCallback {
 
     override fun present(data: UiModel) {
         when (data) {
             is TvSeries -> binding.setVariable(BR.model, data)
             is CastModel -> {
-                val adapter = CastAdapter()
+                val adapter = CastAdapter(this)
                 val decor = HorizontalItemDecoration(20)
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
@@ -84,7 +85,7 @@ class DetailsViewHolder(
                 binding.setVariable(BR.decoration, decor)
             }
             is SimilarModel -> {
-                val adapter = TopRatedSeriesAdapter(callback)
+                val adapter = TopRatedSeriesAdapter(this)
                 val decor = HorizontalItemDecoration(20)
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
@@ -92,7 +93,7 @@ class DetailsViewHolder(
             }
 
             is RecommendationModel -> {
-                val adapter = TopRatedSeriesAdapter(callback)
+                val adapter = TopRatedSeriesAdapter(this)
                 val decor = HorizontalItemDecoration(20)
                 adapter.submitList(data.results)
                 binding.setVariable(BR.adapter, adapter)
@@ -101,4 +102,12 @@ class DetailsViewHolder(
             else -> Unit
         }
     }
+
+    override fun onSeriesClick(model: TvSeries) = callback.onSeriesClick(model)
+    override fun onActorClick(actor: Cast) = callback.onActorClick(actor)
+}
+
+interface DetailsCallback {
+    fun onSeriesClick(series: TvSeries)
+    fun onActorClick(actor: Cast)
 }

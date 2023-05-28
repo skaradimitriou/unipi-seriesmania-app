@@ -1,9 +1,6 @@
 package com.stathis.data.api
 
-import com.stathis.data.model.CastFeedDto
-import com.stathis.data.model.GenresFeedDto
-import com.stathis.data.model.ReviewsFeedDto
-import com.stathis.data.model.TvSeriesFeedDto
+import com.stathis.data.model.*
 import com.stathis.data.util.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -52,4 +49,10 @@ interface SeriesApi {
 
     @GET("tv/{tvSeriesId}/recommendations?$API_KEY")
     suspend fun getRecommendedSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<TvSeriesFeedDto?>
+
+    @GET("person/{person_id}?$API_KEY")
+    suspend fun getPersonDetails(@Path("person_id") person_id: Int): Response<ActorDetailsDto?>
+
+    @GET("person/{person_id}/tv_credits?$API_KEY")
+    suspend fun getActorsKnownMovies(@Path("person_id") person_id: Int): Response<KnownSeriesFeedDto?>
 }

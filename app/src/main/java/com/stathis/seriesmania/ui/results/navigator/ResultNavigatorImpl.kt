@@ -17,6 +17,7 @@ class ResultNavigatorImpl @Inject constructor(
         val destination = when (mode) {
             ResultAction.DETAILS -> R.id.detailsFragment
             ResultAction.RESULTS -> R.id.resultsFragment
+            ResultAction.CAST_DETAILS -> R.id.castDetailsFragment
         }
         navController.init(R.navigation.results_nav, destination)
     }
@@ -24,6 +25,7 @@ class ResultNavigatorImpl @Inject constructor(
     override fun navigateTo(screenKey: ResultAction) = when (screenKey) {
         ResultAction.DETAILS -> navController.navigate(R.id.detailsFragment)
         ResultAction.RESULTS -> navController.navigate(R.id.resultsFragment)
+        ResultAction.CAST_DETAILS -> navController.navigate(R.id.castDetailsFragment)
     }
 
     override fun goBack() {

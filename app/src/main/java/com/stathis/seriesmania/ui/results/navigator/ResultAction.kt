@@ -4,5 +4,6 @@ import java.io.Serializable
 
 enum class ResultAction : Serializable {
     DETAILS,
-    RESULTS
+    CAST_DETAILS,
+    RESULTS,
 }

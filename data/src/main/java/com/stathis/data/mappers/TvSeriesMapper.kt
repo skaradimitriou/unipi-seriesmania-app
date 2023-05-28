@@ -15,11 +15,11 @@ object TvSeriesMapper : BaseMapper<TvSeriesFeedDto?, TvSeriesFeed> {
         results = dto?.results.toDomainModel()
     )
 
-    private fun List<TvSeriesDto>?.toDomainModel() = this?.map { dto ->
+    fun List<TvSeriesDto>?.toDomainModel() = this?.map { dto ->
         dto.toDomainModel()
     } ?: listOf()
 
-    private fun TvSeriesDto?.toDomainModel(): TvSeries = TvSeries(
+    fun TvSeriesDto?.toDomainModel(): TvSeries = TvSeries(
         original_name = this?.original_name.toNotNull(),
         genre_ids = this?.genre_ids.toNotNull(),
         name = this?.name.toNotNull(),
