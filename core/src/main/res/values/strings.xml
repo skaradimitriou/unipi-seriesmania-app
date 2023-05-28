@@ -63,4 +63,10 @@
     <string name="similar_series_title">Similar Series</string>
     <string name="recommended_series_title">Recommended Series</string>
 
+    <!-- Actor Details -->
+    <string name="actor_details_title">Actor Details</string>
+    <string name="known_for_series">Known for series</string>
+    <string name="also_known_as">Also known as: %s</string>
+    <string name="not_found">Not found</string>
+
 </resources>

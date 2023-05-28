@@ -20,6 +20,7 @@ class ResultsActivity : BaseActivity<ActivityResultsBinding>(R.layout.activity_r
     private lateinit var navigator: ResultNavigatorImpl
 
     private val viewModel: ResultsActivityViewModel by viewModels()
+    private val sharedViewModel: ResultsSharedViewModel by viewModels()
 
     override fun init() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

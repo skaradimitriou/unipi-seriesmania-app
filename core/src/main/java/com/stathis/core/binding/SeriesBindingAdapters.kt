@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.stathis.core.R
 import com.stathis.domain.model.TvSeries
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 @BindingAdapter("seriesDescription")
 fun TextView.setSeriesDescription(description: String) {
@@ -33,7 +33,11 @@ fun RatingBar.setSeriesRating(vote_average: Double) {
 
 @BindingAdapter("airDate")
 fun TextView.setAiringDate(date: String) {
-    val initDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)
-    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-    text = initDate?.let { formatter.format(it) }
+    text = if (date.isEmpty()) {
+        resources.getString(R.string.not_found)
+    } else {
+        val initDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)
+        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        initDate?.let { formatter.format(it) }
+    }
 }
