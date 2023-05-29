@@ -2,6 +2,7 @@ package com.stathis.core.ext
 
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.NavController
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -16,4 +17,10 @@ fun NavController.init(navigationId: Int, destinationId: Int) {
     val navGraph = navInflater.inflate(navigationId)
     navGraph.setStartDestination(destinationId)
     graph = navGraph
+}
+
+fun <T : RecyclerView> T.removeItemDecorations() {
+    while (itemDecorationCount > 0) {
+        removeItemDecorationAt(0)
+    }
 }
