@@ -18,4 +18,6 @@ interface SeriesRepository {
     suspend fun getSimilarSeries(seriesId: Int): List<TvSeries>
 
     suspend fun getRecommendedSeries(seriesId: Int): List<TvSeries>
+
+    suspend fun searchForSeries(query: String): List<TvSeries>
 }

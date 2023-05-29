@@ -20,7 +20,7 @@ data class TvSeries(
     val poster_path: String
 ) : UiModel, Parcelable {
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
-        is TvSeries -> id == obj.id
+        is TvSeries -> id == obj.id && name == obj.name
         else -> false
     }
 }

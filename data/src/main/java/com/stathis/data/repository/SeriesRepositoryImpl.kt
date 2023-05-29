@@ -47,4 +47,9 @@ class SeriesRepositoryImpl @Inject constructor(
         call = { api.getRecommendedSeries(seriesId) },
         mapper = { TvSeriesMapper.toDomainModel(it).results }
     )
+
+    override suspend fun searchForSeries(query: String): List<TvSeries> = getAndMapResponse(
+        call = { api.searchForSeries(query) },
+        mapper = { TvSeriesMapper.toDomainModel(it).results }
+    )
 }

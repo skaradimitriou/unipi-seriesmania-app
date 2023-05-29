@@ -39,6 +39,7 @@
     <!-- Discover -->
     <string name="discover_screen_title">Είδη Σειρών</string>
     <string name="discover_title">Discover</string>
+    <string name="search">Search</string>
 
     <!-- Profile Screen -->
     <string name="profile_title">Προφίλ</string>

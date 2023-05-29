@@ -50,6 +50,12 @@ interface SeriesApi {
     @GET("tv/{tvSeriesId}/recommendations?$API_KEY")
     suspend fun getRecommendedSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<TvSeriesFeedDto?>
 
+    @GET("search/tv?$API_KEY")
+    suspend fun searchForSeries(
+        @Query("query") query: String,
+        @Query("include_adult") includeAdult: Boolean = false
+    ): Response<TvSeriesFeedDto?>
+
     @GET("person/{person_id}?$API_KEY")
     suspend fun getPersonDetails(@Path("person_id") person_id: Int): Response<ActorDetailsDto?>
 
