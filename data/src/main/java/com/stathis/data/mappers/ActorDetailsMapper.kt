@@ -6,7 +6,7 @@ import com.stathis.domain.model.cast.ActorDetails
 
 object ActorDetailsMapper : BaseMapper<ActorDetailsDto?, ActorDetails> {
 
-    override fun toDomainModel(dto: ActorDetailsDto?): ActorDetails = ActorDetails(
+    override suspend fun toDomainModel(dto: ActorDetailsDto?): ActorDetails = ActorDetails(
         adult = dto?.adult.toNotNull(),
         also_known_as = dto?.also_known_as.toNotNull(),
         biography = dto?.biography.toNotNull(),

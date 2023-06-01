@@ -3,10 +3,10 @@ package com.stathis.seriesmania.ui.onboarding.login
 import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.showSnackbar
 import com.stathis.domain.model.Result
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseFragment
 import com.stathis.seriesmania.databinding.FragmentLoginBinding
 import com.stathis.seriesmania.ui.dashboard.DashboardActivity
 import com.stathis.seriesmania.ui.onboarding.OnboardingSharedViewModel

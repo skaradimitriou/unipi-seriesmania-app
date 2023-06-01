@@ -8,7 +8,7 @@ import com.stathis.domain.model.TvSeriesFeed
 
 object TvSeriesMapper : BaseMapper<TvSeriesFeedDto?, TvSeriesFeed> {
 
-    override fun toDomainModel(dto: TvSeriesFeedDto?): TvSeriesFeed = TvSeriesFeed(
+    override suspend fun toDomainModel(dto: TvSeriesFeedDto?): TvSeriesFeed = TvSeriesFeed(
         page = dto?.page.toNotNull(),
         total_pages = dto?.total_pages.toNotNull(),
         total_results = dto?.total_results.toNotNull(),

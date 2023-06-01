@@ -3,8 +3,8 @@ package com.stathis.seriesmania.ui.dashboard
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.stathis.core.base.BaseActivity
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseActivity
 import com.stathis.seriesmania.databinding.ActivityDashboardBinding
 import dagger.hilt.android.AndroidEntryPoint
 

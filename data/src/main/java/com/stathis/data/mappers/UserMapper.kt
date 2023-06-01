@@ -6,7 +6,7 @@ import com.stathis.domain.model.profile.User
 
 object UserMapper : BaseMapper<UserDto?, User> {
 
-    override fun toDomainModel(dto: UserDto?): User = User(
+    override suspend fun toDomainModel(dto: UserDto?): User = User(
         firstName = dto?.firstName.toNotNull(),
         lastName = dto?.lastName.toNotNull(),
         telephone = dto?.telephone.toNotNull(),

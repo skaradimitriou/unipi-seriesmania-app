@@ -2,13 +2,13 @@ package com.stathis.seriesmania.ui.results.details
 
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.getParcelable
 import com.stathis.core.ext.setScreenTitle
 import com.stathis.core.util.SERIES
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.cast.Cast
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseFragment
 import com.stathis.seriesmania.databinding.FragmentDetailsBinding
 import com.stathis.seriesmania.ui.results.ResultsActivityViewModel
 import com.stathis.seriesmania.ui.results.ResultsSharedViewModel

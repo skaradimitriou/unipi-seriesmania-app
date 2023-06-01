@@ -7,7 +7,7 @@ import com.stathis.domain.model.genres.Genre
 
 object GenresMapper : BaseMapper<GenresFeedDto?, List<Genre>> {
 
-    override fun toDomainModel(dto: GenresFeedDto?): List<Genre> {
+    override suspend fun toDomainModel(dto: GenresFeedDto?): List<Genre> {
         return dto?.genres.toDomainModel()
     }
 

@@ -45,4 +45,10 @@ class RepositoryModule {
     fun provideReviewsRepository(
         api: SeriesApi
     ): ReviewsRepository = ReviewsRepositoryImpl(api)
+
+    @Provides
+    @Singleton
+    fun provideForumRepository(
+        firestore: FirebaseFirestore
+    ): ForumRepository = ForumRepositoryImpl(firestore)
 }

@@ -3,8 +3,8 @@ package com.stathis.seriesmania.ui.onboarding.intro
 import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.stathis.core.base.BaseFragment
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseFragment
 import com.stathis.seriesmania.databinding.FragmentIntroBinding
 import com.stathis.seriesmania.ui.dashboard.DashboardActivity
 import com.stathis.seriesmania.ui.onboarding.OnboardingSharedViewModel

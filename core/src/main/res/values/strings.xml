@@ -41,6 +41,9 @@
     <string name="discover_title">Discover</string>
     <string name="search">Search</string>
 
+    <!-- Forum -->
+    <string name="forum_screen_title">Forum</string>
+
     <!-- Profile Screen -->
     <string name="profile_title">Προφίλ</string>
     <string name="profile_dummy_username">foustanos</string>

@@ -3,6 +3,7 @@ package com.stathis.seriesmania.ui.results.results
 import android.content.Intent
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.getParcelable
 import com.stathis.core.ext.getSerializable
 import com.stathis.core.ext.setScreenTitle
@@ -15,7 +16,6 @@ import com.stathis.core.util.decorations.VerticalItemDecoration
 import com.stathis.domain.model.ResultType
 import com.stathis.domain.model.genres.Genre
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseFragment
 import com.stathis.seriesmania.databinding.FragmentResultsBinding
 import com.stathis.seriesmania.ui.results.ResultsActivity
 import com.stathis.seriesmania.ui.results.navigator.ResultAction
@@ -42,7 +42,12 @@ class ResultsFragment : BaseFragment<FragmentResultsBinding>(R.layout.fragment_r
             val genre = requireActivity().intent.getParcelable<Genre>(GENRE)
 
             genre?.let {
-                setScreenTitle(getString(com.stathis.core.R.string.all_series_genre_placeholder, genre.name))
+                setScreenTitle(
+                    getString(
+                        com.stathis.core.R.string.all_series_genre_placeholder,
+                        genre.name
+                    )
+                )
             } ?: kotlin.run {
                 setScreenTitle(type.toDisplayText(requireContext()))
             }

@@ -2,10 +2,10 @@ package com.stathis.seriesmania.ui.onboarding.register
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
+import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.showSnackbar
 import com.stathis.domain.model.Result
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseFragment
 import com.stathis.seriesmania.databinding.FragmentRegisterBinding
 import com.stathis.seriesmania.ui.dashboard.DashboardActivity
 import dagger.hilt.android.AndroidEntryPoint

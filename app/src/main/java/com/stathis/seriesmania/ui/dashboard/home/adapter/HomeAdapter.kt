@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.base.BaseDiffUtil
+import com.stathis.core.base.BaseViewHolder
 import com.stathis.core.util.decorations.HorizontalItemDecoration
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.UiModel
@@ -14,8 +16,6 @@ import com.stathis.domain.model.dashboard.TrendingSeries
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.BR
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseDiffUtil
-import com.stathis.seriesmania.base.BaseViewHolder
 import com.stathis.seriesmania.databinding.HolderAiringTodaySeriesBinding
 import com.stathis.seriesmania.databinding.HolderDashboardUserBinding
 import com.stathis.seriesmania.databinding.HolderEmptyViewBinding

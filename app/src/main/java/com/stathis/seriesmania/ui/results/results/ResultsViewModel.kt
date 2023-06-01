@@ -10,12 +10,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.liveData
+import com.stathis.core.base.BaseViewModel
 import com.stathis.data.api.SeriesApi
 import com.stathis.data.pagingsource.TvSeriesPagingSource
 import com.stathis.domain.model.ResultType
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.genres.Genre
-import com.stathis.seriesmania.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

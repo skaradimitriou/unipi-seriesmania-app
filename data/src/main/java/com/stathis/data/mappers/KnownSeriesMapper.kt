@@ -6,7 +6,7 @@ import com.stathis.domain.model.TvSeries
 
 object KnownSeriesMapper : BaseMapper<KnownSeriesFeedDto?, List<TvSeries>> {
 
-    override fun toDomainModel(dto: KnownSeriesFeedDto?): List<TvSeries> {
+    override suspend fun toDomainModel(dto: KnownSeriesFeedDto?): List<TvSeries> {
         return dto?.cast.toDomainModel()
     }
 }

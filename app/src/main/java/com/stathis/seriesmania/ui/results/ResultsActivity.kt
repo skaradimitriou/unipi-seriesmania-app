@@ -4,10 +4,10 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.stathis.core.base.BaseActivity
 import com.stathis.core.ext.getSerializable
 import com.stathis.core.util.MODE
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseActivity
 import com.stathis.seriesmania.databinding.ActivityResultsBinding
 import com.stathis.seriesmania.ui.results.navigator.ResultAction
 import com.stathis.seriesmania.ui.results.navigator.ResultNavigatorImpl

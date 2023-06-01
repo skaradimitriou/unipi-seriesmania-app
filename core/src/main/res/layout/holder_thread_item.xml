@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.stathis.domain.model.forum.ForumThread" />
+
+        <variable
+            name="callback"
+            type="com.stathis.core.adapters.forum.ThreadsCallback" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> callback.onThreadClick(model)}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_m">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatarImgView"
+                android:layout_width="@dimen/dimen_2xl"
+                android:layout_height="@dimen/dimen_2xl"
+                android:contentDescription="@{model.user.userImg}"
+                android:onClick="@{() -> callback.onAvatarClick(model.user)}"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setProfileImage="@{model.user.userImg}"
+                tools:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/forumTitleTxtView"
+                style="@style/text_20_bold_dark_grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:text="@{model.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/avatarImgView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/lorem_ipsum_title" />
+
+            <TextView
+                android:id="@+id/tvShowDescTxtView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:ellipsize="end"
+                android:text="@{model.body}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/forumTitleTxtView"
+                app:layout_constraintTop_toBottomOf="@id/forumTitleTxtView"
+                tools:text="@string/lorem_ipsum" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

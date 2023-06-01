@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.base.BaseDiffUtil
+import com.stathis.core.base.BaseViewHolder
 import com.stathis.domain.model.UiModel
 import com.stathis.seriesmania.BR
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseDiffUtil
-import com.stathis.seriesmania.base.BaseViewHolder
 import com.stathis.seriesmania.databinding.HolderEmptyViewBinding
 import com.stathis.seriesmania.databinding.HolderLogoutOptionBinding
 import com.stathis.seriesmania.databinding.HolderProfileHeaderBinding

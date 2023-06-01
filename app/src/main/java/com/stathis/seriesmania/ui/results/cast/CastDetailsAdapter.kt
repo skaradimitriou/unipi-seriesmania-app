@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.base.BaseDiffUtil
+import com.stathis.core.base.BaseViewHolder
 import com.stathis.core.util.decorations.VerticalItemDecoration
 import com.stathis.domain.model.TvSeriesWrapper
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.cast.ActorDetails
 import com.stathis.seriesmania.BR
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseDiffUtil
-import com.stathis.seriesmania.base.BaseViewHolder
 import com.stathis.seriesmania.databinding.HolderActorItemBinding
 import com.stathis.seriesmania.databinding.HolderEmptyViewBinding
 import com.stathis.seriesmania.databinding.HolderKnownForItemBinding
@@ -27,9 +27,11 @@ class CastDetailsAdapter(
             R.layout.holder_actor_item -> {
                 HolderActorItemBinding.inflate(inflater, parent, false)
             }
+
             R.layout.holder_known_for_item -> {
                 HolderKnownForItemBinding.inflate(inflater, parent, false)
             }
+
             else -> HolderEmptyViewBinding.inflate(inflater, parent, false)
         }
         return CastDetailsViewHolder(view, callback)
@@ -56,6 +58,7 @@ class CastDetailsViewHolder(
             is ActorDetails -> {
                 binding.setVariable(BR.model, data)
             }
+
             is TvSeriesWrapper -> {
                 val decor = VerticalItemDecoration(30)
                 val adapter = KnownForAdapter(callback)

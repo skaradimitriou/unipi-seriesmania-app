@@ -7,7 +7,7 @@ import com.stathis.domain.model.cast.Cast
 
 object CastMapper : BaseMapper<CastFeedDto?, List<Cast>> {
 
-    override fun toDomainModel(dto: CastFeedDto?): List<Cast> {
+    override suspend fun toDomainModel(dto: CastFeedDto?): List<Cast> {
         return dto?.cast.toDomainModel()
     }
 

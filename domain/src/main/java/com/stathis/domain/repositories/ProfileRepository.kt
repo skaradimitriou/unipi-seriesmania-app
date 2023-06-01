@@ -8,5 +8,7 @@ interface ProfileRepository {
 
     suspend fun getUserProfile(): User
 
+    suspend fun getUserInfo(userId: String): User
+
     suspend fun logout(): Boolean
 }
