@@ -1,8 +1,8 @@
 package com.stathis.seriesmania.ui.results
 
 import android.app.Application
+import com.stathis.core.base.BaseViewModel
 import com.stathis.domain.model.cast.Cast
-import com.stathis.seriesmania.base.BaseViewModel
 
 class ResultsSharedViewModel(
     app: Application
@@ -15,5 +15,4 @@ class ResultsSharedViewModel(
     }
 
     fun getPerson() = _person
-
 }

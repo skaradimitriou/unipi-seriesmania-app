@@ -3,6 +3,7 @@ package com.stathis.seriesmania.ui.dashboard.home
 import android.content.Intent
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.setScreenTitle
 import com.stathis.core.util.MODE
 import com.stathis.core.util.RESULT_TYPE
@@ -10,7 +11,6 @@ import com.stathis.core.util.SERIES
 import com.stathis.domain.model.ResultType
 import com.stathis.domain.model.TvSeries
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.base.BaseFragment
 import com.stathis.seriesmania.databinding.FragmentHomeBinding
 import com.stathis.seriesmania.ui.dashboard.home.adapter.DashboardCallback
 import com.stathis.seriesmania.ui.dashboard.home.adapter.HomeAdapter

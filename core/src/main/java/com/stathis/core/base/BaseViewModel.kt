@@ -1,4 +1,4 @@
-package com.stathis.seriesmania.base
+package com.stathis.core.base
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -3,9 +3,9 @@ package com.stathis.seriesmania.ui.results.cast
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.stathis.core.base.BaseViewModel
 import com.stathis.domain.combiners.ActorDetailsCombiner
 import com.stathis.domain.model.UiModel
-import com.stathis.seriesmania.base.BaseViewModel
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher

@@ -39,6 +39,16 @@ class ProfileRepositoryImpl @Inject constructor(
         return UserMapper.toDomainModel(result)
     }
 
+    override suspend fun getUserInfo(userId: String): User {
+        val result = firestore.collection(USERS_DB_PATH)
+            .document(userId)
+            .get()
+            .await()
+            .toObject(UserDto::class.java)
+
+        return UserMapper.toDomainModel(result)
+    }
+
     override suspend fun logout(): Boolean {
         return auth.logout()
     }

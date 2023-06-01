@@ -3,10 +3,10 @@ package com.stathis.seriesmania.ui.results.details.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.base.BaseDiffUtil
+import com.stathis.core.base.BaseViewHolder
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.cast.Cast
-import com.stathis.seriesmania.base.BaseDiffUtil
-import com.stathis.seriesmania.base.BaseViewHolder
 import com.stathis.seriesmania.databinding.HolderCastItemBinding
 
 class CastAdapter(

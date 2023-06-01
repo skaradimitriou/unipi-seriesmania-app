@@ -22,5 +22,10 @@
         android:name="com.stathis.seriesmania.ui.dashboard.discover.DiscoverFragment"
         android:label="DiscoverFragment"
         tools:layout="@layout/fragment_discover" />
+    <fragment
+        android:id="@+id/nav_threads"
+        android:name="com.stathis.seriesmania.ui.dashboard.threads.ForumFragment"
+        android:label="ThreadsFragment"
+        tools:layout="@layout/fragment_forum" />
 
 </navigation>

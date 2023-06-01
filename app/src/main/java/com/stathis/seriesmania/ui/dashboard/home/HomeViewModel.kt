@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.stathis.core.base.BaseViewModel
 import com.stathis.domain.combiners.DashboardDataCombiner
 import com.stathis.domain.model.UiModel
-import com.stathis.seriesmania.base.BaseViewModel
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher

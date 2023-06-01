@@ -1,4 +1,4 @@
-package com.stathis.seriesmania.base
+package com.stathis.core.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -7,7 +7,7 @@ import com.stathis.domain.model.reviews.Review
 
 object ReviewsMapper : BaseMapper<ReviewsFeedDto?, List<Review>> {
 
-    override fun toDomainModel(dto: ReviewsFeedDto?): List<Review> {
+    override suspend fun toDomainModel(dto: ReviewsFeedDto?): List<Review> {
         return dto?.results.toDomainModel()
     }
 
