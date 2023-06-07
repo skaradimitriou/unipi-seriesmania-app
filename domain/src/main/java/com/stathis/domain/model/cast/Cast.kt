@@ -11,5 +11,8 @@ data class Cast(
     val order: Int,
     val profile_path: String
 ) : UiModel {
-    override fun equalsContent(obj: UiModel): Boolean = false
+    override fun equalsContent(obj: UiModel): Boolean = when (obj) {
+        is Cast -> cast_id == obj.cast_id && name == obj.name
+        else -> false
+    }
 }

@@ -15,7 +15,7 @@ data class ActorDetails(
     val profile_path: String
 ) : UiModel {
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
-        is ActorDetails -> id == obj.id
+        is ActorDetails -> id == obj.id && name == obj.name
         else -> false
     }
 }

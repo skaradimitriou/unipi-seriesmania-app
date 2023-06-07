@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isEnabled"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.forum.threaddetails.ThreadDetailsFragment">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detailsRecycler"
+                style="@style/AppRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_s"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/typingConstraint"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/holder_thread_item" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/typingConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grey_bg"
+                android:padding="@dimen/dimen_m"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <EditText
+                    android:id="@+id/threadMessageInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_m"
+                    android:background="@drawable/round_corners"
+                    android:hint="@string/thread_reply_hint"
+                    android:padding="@dimen/dimen_m"
+                    app:layout_constraintEnd_toStartOf="@id/sendBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/sendBtn"
+                    android:layout_width="@dimen/dimen_1.5xl"
+                    android:layout_height="@dimen/dimen_1.5xl"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@{isEnabled ? @color/dark_blue : @color/grey_bg_darker}"
+                    android:enabled="@{isEnabled}"
+                    android:padding="@dimen/dimen_s"
+                    android:src="@drawable/ic_send"
+                    app:layout_constraintBottom_toBottomOf="@id/threadMessageInput"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>
