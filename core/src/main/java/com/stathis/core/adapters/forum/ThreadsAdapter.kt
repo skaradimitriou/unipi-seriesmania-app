@@ -7,7 +7,7 @@ import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
 import com.stathis.core.databinding.HolderThreadItemBinding
 import com.stathis.domain.model.UiModel
-import com.stathis.domain.model.forum.ForumThread
+import com.stathis.domain.model.forum.Thread
 import com.stathis.domain.model.profile.User
 
 class ThreadsAdapter(
@@ -32,7 +32,7 @@ class ThreadsViewHolder(
 
     override fun present(data: UiModel) {
         when (data) {
-            is ForumThread -> {
+            is Thread -> {
                 binding.model = data
                 binding.callback = callback
             }
@@ -42,5 +42,5 @@ class ThreadsViewHolder(
 
 interface ThreadsCallback {
     fun onAvatarClick(user: User)
-    fun onThreadClick(model: ForumThread)
+    fun onThreadClick(model: Thread)
 }

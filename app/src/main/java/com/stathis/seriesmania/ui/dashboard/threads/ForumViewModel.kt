@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
-import com.stathis.domain.combiners.ForumThreadsCombiner
-import com.stathis.domain.model.forum.ForumThread
+import com.stathis.domain.model.forum.Thread
+import com.stathis.domain.usecases.forum.FetchForumThreadsUseCase
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,13 +16,13 @@ import javax.inject.Inject
 class ForumViewModel @Inject constructor(
     app: Application,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-    private val threadsCombiner: ForumThreadsCombiner
+    private val threadsCombiner: FetchForumThreadsUseCase
 ) : BaseViewModel(app) {
 
-    val threads: MutableLiveData<List<ForumThread>>
+    val threads: MutableLiveData<List<Thread>>
         get() = _threads
 
-    private val _threads = MutableLiveData<List<ForumThread>>()
+    private val _threads = MutableLiveData<List<Thread>>()
 
     fun fetchThreads() {
         viewModelScope.launch(dispatcher) {

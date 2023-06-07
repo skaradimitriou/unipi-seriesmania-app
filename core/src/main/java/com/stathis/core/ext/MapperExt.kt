@@ -13,8 +13,8 @@ fun Boolean?.toNotNull() = this ?: false
 
 fun <T> List<T>?.toNotNull() = this ?: listOf()
 
-suspend fun <DtoModel, DomainModel> List<DtoModel>?.toListOf(
-    performMapping: suspend (DtoModel) -> DomainModel
+fun <DtoModel, DomainModel> List<DtoModel>?.toListOf(
+    performMapping: (DtoModel) -> DomainModel
 ): List<DomainModel> = this?.map { performMapping.invoke(it) } ?: listOf()
 
 /**

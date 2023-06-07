@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isEnabled"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_bg"
+        android:padding="@dimen/dimen_m"
+        tools:context=".ui.forum.add.AddThreadFragment">
+
+        <EditText
+            android:id="@+id/threadTitleInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corners"
+            android:hint="@string/thread_title_hint"
+            android:maxLength="100"
+            android:maxLines="1"
+            android:padding="@dimen/dimen_m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/threadBodyInput"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_200"
+            android:layout_marginTop="@dimen/dimen_m"
+            android:background="@drawable/round_corners"
+            android:gravity="top"
+            android:hint="@string/thread_message_hint"
+            android:padding="@dimen/dimen_m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/threadTitleInput" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/addNewThreadButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:enabled="@{isEnabled}"
+                android:text="@string/add_new_thread_btn"
+                android:textAllCaps="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

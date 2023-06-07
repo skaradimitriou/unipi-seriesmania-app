@@ -42,7 +42,7 @@
     <string name="search">Search</string>
 
     <!-- Forum -->
-    <string name="forum_screen_title">Forum</string>
+    <string name="forum_screen_title">Συζητήσεις</string>
 
     <!-- Profile Screen -->
     <string name="profile_title">Προφίλ</string>
@@ -72,5 +72,16 @@
     <string name="known_for_series">Known for series</string>
     <string name="also_known_as">Also known as: %s</string>
     <string name="not_found">Not found</string>
+
+    <!-- Add new thread -->
+    <string name="new_thread_title">Νέα συζήτηση</string>
+    <string name="add_new_thread">Add new</string>
+    <string name="thread_title_hint">Thread title</string>
+    <string name="add_new_thread_btn">Add new thread</string>
+    <string name="thread_message_hint">Type your thread\'s message here…</string>
+
+    <!-- Thread details -->
+    <string name="thread_details_screen_title">Πληροφορίες Συζήτησης</string>
+    <string name="thread_reply_hint">Reply to this forum thread…</string>
 
 </resources>

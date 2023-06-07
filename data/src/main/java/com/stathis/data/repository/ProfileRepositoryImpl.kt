@@ -2,6 +2,7 @@ package com.stathis.data.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.stathis.core.util.auth.Authenticator
+import com.stathis.core.util.session.SessionManager
 import com.stathis.data.mappers.UserMapper
 import com.stathis.data.model.UserDto
 import com.stathis.data.util.USERS_DB_PATH
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
-    private val auth: Authenticator
+    private val auth: Authenticator,
+    private val sessionManager: SessionManager
 ) : ProfileRepository {
 
     override suspend fun createNewUserProfile(email: String) {
@@ -36,7 +38,12 @@ class ProfileRepositoryImpl @Inject constructor(
             .await()
             .toObject(UserDto::class.java)
 
-        return UserMapper.toDomainModel(result)
+        val mappedResult = UserMapper.toDomainModel(result)
+
+        //saves the user data to the session manager
+        sessionManager.storeUserData(mappedResult)
+
+        return mappedResult
     }
 
     override suspend fun getUserInfo(userId: String): User {
@@ -49,7 +56,5 @@ class ProfileRepositoryImpl @Inject constructor(
         return UserMapper.toDomainModel(result)
     }
 
-    override suspend fun logout(): Boolean {
-        return auth.logout()
-    }
+    override suspend fun logout(): Boolean = auth.logout()
 }

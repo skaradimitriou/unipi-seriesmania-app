@@ -4,12 +4,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import com.stathis.core.util.GENERIC_ERROR
+import com.stathis.core.util.session.SessionManager
 import com.stathis.domain.model.Result
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class AuthenticatorImpl @Inject constructor(
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val sessionManager: SessionManager
 ) : Authenticator {
 
     /**
@@ -52,8 +54,9 @@ class AuthenticatorImpl @Inject constructor(
 
     override fun getActiveUserId(): String = auth.currentUser?.uid.toString()
 
-    override fun logout(): Boolean {
+    override suspend fun logout(): Boolean {
         auth.signOut()
+        sessionManager.clearUserData()
         return auth.currentUser == null
     }
 }
