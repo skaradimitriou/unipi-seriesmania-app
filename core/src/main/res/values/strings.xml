@@ -84,4 +84,8 @@
     <string name="thread_details_screen_title">Πληροφορίες Συζήτησης</string>
     <string name="thread_reply_hint">Reply to this forum thread…</string>
 
+    <!-- Watchlist -->
+    <string name="my_watchlist">My Watchlist</string>
+    <string name="watchlist">Watchlist</string>
+
 </resources>

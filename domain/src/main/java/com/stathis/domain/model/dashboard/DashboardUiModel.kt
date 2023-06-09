@@ -1,6 +1,7 @@
 package com.stathis.domain.model.dashboard
 
 import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.TvSeriesWrapper
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.User
 
@@ -9,7 +10,8 @@ data class DashboardUiModel(
     val popularSeries: PopularSeries,
     val topRatedSeries: TopRatedSeries,
     val trendingSeries: TrendingSeries,
-    val airingTodaySeries: AiringTodaySeries
+    val airingTodaySeries: AiringTodaySeries,
+    val watchlist: TvSeriesWrapper? = null
 )
 
 data class PopularSeries(

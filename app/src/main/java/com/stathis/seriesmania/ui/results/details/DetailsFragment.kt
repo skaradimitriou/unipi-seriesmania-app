@@ -1,10 +1,10 @@
 package com.stathis.seriesmania.ui.results.details
 
+import android.view.Menu
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.stathis.core.base.BaseFragment
-import com.stathis.core.ext.getParcelable
-import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.*
 import com.stathis.core.util.SERIES
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.cast.Cast
@@ -24,6 +24,8 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
     private val sharedViewModel: ResultsSharedViewModel by activityViewModels()
     private val activityViewModel: ResultsActivityViewModel by activityViewModels()
 
+    private var menu: Menu? = null
+
     private val adapter = DetailsAdapter(object : DetailsCallback {
         override fun onSeriesClick(series: TvSeries) {
             viewModel.getSeriesInfo(series)
@@ -37,6 +39,16 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
 
     override fun init() {
         setScreenTitle(getString(com.stathis.core.R.string.details_screen_title))
+        setMenuProvider(
+            menuId = R.menu.series_details_menu,
+            onMenuCreated = { menu = it },
+            onItemSelected = {
+                if (it.itemId == R.id.favoriteIcon) {
+                    viewModel.favoriteIconClicked()
+                }
+            }
+        )
+
         binding.adapter = adapter
 
         requireActivity().intent.getParcelable<TvSeries>(SERIES)?.let {
@@ -47,6 +59,13 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
     override fun startOps() {
         viewModel.details.observe(viewLifecycleOwner) { detail ->
             adapter.submitList(detail)
+        }
+
+        viewModel.isFavorite.observe(viewLifecycleOwner) { isFavorite ->
+            val drawable = getAppropriateIcon(isFavorite)
+            menu?.getItemOrNull(0)?.apply {
+                icon = getDrawable(drawable)
+            }
         }
     }
 

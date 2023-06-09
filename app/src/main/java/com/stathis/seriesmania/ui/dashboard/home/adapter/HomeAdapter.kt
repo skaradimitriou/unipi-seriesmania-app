@@ -8,6 +8,7 @@ import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
 import com.stathis.core.util.decorations.HorizontalItemDecoration
 import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.TvSeriesWrapper
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.dashboard.AiringTodaySeries
 import com.stathis.domain.model.dashboard.PopularSeries
@@ -16,12 +17,7 @@ import com.stathis.domain.model.dashboard.TrendingSeries
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.BR
 import com.stathis.seriesmania.R
-import com.stathis.seriesmania.databinding.HolderAiringTodaySeriesBinding
-import com.stathis.seriesmania.databinding.HolderDashboardUserBinding
-import com.stathis.seriesmania.databinding.HolderEmptyViewBinding
-import com.stathis.seriesmania.databinding.HolderPopularSeriesBinding
-import com.stathis.seriesmania.databinding.HolderTopRatedSeriesBinding
-import com.stathis.seriesmania.databinding.HolderTrendingSeriesBinding
+import com.stathis.seriesmania.databinding.*
 
 class HomeAdapter(
     private val callback: DashboardCallback
@@ -50,6 +46,10 @@ class HomeAdapter(
                 HolderAiringTodaySeriesBinding.inflate(inflater, parent, false)
             }
 
+            R.layout.holder_series_wrapper_item -> {
+                HolderSeriesWrapperItemBinding.inflate(inflater, parent, false)
+            }
+
             else -> HolderEmptyViewBinding.inflate(inflater, parent, false)
         }
         return HomeViewHolder(view, callback)
@@ -65,6 +65,7 @@ class HomeAdapter(
         is TopRatedSeries -> R.layout.holder_top_rated_series
         is TrendingSeries -> R.layout.holder_trending_series
         is AiringTodaySeries -> R.layout.holder_airing_today_series
+        is TvSeriesWrapper -> R.layout.holder_series_wrapper_item
         else -> R.layout.holder_empty_view
     }
 }
@@ -112,6 +113,14 @@ class HomeViewHolder(
                 binding.setVariable(BR.adapter, adapter)
                 binding.setVariable(BR.decoration, decor)
                 binding.setVariable(BR.callback, callback)
+            }
+
+            is TvSeriesWrapper -> {
+                val adapter = AiringTodaySeriesAdapter(this)
+                val decor = HorizontalItemDecoration(20)
+                adapter.submitList(data.series)
+                binding.setVariable(BR.adapter, adapter)
+                binding.setVariable(BR.decoration, decor)
             }
         }
     }

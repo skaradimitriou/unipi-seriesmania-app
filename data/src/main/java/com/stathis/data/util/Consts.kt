@@ -5,3 +5,4 @@ const val API_KEY = "api_key=b36812048cc4b54d559f16a2ff196bc5"
 
 const val USERS_DB_PATH = "users"
 const val FORUM_DB_PATH = "forum"
+const val WATCHLIST_DB_PATH = "watchlist"
