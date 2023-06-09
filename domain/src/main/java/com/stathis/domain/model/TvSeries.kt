@@ -19,6 +19,22 @@ data class TvSeries(
     val overview: String,
     val poster_path: String
 ) : UiModel, Parcelable {
+    constructor() : this(
+        "",
+        listOf(),
+        "",
+        0.0,
+        listOf(),
+        0,
+        "",
+        "",
+        "",
+        0,
+        0.0,
+        "",
+        ""
+    )
+
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
         is TvSeries -> id == obj.id && name == obj.name
         else -> false

@@ -2,6 +2,7 @@ package com.stathis.core.ext
 
 import android.app.Activity
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -69,6 +70,39 @@ fun Fragment.addSearchBarMenu(menuId: Int, callback: (String) -> Unit) {
             return true
         }
     }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+}
+
+/**
+ * Helper method to set a custom Menu inside a Fragment.
+ * @param menuId : The menu id reference that will be inflated.
+ * @param onMenuCreated : Callback in case the user needs a reference to the menu
+ * @param onItemSelected : Callback for user clicks on menu items.
+ */
+
+fun Fragment.setMenuProvider(
+    menuId: Int,
+    onMenuCreated: (Menu) -> Unit,
+    onItemSelected: (MenuItem) -> Unit
+) {
+    requireActivity().addMenuProvider(object : MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(menuId, menu)
+            onMenuCreated.invoke(menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            onItemSelected.invoke(menuItem)
+            return false
+        }
+    }, viewLifecycleOwner)
+}
+
+/**
+ * Helper method to simplify the procedure of getting a drawable inside a fragment.
+ */
+
+fun Fragment.getDrawable(drawableId: Int): Drawable? {
+    return requireContext().getAppDrawable(drawableId)
 }
 
 /**

@@ -55,4 +55,11 @@ class RepositoryModule {
         authenticator: Authenticator,
         sessionManager: SessionManager
     ): ForumRepository = ForumRepositoryImpl(firestore, authenticator, sessionManager)
+
+    @Provides
+    @Singleton
+    fun provideWatchlistRepository(
+        firestore: FirebaseFirestore,
+        authenticator: Authenticator
+    ): WatchlistRepository = WatchlistRepositoryImpl(firestore, authenticator)
 }

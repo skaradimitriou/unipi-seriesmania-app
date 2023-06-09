@@ -1,8 +1,10 @@
 package com.stathis.core.ext
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.stathis.core.databinding.AskUserBottomsheetBinding
 
@@ -27,4 +29,12 @@ fun Context.askUserForAction(title: String, btnTitle: String, onPrimaryBtnClick:
             dismiss()
         }
     }.show()
+}
+
+/**
+ * Helper method to get a drawable from resources.
+ */
+
+fun Context.getAppDrawable(drawable: Int): Drawable? {
+    return ResourcesCompat.getDrawable(resources, drawable, null)
 }

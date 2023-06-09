@@ -1,9 +1,12 @@
 package com.stathis.core.ext
 
+import android.view.Menu
+import android.view.MenuItem
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.stathis.core.R
 
 /**
  * Helper method to show a simple [Snackbar].
@@ -22,5 +25,29 @@ fun NavController.init(navigationId: Int, destinationId: Int) {
 fun <T : RecyclerView> T.removeItemDecorations() {
     while (itemDecorationCount > 0) {
         removeItemDecorationAt(0)
+    }
+}
+
+/**
+ * Helper method to get the appropriate favorite icon drawable id (either white or red
+ */
+
+fun getAppropriateIcon(isFavorite: Boolean): Int {
+    return if (isFavorite) {
+        R.drawable.ic_favorite_red
+    } else {
+        R.drawable.ic_favorite_white
+    }
+}
+
+/**
+ * Helper fun to get a menu item in a safe way
+ */
+
+fun Menu.getItemOrNull(position: Int): MenuItem? {
+    return try {
+        getItem(position)
+    } catch (e: Exception) {
+        null
     }
 }

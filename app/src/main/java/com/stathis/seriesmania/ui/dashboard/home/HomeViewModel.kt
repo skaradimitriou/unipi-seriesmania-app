@@ -28,13 +28,15 @@ class HomeViewModel @Inject constructor(
     fun getData() {
         viewModelScope.launch(dispatcher) {
             val result = homeCombiner.invoke()
-            val list = listOf(
+            val list = mutableListOf(
                 result.profileInfo,
                 result.popularSeries,
                 result.topRatedSeries,
                 result.trendingSeries,
-                result.airingTodaySeries
+                result.airingTodaySeries,
             )
+
+            result.watchlist?.let { list.add(it) }
             _dashboardData.postValue(list)
         }
     }
