@@ -2,6 +2,7 @@ package com.stathis.seriesmania.ui.dashboard.profile
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
+import com.stathis.core.adapters.profile.UserProfileAdapter
 import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.askUserForAction
 import com.stathis.core.ext.setScreenTitle
@@ -15,14 +16,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
 
     private val viewModel: ProfileViewModel by viewModels()
 
-    private val adapter = ProfileAdapter {
-        askUserForAction(
-            title = getString(com.stathis.core.R.string.ask_user_logout),
-            btnTitle = getString(com.stathis.core.R.string.logout)
-        ) {
-            viewModel.logoutUser()
-        }
-    }
+    private val adapter = UserProfileAdapter()
+
+//    {
+//        askUserForAction(
+//            title = getString(com.stathis.core.R.string.ask_user_logout),
+//            btnTitle = getString(com.stathis.core.R.string.logout)
+//        ) {
+//            viewModel.logoutUser()
+//        }
+//    }
 
     override fun init() {
         setScreenTitle(getString(com.stathis.core.R.string.profile_title))

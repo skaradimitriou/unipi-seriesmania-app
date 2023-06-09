@@ -4,16 +4,12 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.stathis.core.R
 import com.stathis.core.base.BaseViewModel
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.User
 import com.stathis.domain.usecases.profile.GetProfileInfoUseCase
 import com.stathis.domain.usecases.profile.LogoutUserUseCase
 import com.stathis.seriesmania.di.IoDispatcher
-import com.stathis.seriesmania.ui.dashboard.profile.uimodel.ProfileHeader
-import com.stathis.seriesmania.ui.dashboard.profile.uimodel.ProfileLogoutOption
-import com.stathis.seriesmania.ui.dashboard.profile.uimodel.ProfileOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -45,12 +41,13 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun User.toUiData() = listOf(
-        ProfileHeader(userImg, username),
-        ProfileOption(getString(R.string.email), email),
-        ProfileOption(getString(R.string.telephone), telephone),
-        ProfileOption(getString(R.string.first_name), firstName),
-        ProfileOption(getString(R.string.last_name), lastName),
-        ProfileLogoutOption(getString(R.string.logout))
+        this
+        //ProfileHeader(userImg, username),
+        //ProfileOption(getString(R.string.email), email),
+//        ProfileOption(getString(R.string.telephone), telephone),
+//        ProfileOption(getString(R.string.first_name), firstName),
+//        ProfileOption(getString(R.string.last_name), lastName),
+        //ProfileLogoutOption(getString(R.string.logout))
     )
 
     fun logoutUser() {
