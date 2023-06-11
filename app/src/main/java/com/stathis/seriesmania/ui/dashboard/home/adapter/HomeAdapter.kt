@@ -4,8 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.adapters.general.AiringTodaySeriesAdapter
+import com.stathis.core.adapters.general.SeriesCallback
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
+import com.stathis.core.databinding.HolderSeriesWrapperItemBinding
 import com.stathis.core.util.decorations.HorizontalItemDecoration
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.TvSeriesWrapper
@@ -46,7 +49,7 @@ class HomeAdapter(
                 HolderAiringTodaySeriesBinding.inflate(inflater, parent, false)
             }
 
-            R.layout.holder_series_wrapper_item -> {
+            com.stathis.core.R.layout.holder_series_wrapper_item -> {
                 HolderSeriesWrapperItemBinding.inflate(inflater, parent, false)
             }
 
@@ -65,7 +68,7 @@ class HomeAdapter(
         is TopRatedSeries -> R.layout.holder_top_rated_series
         is TrendingSeries -> R.layout.holder_trending_series
         is AiringTodaySeries -> R.layout.holder_airing_today_series
-        is TvSeriesWrapper -> R.layout.holder_series_wrapper_item
+        is TvSeriesWrapper -> com.stathis.core.R.layout.holder_series_wrapper_item
         else -> R.layout.holder_empty_view
     }
 }
@@ -136,8 +139,4 @@ interface DashboardCallback {
     fun openAllTopRatedSeries()
     fun openAllTrendingSeries()
     fun openAllAiringTodaySeries()
-}
-
-fun interface SeriesCallback {
-    fun onSeriesClick(model: TvSeries)
 }

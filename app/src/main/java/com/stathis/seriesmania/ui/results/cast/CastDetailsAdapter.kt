@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.adapters.general.SeriesCallback
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
 import com.stathis.core.util.decorations.VerticalItemDecoration
@@ -15,7 +16,6 @@ import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.HolderActorItemBinding
 import com.stathis.seriesmania.databinding.HolderEmptyViewBinding
 import com.stathis.seriesmania.databinding.HolderKnownForItemBinding
-import com.stathis.seriesmania.ui.dashboard.home.adapter.SeriesCallback
 
 class CastDetailsAdapter(
     private val callback: SeriesCallback

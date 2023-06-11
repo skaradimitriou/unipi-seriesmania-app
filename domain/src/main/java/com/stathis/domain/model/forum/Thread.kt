@@ -14,7 +14,7 @@ data class Thread(
     val replies: List<ThreadReply>
 ) : UiModel, Parcelable {
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
-        is Thread -> true
+        is Thread -> threadId == obj.threadId && title == obj.title && body == obj.body && replies == obj.replies
         else -> false
     }
 }

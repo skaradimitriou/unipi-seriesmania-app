@@ -3,6 +3,7 @@ package com.stathis.seriesmania.ui.dashboard.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.adapters.general.SeriesCallback
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
 import com.stathis.domain.model.TvSeries

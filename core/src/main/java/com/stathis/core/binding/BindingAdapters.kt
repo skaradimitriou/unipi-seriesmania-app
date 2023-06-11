@@ -2,7 +2,6 @@ package com.stathis.core.binding
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -47,15 +46,6 @@ fun ImageView.imageUrl(url: String) {
             .placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(this)
     } catch (e: Exception) {
         setImageResource(R.mipmap.ic_launcher)
-    }
-}
-
-@BindingAdapter("setProfileOptionValue")
-fun TextView.setProfileOptionValue(value: String?) {
-    text = if (value.isNullOrEmpty()) {
-        resources.getString(R.string.profile_option_missing)
-    } else {
-        value
     }
 }
 

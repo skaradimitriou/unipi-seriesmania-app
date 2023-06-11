@@ -7,11 +7,11 @@
 
         <variable
             name="model"
-            type="com.stathis.seriesmania.ui.dashboard.profile.uimodel.ProfileLogoutOption" />
+            type="com.stathis.domain.model.profile.uimodel.LogoutOption" />
 
         <variable
             name="callback"
-            type="com.stathis.seriesmania.ui.dashboard.profile.ProfileScreenCallback" />
+            type="com.stathis.core.adapters.profile.UserProfileCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.stathis.domain.model.profile.uimodel.UserStatistics" />
+
+        <variable
+            name="callback"
+            type="com.stathis.core.adapters.profile.UserProfileCallback" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_m">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/followingConstraint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/grey_bg"
+            android:padding="@dimen/dimen_10"
+            app:layout_constraintEnd_toStartOf="@id/followersConstraint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/followingCounterTxtView"
+                style="@style/text_24_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{model.following}"
+                app:layout_constraintBottom_toTopOf="@id/followingTitleTxtView" />
+
+            <TextView
+                android:id="@+id/followingTitleTxtView"
+                style="@style/text_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/following"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/followersConstraint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_s"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/grey_bg"
+            android:padding="@dimen/dimen_10"
+            app:layout_constraintEnd_toStartOf="@id/watchlistConstraint"
+            app:layout_constraintStart_toEndOf="@id/followingConstraint"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/followerCounterTxtView"
+                style="@style/text_24_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{model.followers}"
+                app:layout_constraintBottom_toTopOf="@id/followerTitleTxtView" />
+
+            <TextView
+                android:id="@+id/followerTitleTxtView"
+                style="@style/text_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/followers"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/watchlistConstraint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/grey_bg"
+            android:padding="@dimen/dimen_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/followersConstraint"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/watchlistCounterTxtView"
+                style="@style/text_24_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{model.watchlist}"
+                app:layout_constraintBottom_toTopOf="@id/watchlistTitleTxtView" />
+
+            <TextView
+                android:id="@+id/watchlistTitleTxtView"
+                style="@style/text_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/watchlist"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

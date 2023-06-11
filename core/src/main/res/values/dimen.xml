@@ -5,6 +5,7 @@
     <dimen name="text_18">18sp</dimen>
     <dimen name="text_20">20sp</dimen>
     <dimen name="text_22">22sp</dimen>
+    <dimen name="text_24">24sp</dimen>
 
     <!-- App General Dimensions -->
     <dimen name="button_height">56dp</dimen>
