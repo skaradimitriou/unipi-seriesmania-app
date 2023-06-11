@@ -13,61 +13,65 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/dimen_l">
+        android:background="@color/dark_blue"
+        android:padding="@dimen/dimen_m">
 
         <View
             android:id="@+id/profileBgView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_100"
-            android:background="@color/light_blue"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/profileBgCenterView"
-            android:layout_width="@dimen/dimen_1"
-            android:layout_height="@dimen/dimen_1"
-            app:layout_constraintBottom_toBottomOf="@id/profileBgView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileUserImgView"
             android:layout_width="@dimen/dimen_3xl"
             android:layout_height="@dimen/dimen_3xl"
+            android:layout_marginTop="@dimen/dimen_m"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@id/profileBgCenterView"
-            app:layout_constraintEnd_toEndOf="@id/profileBgCenterView"
-            app:layout_constraintStart_toStartOf="@id/profileBgCenterView"
-            app:layout_constraintTop_toTopOf="@id/profileBgCenterView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:setProfileImage="@{model.userImg}"
             tools:src="@drawable/profile_placeholder" />
 
         <TextView
-            android:id="@+id/profile_user_name"
-            style="@style/text_18_bold_center"
+            android:id="@+id/userNameTxtView"
+            style="@style/text_22_bold_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_m"
             android:text="@{model.username}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/profileUserImgView"
-            app:layout_constraintTop_toBottomOf="@id/profileUserImgView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileUserImgView"
             tools:text="testopoulos" />
 
         <TextView
-            android:id="@+id/profile_user_bio"
-            style="@style/text_18"
+            android:id="@+id/profileEmailTxtView"
+            style="@style/text_16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:padding="@dimen/dimen_10"
+            android:text="@{model.email}"
+            android:textColor="@color/grey_bg"
+            app:layout_constraintTop_toBottomOf="@id/userNameTxtView"
+            tools:text="testopoulos@gmail.com" />
+
+        <TextView
+            android:id="@+id/profileBioTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_l"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:maxLines="4"
             android:text="@{model.bio}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/profileUserImgView"
-            app:layout_constraintTop_toBottomOf="@id/profile_user_name"
-            tools:text="testopoulos" />
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileEmailTxtView"
+            tools:text="@string/lorem_ipsum" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

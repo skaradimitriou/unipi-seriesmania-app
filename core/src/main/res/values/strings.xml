@@ -32,7 +32,7 @@
     <string name="trending_title">Trending Series</string>
     <string name="airing_today_title">Airing Today Series</string>
     <string name="all_series_genre_placeholder">%s Series</string>
-    <string name="all">ALL ></string>
+    <string name="all">ALL</string>
     <string name="user_greeting">Hello</string>
     <string name="dummy_username">testopoulos</string>
 
@@ -47,14 +47,13 @@
     <!-- Profile Screen -->
     <string name="profile_title">Προφίλ</string>
     <string name="profile_dummy_username">foustanos</string>
-    <string name="profile_option_title">title</string>
-    <string name="profile_option_value">value</string>
-    <string name="profile_option_missing">Δεν έχει δωθεί</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="profile_empty_prefs_title">Empty preferences</string>
+    <string name="profile_empty_prefs_desc">Click here to add your series preferences</string>
+    <string name="profile_empty_watchlist_title">Empty watchlist</string>
+    <string name="profile_empty_watchlist_desc">The series that you add to your watchlist will be displayed here</string>
     <string name="ask_user_logout">Θέλετε να αποσυνδεθείτε;</string>
-    <string name="email">E-mail</string>
-    <string name="telephone">Τηλέφωνο</string>
-    <string name="first_name">Όνομα</string>
-    <string name="last_name">Επώνυμο</string>
     <string name="logout">Αποσύνδεση</string>
 
     <!-- Details -->

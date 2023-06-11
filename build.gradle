@@ -15,6 +15,7 @@ plugins {
 ext.material_version = '1.9.0'
 ext.activity_version = '1.6.1'
 ext.glide_version = "4.15.0"
+ext.lottie_version = "6.0.0"
 ext.lifecycle_version = '2.6.1'
 ext.navigation_version = '2.5.3'
 ext.timber_version = '5.0.1'

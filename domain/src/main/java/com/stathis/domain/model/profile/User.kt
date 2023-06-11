@@ -9,6 +9,7 @@ data class User(
     val id: String,
     val username: String,
     val bio: String,
+    val preferences: List<String>,
     val email: String,
     val userImg: String
 ) : UiModel, Parcelable {

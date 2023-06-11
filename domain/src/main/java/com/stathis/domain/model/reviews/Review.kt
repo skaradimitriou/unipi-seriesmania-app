@@ -8,5 +8,8 @@ data class Review(
     val content: String,
     val url: String
 ) : UiModel {
-    override fun equalsContent(obj: UiModel): Boolean = false
+    override fun equalsContent(obj: UiModel): Boolean = when (obj) {
+        is Review -> id == obj.id && author == obj.author && content == obj.content && url == obj.url
+        else -> false
+    }
 }

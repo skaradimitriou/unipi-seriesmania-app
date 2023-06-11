@@ -5,9 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.domain.combiners.ProfileCombiner
 import com.stathis.domain.model.UiModel
-import com.stathis.domain.model.profile.User
-import com.stathis.domain.usecases.profile.GetProfileInfoUseCase
 import com.stathis.domain.usecases.profile.LogoutUserUseCase
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +18,7 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     app: Application,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-    private val useCase: GetProfileInfoUseCase,
+    private val combiner: ProfileCombiner,
     private val logoutUseCase: LogoutUserUseCase
 ) : BaseViewModel(app) {
 
@@ -35,20 +34,10 @@ class ProfileViewModel @Inject constructor(
 
     fun getProfileInfo() {
         viewModelScope.launch(dispatcher) {
-            val result = useCase.invoke()
-            _userInfo.postValue(result.toUiData())
+            val result = combiner.invoke()
+            _userInfo.postValue(result)
         }
     }
-
-    private fun User.toUiData() = listOf(
-        this
-        //ProfileHeader(userImg, username),
-        //ProfileOption(getString(R.string.email), email),
-//        ProfileOption(getString(R.string.telephone), telephone),
-//        ProfileOption(getString(R.string.first_name), firstName),
-//        ProfileOption(getString(R.string.last_name), lastName),
-        //ProfileLogoutOption(getString(R.string.logout))
-    )
 
     fun logoutUser() {
         viewModelScope.launch(dispatcher) {
