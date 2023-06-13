@@ -1,6 +1,9 @@
 package com.stathis.data.repository
 
+import android.graphics.Bitmap
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.StorageReference
+import com.stathis.core.ext.compressBitmap
 import com.stathis.core.util.auth.Authenticator
 import com.stathis.core.util.session.SessionManager
 import com.stathis.data.mappers.OtherUserMapper
@@ -16,7 +19,8 @@ import javax.inject.Inject
 class ProfileRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val auth: Authenticator,
-    private val sessionManager: SessionManager
+    private val sessionManager: SessionManager,
+    private val storage: StorageReference
 ) : ProfileRepository {
 
     override suspend fun createNewUserProfile(email: String) {
@@ -64,6 +68,20 @@ class ProfileRepositoryImpl @Inject constructor(
             .toObject(UserDto::class.java)
 
         return OtherUserMapper.toDomainModel(result)
+    }
+
+    override suspend fun uploadProfileImage(userImage: Bitmap): Boolean {
+        val storageRef = storage.child("profile/${auth.getActiveUserId()}")
+        val image = userImage.compressBitmap()
+        val upload = storageRef.putBytes(image).await()
+        val downloadUrl = upload.metadata?.reference?.downloadUrl?.await().toString()
+
+        val data: HashMap<String, Any> = hashMapOf(
+            "userImg" to downloadUrl
+        )
+
+        firestore.collection(USERS_DB_PATH).document(auth.getActiveUserId()).update(data).await()
+        return true
     }
 
     override suspend fun logout(): Boolean = auth.logout()

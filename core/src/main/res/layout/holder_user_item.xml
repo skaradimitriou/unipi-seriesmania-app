@@ -8,6 +8,10 @@
         <variable
             name="model"
             type="com.stathis.domain.model.profile.User" />
+
+        <variable
+            name="callback"
+            type="com.stathis.core.adapters.profile.UserProfileCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +33,7 @@
             android:layout_width="@dimen/dimen_3xl"
             android:layout_height="@dimen/dimen_3xl"
             android:layout_marginTop="@dimen/dimen_m"
+            android:onClick="@{() -> callback.onImageClick()}"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

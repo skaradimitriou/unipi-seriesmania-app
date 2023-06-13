@@ -11,6 +11,7 @@ object OtherUserMapper : BaseMapper<UserDto?, OtherUser> {
         username = dto?.username.toNotNull(),
         bio = dto?.bio.toNotNull(),
         email = dto?.email.toNotNull(),
-        userImg = dto?.userImg.toNotNull()
+        userImg = dto?.userImg.toNotNull(),
+        preferences = dto?.preferences.toNotNull()
     )
 }

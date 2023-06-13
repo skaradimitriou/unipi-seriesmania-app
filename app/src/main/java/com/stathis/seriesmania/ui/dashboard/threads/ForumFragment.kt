@@ -9,6 +9,7 @@ import com.stathis.core.ext.addAppBarMenu
 import com.stathis.core.ext.setScreenTitle
 import com.stathis.core.util.MODE
 import com.stathis.core.util.THREAD
+import com.stathis.core.util.USER
 import com.stathis.core.util.decorations.VerticalItemDecoration
 import com.stathis.domain.model.forum.Thread
 import com.stathis.domain.model.profile.User
@@ -16,8 +17,9 @@ import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentForumBinding
 import com.stathis.seriesmania.ui.forum.ForumActivity
 import com.stathis.seriesmania.ui.forum.navigator.ForumAction
+import com.stathis.seriesmania.ui.profile.ProfileActivity
+import com.stathis.seriesmania.ui.profile.navigator.ProfileAction
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ForumFragment : BaseFragment<FragmentForumBinding>(R.layout.fragment_forum) {
@@ -26,7 +28,10 @@ class ForumFragment : BaseFragment<FragmentForumBinding>(R.layout.fragment_forum
 
     private val adapter = ThreadsAdapter(object : ThreadsCallback {
         override fun onAvatarClick(user: User) {
-            Timber.d("Sel => $user")
+            startActivity(Intent(requireContext(), ProfileActivity::class.java).apply {
+                putExtra(MODE, ProfileAction.USER_PROFILE)
+                putExtra(USER, user)
+            })
         }
 
         override fun onThreadClick(model: Thread) {

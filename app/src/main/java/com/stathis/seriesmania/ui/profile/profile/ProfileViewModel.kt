@@ -1,4 +1,4 @@
-package com.stathis.seriesmania.ui.dashboard.profile
+package com.stathis.seriesmania.ui.profile.profile
 
 import android.app.Application
 import androidx.lifecycle.LiveData

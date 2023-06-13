@@ -6,9 +6,9 @@ import androidx.paging.PagingDataAdapter
 import com.stathis.core.adapters.general.SeriesCallback
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
+import com.stathis.core.databinding.HolderTvSeriesItemBinding
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.UiModel
-import com.stathis.seriesmania.databinding.HolderTvSeriesItemBinding
 
 class ResultsPagingAdapter(
     private val callback: SeriesCallback

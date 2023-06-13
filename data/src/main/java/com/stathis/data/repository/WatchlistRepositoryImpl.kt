@@ -14,7 +14,8 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class WatchlistRepositoryImpl @Inject constructor(
-    private val firestore: FirebaseFirestore, private val auth: Authenticator
+    private val firestore: FirebaseFirestore,
+    private val auth: Authenticator
 ) : WatchlistRepository {
 
     override suspend fun addNewItem(item: TvSeries) {
@@ -34,6 +35,17 @@ class WatchlistRepositoryImpl @Inject constructor(
     override suspend fun getAllItems(): Flow<List<TvSeries>> = flow {
         val result = firestore.collection(WATCHLIST_DB_PATH)
             .document(auth.getActiveUserId())
+            .get()
+            .await()
+            .toObject(TvSeriesWrapper::class.java)
+
+        val data = WatchlistMapper.toDomainModel(result)
+        emit(data)
+    }
+
+    override suspend fun getAllItemsByUserId(userId: String): Flow<List<TvSeries>> = flow {
+        val result = firestore.collection(WATCHLIST_DB_PATH)
+            .document(userId)
             .get()
             .await()
             .toObject(TvSeriesWrapper::class.java)

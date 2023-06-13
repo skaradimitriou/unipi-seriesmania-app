@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dimen_l"
+        tools:context=".ui.profile.image.UploadImageFragment">
+
+        <TextView
+            android:id="@+id/headerTxtView"
+            style="@style/text_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ανέβασε μια φωτογραφία στο προφίλ σου"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userImgView"
+            android:layout_width="@dimen/dimen_200"
+            android:layout_height="@dimen/dimen_200"
+            android:src="@drawable/profile_placeholder"
+            app:layout_constraintBottom_toTopOf="@id/saveBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerTxtView" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/addImgBtn"
+            android:layout_width="@dimen/dimen_1.5xl"
+            android:layout_height="@dimen/dimen_1.5xl"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/dark_blue"
+            android:padding="@dimen/dimen_10"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@id/userImgView"
+            app:layout_constraintEnd_toEndOf="@id/userImgView" />
+
+        <Button
+            android:id="@+id/saveBtn"
+            style="@style/AppButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/dimen_10"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

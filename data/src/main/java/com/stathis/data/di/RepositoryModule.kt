@@ -1,6 +1,8 @@
 package com.stathis.data.di
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.stathis.core.util.auth.Authenticator
 import com.stathis.core.util.session.SessionManager
 import com.stathis.data.api.SeriesApi
@@ -27,8 +29,9 @@ class RepositoryModule {
     fun provideProfileRepository(
         firestore: FirebaseFirestore,
         authenticator: Authenticator,
-        sessionManager: SessionManager
-    ): ProfileRepository = ProfileRepositoryImpl(firestore, authenticator, sessionManager)
+        sessionManager: SessionManager,
+        storage: StorageReference
+    ): ProfileRepository = ProfileRepositoryImpl(firestore, authenticator, sessionManager, storage)
 
     @Provides
     @Singleton
@@ -62,4 +65,11 @@ class RepositoryModule {
         firestore: FirebaseFirestore,
         authenticator: Authenticator
     ): WatchlistRepository = WatchlistRepositoryImpl(firestore, authenticator)
+
+    @Provides
+    @Singleton
+    fun provideCommunityRepository(
+        firestore: FirebaseFirestore,
+        authenticator: Authenticator
+    ): CommunityRepository = CommunityRepositoryImpl(firestore, authenticator)
 }

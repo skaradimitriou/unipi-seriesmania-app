@@ -10,4 +10,6 @@ interface WatchlistRepository {
     suspend fun removeItem(item: TvSeries)
 
     suspend fun getAllItems(): Flow<List<TvSeries>>
+
+    suspend fun getAllItemsByUserId(userId: String): Flow<List<TvSeries>>
 }

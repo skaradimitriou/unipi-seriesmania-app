@@ -13,8 +13,12 @@ data class User(
     val email: String,
     val userImg: String
 ) : UiModel, Parcelable {
+    constructor() : this("", "", "", listOf(), "", "")
+
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
         is User -> userImg == obj.userImg && username == obj.username
         else -> false
     }
 }
+
+fun User.toOtherUser() = OtherUser(id, username, bio, preferences, email, userImg)
