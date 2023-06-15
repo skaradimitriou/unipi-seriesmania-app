@@ -109,6 +109,7 @@ class UserProfileViewHolder(
 
 interface UserProfileCallback {
     fun onImageClick()
+    fun onEditInfoClick()
     fun onFollowClick(model: User)
     fun onMyFollowingUsersClick()
     fun onMyFollowsClick()

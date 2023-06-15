@@ -42,6 +42,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
     }
 
     override fun stopOps() {
+        viewModel.resetNavigation()
         viewModel.navigatorState.removeObservers(this)
     }
 

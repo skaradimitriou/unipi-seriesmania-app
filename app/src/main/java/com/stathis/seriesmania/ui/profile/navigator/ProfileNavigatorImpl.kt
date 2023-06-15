@@ -30,9 +30,11 @@ class ProfileNavigatorImpl @Inject constructor(
             ProfileAction.CHANGE_PROFILE_PHOTO -> {
                 navController.navigate(R.id.uploadImageFragment, args)
             }
-            ProfileAction.PHOTO_UPLOADED -> {
-                goBack()
+            ProfileAction.PHOTO_UPLOADED -> goBack()
+            ProfileAction.UPDATE_PROFILE_INFO -> {
+                navController.navigate(R.id.updateInfoFragment, args)
             }
+            ProfileAction.PROFILE_INFO_UPDATED -> goBack()
             ProfileAction.FOLLOWING -> {
                 navController.navigate(R.id.profileResultsFragment, args = Bundle().apply {
                     putSerializable(TYPE, ProfileResultsType.FOLLOWING)

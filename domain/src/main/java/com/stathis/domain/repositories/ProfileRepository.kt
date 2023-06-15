@@ -16,5 +16,7 @@ interface ProfileRepository {
 
     suspend fun uploadProfileImage(userImage: Bitmap): Boolean
 
+    suspend fun updateProfileInfo(username: String, bio: String): Boolean
+
     suspend fun logout(): Boolean
 }

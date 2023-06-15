@@ -26,21 +26,16 @@ class ProfileRepositoryImpl @Inject constructor(
     override suspend fun createNewUserProfile(email: String) {
         val uuid = auth.getActiveUserId()
         val data: HashMap<String, String> = hashMapOf(
-            "id" to uuid,
-            "username" to email.takeWhile { it != '@' },
-            "bio" to "",
-            "email" to email
+            "id" to uuid, "username" to email.takeWhile { it != '@' }, "bio" to "", "email" to email
         )
 
         firestore.collection(USERS_DB_PATH).document(uuid).set(data).await()
     }
 
     override suspend fun getUserProfile(): User {
-        val result = firestore.collection(USERS_DB_PATH)
-            .document(auth.getActiveUserId())
-            .get()
-            .await()
-            .toObject(UserDto::class.java)
+        val result =
+            firestore.collection(USERS_DB_PATH).document(auth.getActiveUserId()).get().await()
+                .toObject(UserDto::class.java)
 
         val mappedResult = UserMapper.toDomainModel(result)
 
@@ -51,20 +46,14 @@ class ProfileRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUserInfo(userId: String): User {
-        val result = firestore.collection(USERS_DB_PATH)
-            .document(userId)
-            .get()
-            .await()
+        val result = firestore.collection(USERS_DB_PATH).document(userId).get().await()
             .toObject(UserDto::class.java)
 
         return UserMapper.toDomainModel(result)
     }
 
     override suspend fun getUserById(userId: String): OtherUser {
-        val result = firestore.collection(USERS_DB_PATH)
-            .document(userId)
-            .get()
-            .await()
+        val result = firestore.collection(USERS_DB_PATH).document(userId).get().await()
             .toObject(UserDto::class.java)
 
         return OtherUserMapper.toDomainModel(result)
@@ -81,6 +70,17 @@ class ProfileRepositoryImpl @Inject constructor(
         )
 
         firestore.collection(USERS_DB_PATH).document(auth.getActiveUserId()).update(data).await()
+        return true
+    }
+
+    override suspend fun updateProfileInfo(username: String, bio: String): Boolean {
+        val uuid = auth.getActiveUserId()
+        val data = mapOf(
+            "username" to username,
+            "bio" to bio,
+        )
+
+        firestore.collection(USERS_DB_PATH).document(uuid).update(data).await()
         return true
     }
 

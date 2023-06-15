@@ -16,14 +16,23 @@
         android:name="com.stathis.seriesmania.ui.profile.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/profileResultsFragment"
         android:name="com.stathis.seriesmania.ui.profile.results.ProfileResultsFragment"
         android:label="ProfileResultsFragment"
         tools:layout="@layout/fragment_profile_results" />
+
     <fragment
         android:id="@+id/uploadImageFragment"
         android:name="com.stathis.seriesmania.ui.profile.image.UploadImageFragment"
         android:label="UploadImageFragment"
         tools:layout="@layout/fragment_upload_image" />
+
+    <fragment
+        android:id="@+id/updateInfoFragment"
+        android:name="com.stathis.seriesmania.ui.profile.update.UpdateInfoFragment"
+        android:label="UpdateInfoFragment"
+        tools:layout="@layout/fragment_update_info" />
+
 </navigation>

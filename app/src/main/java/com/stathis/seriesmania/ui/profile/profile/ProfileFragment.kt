@@ -55,6 +55,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
         activityViewModel.navigateToScreen(ProfileAction.CHANGE_PROFILE_PHOTO)
     }
 
+    override fun onEditInfoClick() {
+        activityViewModel.navigateToScreen(ProfileAction.UPDATE_PROFILE_INFO)
+    }
+
     override fun onFollowClick(model: User) {
         //handle follow mechanism
     }
