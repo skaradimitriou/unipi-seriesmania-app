@@ -11,7 +11,10 @@ data class DashboardUiModel(
     val topRatedSeries: TopRatedSeries,
     val trendingSeries: TrendingSeries,
     val airingTodaySeries: AiringTodaySeries,
-    val watchlist: TvSeriesWrapper? = null
+    val watchlist: TvSeriesWrapper? = null,
+    val firstPreference: TvSeriesWrapper? = null,
+    val secondPreference: TvSeriesWrapper? = null,
+    val thirdPreference: TvSeriesWrapper? = null,
 )
 
 data class PopularSeries(

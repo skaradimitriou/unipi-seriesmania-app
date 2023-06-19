@@ -2,10 +2,7 @@ package com.stathis.domain.combiners
 
 import com.stathis.domain.model.TvSeriesWrapper
 import com.stathis.domain.model.dashboard.*
-import com.stathis.domain.usecases.dashboard.GetAiringTodaySeriesUseCase
-import com.stathis.domain.usecases.dashboard.GetPopularSeriesUseCase
-import com.stathis.domain.usecases.dashboard.GetTopRatedSeriesUseCase
-import com.stathis.domain.usecases.dashboard.GetTrendingSeriesUseCase
+import com.stathis.domain.usecases.dashboard.*
 import com.stathis.domain.usecases.profile.GetProfileInfoUseCase
 import com.stathis.domain.usecases.watchlist.FetchWatchlistUseCase
 import kotlinx.coroutines.async
@@ -18,7 +15,8 @@ class DashboardDataCombiner @Inject constructor(
     private val topRatedSeriesUseCase: GetTopRatedSeriesUseCase,
     private val trendingSeriesUseCase: GetTrendingSeriesUseCase,
     private val airingTodaySeriesUseCase: GetAiringTodaySeriesUseCase,
-    private val fetchWatchlistUseCase: FetchWatchlistUseCase
+    private val fetchWatchlistUseCase: FetchWatchlistUseCase,
+    private val seriesByGenreIdUseCase: GetSeriesByGenreIdUseCase
 ) : BaseCombiner<DashboardUiModel> {
 
     override suspend fun invoke(vararg args: Any?): DashboardUiModel = coroutineScope {
@@ -38,12 +36,42 @@ class DashboardDataCombiner @Inject constructor(
         )
 
         var watchlist: TvSeriesWrapper? = null
-        fetchWatchlistUseCase.invoke().collect {
-            watchlist = TvSeriesWrapper(it)
-        }
+        async {
+            fetchWatchlistUseCase.invoke().collect {
+                if (it.isNotEmpty()) {
+                    watchlist = TvSeriesWrapper(it, "Watchlist")
+                }
+            }
+        }.await()
+
+        val firstPreference = async {
+            profile.preferences.getOrNull(0)?.let {
+                TvSeriesWrapper(seriesByGenreIdUseCase.invoke(it.id), "${it.name} series")
+            }
+        }.await()
+
+        val secondPreference = async {
+            profile.preferences.getOrNull(1)?.let {
+                TvSeriesWrapper(seriesByGenreIdUseCase.invoke(it.id), "${it.name} series")
+            }
+        }.await()
+
+        val thirdPreference = async {
+            profile.preferences.getOrNull(2)?.let {
+                TvSeriesWrapper(seriesByGenreIdUseCase.invoke(it.id), "${it.name} series")
+            }
+        }.await()
 
         return@coroutineScope DashboardUiModel(
-            profile, popularSeries, topRatedSeries, trendingSeries, airingTodaySeries, watchlist
+            profile,
+            popularSeries,
+            topRatedSeries,
+            trendingSeries,
+            airingTodaySeries,
+            watchlist,
+            firstPreference,
+            secondPreference,
+            thirdPreference
         )
     }
 }

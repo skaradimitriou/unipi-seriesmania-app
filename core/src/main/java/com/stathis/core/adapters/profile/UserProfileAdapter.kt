@@ -16,10 +16,7 @@ import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.TvSeriesWrapper
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.User
-import com.stathis.domain.model.profile.uimodel.EmptyUserPreferences
-import com.stathis.domain.model.profile.uimodel.EmptyWatchlist
-import com.stathis.domain.model.profile.uimodel.LogoutOption
-import com.stathis.domain.model.profile.uimodel.UserStatistics
+import com.stathis.domain.model.profile.uimodel.*
 
 class UserProfileAdapter(
     private val callback: UserProfileCallback
@@ -36,6 +33,9 @@ class UserProfileAdapter(
             }
             R.layout.holder_empty_prefs -> {
                 HolderEmptyPrefsBinding.inflate(inflater, parent, false)
+            }
+            R.layout.holder_prefs_item -> {
+                HolderPrefsItemBinding.inflate(inflater, parent, false)
             }
             R.layout.holder_empty_watchlist -> {
                 HolderEmptyWatchlistBinding.inflate(inflater, parent, false)
@@ -59,6 +59,7 @@ class UserProfileAdapter(
         is User -> R.layout.holder_user_item
         is UserStatistics -> R.layout.holder_user_statistics_item
         is EmptyUserPreferences -> R.layout.holder_empty_prefs
+        is UserPreferences -> R.layout.holder_prefs_item
         is EmptyWatchlist -> R.layout.holder_empty_watchlist
         is TvSeriesWrapper -> R.layout.holder_series_wrapper_item
         is LogoutOption -> R.layout.holder_logout_option
@@ -86,12 +87,19 @@ class UserProfileViewHolder(
                 binding.setVariable(BR.callback, callback)
             }
 
+            is UserPreferences -> {
+                val preferences = data.prefs.joinToString(", ") { it.name }
+                binding.setVariable(BR.preferences, preferences)
+                binding.setVariable(BR.callback, callback)
+            }
+
             is TvSeriesWrapper -> {
                 val adapter = AiringTodaySeriesAdapter(this)
                 val decor = HorizontalItemDecoration(20)
                 adapter.submitList(data.series)
                 binding.setVariable(BR.adapter, adapter)
                 binding.setVariable(BR.decoration, decor)
+                binding.setVariable(BR.model, data)
             }
 
             is LogoutOption -> {

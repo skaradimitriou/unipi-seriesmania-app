@@ -35,7 +35,7 @@ interface SeriesApi {
     @GET("discover/tv?$API_KEY")
     suspend fun getPagedResultsForThisGenre(
         @Query("with_genres") genreId: String,
-        @Query("page") page: Int
+        @Query("page") page: Int = 1
     ): Response<TvSeriesFeedDto?>
 
     @GET("tv/{tvSeriesId}/credits?$API_KEY")

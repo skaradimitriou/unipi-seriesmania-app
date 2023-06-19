@@ -52,4 +52,9 @@ class SeriesRepositoryImpl @Inject constructor(
         call = { api.searchForSeries(query) },
         mapper = { TvSeriesMapper.toDomainModel(it).results }
     )
+
+    override suspend fun getSeriesByGenreId(genreId: Int): List<TvSeries> = getAndMapResponse(
+        call = { api.getPagedResultsForThisGenre(genreId.toString()) },
+        mapper = { TvSeriesMapper.toDomainModel(it).results }
+    )
 }

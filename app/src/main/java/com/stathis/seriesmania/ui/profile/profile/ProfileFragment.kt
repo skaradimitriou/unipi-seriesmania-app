@@ -10,6 +10,7 @@ import com.stathis.core.ext.askUserForAction
 import com.stathis.core.ext.setScreenTitle
 import com.stathis.core.util.MODE
 import com.stathis.core.util.SERIES
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.R
@@ -20,7 +21,6 @@ import com.stathis.seriesmania.ui.profile.navigator.ProfileAction
 import com.stathis.seriesmania.ui.results.ResultsActivity
 import com.stathis.seriesmania.ui.results.navigator.ResultAction
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile),
@@ -29,18 +29,35 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
     private val viewModel: ProfileViewModel by viewModels()
     private val activityViewModel: ProfileActivityViewModel by activityViewModels()
 
-    private val adapter = UserProfileAdapter(this)
+    private val profileAdapter = UserProfileAdapter(this)
 
     override fun init() {
         setScreenTitle(getString(com.stathis.core.R.string.profile_title))
-        binding.adapter = adapter
+
+        binding.profileDetailsRecycler.apply {
+            adapter = profileAdapter
+            itemAnimator = null
+        }
     }
 
     override fun startOps() {
         viewModel.getProfileInfo()
 
-        viewModel.userInfo.observe(viewLifecycleOwner) { uiData ->
-            adapter.submitList(uiData)
+        viewModel.userInfo.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.isLoading = true
+                }
+
+                is Result.Success -> {
+                    binding.isLoading = false
+                    profileAdapter.submitList(result.data)
+                }
+
+                is Result.Failure -> {
+                    binding.isLoading = false
+                }
+            }
         }
 
         viewModel.userLoggedOut.observe(viewLifecycleOwner) { loggedOut ->
@@ -76,8 +93,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
     }
 
     override fun onPreferencesClick() {
-        //Go to preferences screen
-        Timber.d("")
+        activityViewModel.navigateToScreen(ProfileAction.SET_PREFERENCES)
     }
 
     override fun onSeriesClick(model: TvSeries) {

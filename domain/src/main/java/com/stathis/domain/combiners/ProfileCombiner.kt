@@ -1,12 +1,10 @@
 package com.stathis.domain.combiners
 
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeriesWrapper
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.OtherUser
-import com.stathis.domain.model.profile.uimodel.EmptyUserPreferences
-import com.stathis.domain.model.profile.uimodel.EmptyWatchlist
-import com.stathis.domain.model.profile.uimodel.LogoutOption
-import com.stathis.domain.model.profile.uimodel.UserStatistics
+import com.stathis.domain.model.profile.uimodel.*
 import com.stathis.domain.usecases.follow.FetchMyFollowersUseCase
 import com.stathis.domain.usecases.follow.FetchWhoFollowsMeUseCase
 import com.stathis.domain.usecases.profile.GetProfileInfoUseCase
@@ -20,15 +18,15 @@ class ProfileCombiner @Inject constructor(
     private val watchlistUseCase: FetchWatchlistUseCase,
     private val followsUseCase: FetchMyFollowersUseCase,
     private val whoFollowsMeUseCase: FetchWhoFollowsMeUseCase
-) : BaseCombiner<List<UiModel>> {
+) : BaseCombiner<Result<List<UiModel>>> {
 
-    override suspend fun invoke(vararg args: Any?): List<UiModel> = coroutineScope {
+    override suspend fun invoke(vararg args: Any?): Result<List<UiModel>> = coroutineScope {
         val profile = async { profileInfoUseCase.invoke() }.await()
 
         var watchlist: TvSeriesWrapper? = null
         async {
             watchlistUseCase.invoke().collect {
-                if (it.isNotEmpty()) watchlist = TvSeriesWrapper(it)
+                if (it.isNotEmpty()) watchlist = TvSeriesWrapper(it, "Watchlist")
             }
         }.await()
 
@@ -50,8 +48,6 @@ class ProfileCombiner @Inject constructor(
 
         list.add(profile)
 
-        //FIXME: Calculate follows once it can be done and replace hardcoded values.
-
         list.add(
             UserStatistics(
                 following = followList.size.toString(),
@@ -63,7 +59,7 @@ class ProfileCombiner @Inject constructor(
         if (profile.preferences.isEmpty()) {
             list.add(EmptyUserPreferences())
         } else {
-            //
+            list.add(UserPreferences(prefs = profile.preferences))
         }
 
         watchlist?.let {
@@ -75,6 +71,6 @@ class ProfileCombiner @Inject constructor(
 
         list.add(LogoutOption(buttonTxt = "Αποσύνδεση"))
 
-        return@coroutineScope list
+        return@coroutineScope Result.Success(list)
     }
 }

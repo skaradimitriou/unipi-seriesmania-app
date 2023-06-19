@@ -6,6 +6,15 @@ class EmptyUserPreferences : UiModel {
     override fun equalsContent(obj: UiModel): Boolean = true
 }
 
+data class UserPreferences(
+    val prefs: List<SeriesPreference>
+) : UiModel {
+    override fun equalsContent(obj: UiModel): Boolean = when (obj) {
+        is UserPreferences -> prefs == obj.prefs
+        else -> false
+    }
+}
+
 class EmptyWatchlist : UiModel {
     override fun equalsContent(obj: UiModel): Boolean = true
 }

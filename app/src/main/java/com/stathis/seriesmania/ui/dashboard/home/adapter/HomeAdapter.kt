@@ -124,6 +124,7 @@ class HomeViewHolder(
                 adapter.submitList(data.series)
                 binding.setVariable(BR.adapter, adapter)
                 binding.setVariable(BR.decoration, decor)
+                binding.setVariable(BR.model, data)
             }
         }
     }

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="adapter"
             type="com.stathis.core.adapters.general.AiringTodaySeriesAdapter" />
+
+        <variable
+            name="model"
+            type="com.stathis.domain.model.TvSeriesWrapper" />
 
         <variable
             name="decoration"
@@ -26,9 +31,10 @@
             android:layout_marginHorizontal="@dimen/dimen_m"
             android:layout_marginTop="@dimen/dimen_m"
             android:paddingVertical="@dimen/dimen_s"
-            android:text="@string/my_watchlist"
+            android:text="@{model.title}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/my_watchlist" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/seriesRecycler"

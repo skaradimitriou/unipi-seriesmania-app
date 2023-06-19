@@ -12,6 +12,6 @@ object UserMapper : BaseMapper<UserDto?, User> {
         bio = dto?.bio.toNotNull(),
         email = dto?.email.toNotNull(),
         userImg = dto?.userImg.toNotNull(),
-        preferences = listOf()
+        preferences = dto?.preferences.toNotNull()
     )
 }

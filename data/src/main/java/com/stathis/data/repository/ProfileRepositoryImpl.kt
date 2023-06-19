@@ -10,8 +10,10 @@ import com.stathis.data.mappers.OtherUserMapper
 import com.stathis.data.mappers.UserMapper
 import com.stathis.data.model.UserDto
 import com.stathis.data.util.USERS_DB_PATH
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.profile.OtherUser
 import com.stathis.domain.model.profile.User
+import com.stathis.domain.model.profile.uimodel.SeriesPreference
 import com.stathis.domain.repositories.ProfileRepository
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -33,9 +35,11 @@ class ProfileRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUserProfile(): User {
-        val result =
-            firestore.collection(USERS_DB_PATH).document(auth.getActiveUserId()).get().await()
-                .toObject(UserDto::class.java)
+        val result = firestore.collection(USERS_DB_PATH)
+            .document(auth.getActiveUserId())
+            .get()
+            .await()
+            .toObject(UserDto::class.java)
 
         val mappedResult = UserMapper.toDomainModel(result)
 
@@ -59,7 +63,7 @@ class ProfileRepositoryImpl @Inject constructor(
         return OtherUserMapper.toDomainModel(result)
     }
 
-    override suspend fun uploadProfileImage(userImage: Bitmap): Boolean {
+    override suspend fun uploadProfileImage(userImage: Bitmap): Result<Boolean> {
         val storageRef = storage.child("profile/${auth.getActiveUserId()}")
         val image = userImage.compressBitmap()
         val upload = storageRef.putBytes(image).await()
@@ -70,7 +74,7 @@ class ProfileRepositoryImpl @Inject constructor(
         )
 
         firestore.collection(USERS_DB_PATH).document(auth.getActiveUserId()).update(data).await()
-        return true
+        return Result.Success(true)
     }
 
     override suspend fun updateProfileInfo(username: String, bio: String): Boolean {
@@ -80,6 +84,13 @@ class ProfileRepositoryImpl @Inject constructor(
             "bio" to bio,
         )
 
+        firestore.collection(USERS_DB_PATH).document(uuid).update(data).await()
+        return true
+    }
+
+    override suspend fun saveUserPreferences(list: List<SeriesPreference>): Boolean {
+        val uuid = auth.getActiveUserId()
+        val data = mapOf("preferences" to list)
         firestore.collection(USERS_DB_PATH).document(uuid).update(data).await()
         return true
     }

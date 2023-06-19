@@ -47,10 +47,16 @@
     <!-- Profile Screen -->
     <string name="profile_title">Προφίλ</string>
     <string name="profile_dummy_username">foustanos</string>
+    <string name="bio_placeholder">\&quot;%s\&quot;</string>
     <string name="following">Following</string>
     <string name="followers">Followers</string>
     <string name="profile_empty_prefs_title">Empty preferences</string>
     <string name="profile_empty_prefs_desc">Click here to add your series preferences</string>
+    <string name="profile_prefs_title">Series Preferences</string>
+    <string name="profile_prefs_desc">You told us that you enjoy <b>%s</b> series</string>
+    <string name="profile_prefs_desc_other_user">This user enjoys <b>%s</b> series</string>
+    <string name="edit"><u>Επεξεργασία</u></string>
+    <string name="edit_profile">Επεξεργασία Προφίλ</string>
     <string name="profile_empty_watchlist_title">Empty watchlist</string>
     <string name="profile_empty_watchlist_desc">The series that you add to your watchlist will be displayed here</string>
     <string name="ask_user_logout">Θέλετε να αποσυνδεθείτε;</string>
@@ -58,6 +64,12 @@
 
     <!-- Upload Profile Image Screen -->
     <string name="upload_image_title">Φωτογραφία Προφίλ</string>
+    <string name="upload_image_header">Ανέβασε μια φωτογραφία στο προφίλ σου</string>
+    <string name="uploading_image">Ανανεώνουμε το προφίλ σου..</string>
+
+    <!-- User Preferences screen -->
+    <string name="preferences_title">Οι προτιμήσεις μου</string>
+    <string name="preferences_header">Επίλεξε μέχρι τρείς (3) προτιμήσεις σειρών</string>
 
     <!-- Details -->
     <string name="details_screen_title">Πληροφορίες Σειράς</string>

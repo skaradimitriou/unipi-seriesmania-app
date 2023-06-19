@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
 import com.stathis.domain.combiners.ProfileCombiner
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.usecases.profile.LogoutUserUseCase
 import com.stathis.seriesmania.di.IoDispatcher
@@ -22,10 +23,10 @@ class ProfileViewModel @Inject constructor(
     private val logoutUseCase: LogoutUserUseCase
 ) : BaseViewModel(app) {
 
-    val userInfo: LiveData<List<UiModel>>
+    val userInfo: LiveData<Result<List<UiModel>>>
         get() = _userInfo
 
-    private val _userInfo = MutableLiveData<List<UiModel>>()
+    private val _userInfo = MutableLiveData<Result<List<UiModel>>>()
 
     val userLoggedOut: LiveData<Boolean>
         get() = _userLoggedOut
@@ -33,6 +34,7 @@ class ProfileViewModel @Inject constructor(
     private val _userLoggedOut = MutableLiveData<Boolean>()
 
     fun getProfileInfo() {
+        _userInfo.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             val result = combiner.invoke()
             _userInfo.postValue(result)

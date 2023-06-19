@@ -34,5 +34,10 @@
         android:name="com.stathis.seriesmania.ui.profile.update.UpdateInfoFragment"
         android:label="UpdateInfoFragment"
         tools:layout="@layout/fragment_update_info" />
+    <fragment
+        android:id="@+id/preferencesFragment"
+        android:name="com.stathis.seriesmania.ui.profile.preferences.PreferencesFragment"
+        android:label="PreferencesFragment"
+        tools:layout="@layout/fragment_preferences" />
 
 </navigation>

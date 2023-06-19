@@ -50,7 +50,10 @@ class ProfileNavigatorImpl @Inject constructor(
                     putSerializable(TYPE, ProfileResultsType.WATCHLIST)
                 })
             }
-            else -> Unit
+            ProfileAction.SET_PREFERENCES -> {
+                navController.navigate(R.id.preferencesFragment)
+            }
+            ProfileAction.PREFERENCES_UPDATED -> goBack()
         }
     }
 

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.stathis.domain.model.profile.uimodel.SeriesPreference" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_corners"
+        android:backgroundTint="@{model.selected ? @color/grey_bg : @color/sand_bg}"
+        android:padding="@dimen/dimen_m"
+        tools:backgroundTint="@color/grey_bg">
+
+        <TextView
+            android:id="@+id/preferenceTxtView"
+            style="@style/text_18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_m"
+            android:text="@{model.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/radioBtnImgView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/dummy_username" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/radioBtnImgView"
+            android:layout_width="@dimen/dimen_xl"
+            android:layout_height="@dimen/dimen_xl"
+            android:src="@{model.selected ? @color/dark_blue : @color/white}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/dark_blue" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/radioBtnFilledImgView"
+            android:layout_width="@dimen/dimen_m"
+            android:layout_height="@dimen/dimen_m"
+            android:src="@color/white"
+            android:visibility="@{model.selected ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/radioBtnImgView"
+            app:layout_constraintEnd_toEndOf="@id/radioBtnImgView"
+            app:layout_constraintStart_toStartOf="@id/radioBtnImgView"
+            app:layout_constraintTop_toTopOf="@id/radioBtnImgView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

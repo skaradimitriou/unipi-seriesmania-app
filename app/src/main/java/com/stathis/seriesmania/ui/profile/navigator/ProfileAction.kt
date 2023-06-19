@@ -14,5 +14,6 @@ enum class ProfileAction {
     FOLLOWERS,
     WATCHLIST,
 
-    PREFERENCES
+    SET_PREFERENCES,
+    PREFERENCES_UPDATED
 }

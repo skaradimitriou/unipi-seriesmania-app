@@ -2,6 +2,7 @@ package com.stathis.domain.model.profile
 
 import android.os.Parcelable
 import com.stathis.domain.model.UiModel
+import com.stathis.domain.model.profile.uimodel.SeriesPreference
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -9,7 +10,7 @@ data class User(
     val id: String,
     val username: String,
     val bio: String,
-    val preferences: List<String>,
+    val preferences: List<SeriesPreference>,
     val email: String,
     val userImg: String
 ) : UiModel, Parcelable {

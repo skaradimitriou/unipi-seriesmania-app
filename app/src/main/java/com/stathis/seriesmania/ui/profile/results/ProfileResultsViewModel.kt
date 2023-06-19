@@ -5,8 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
-import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.OtherUser
+import com.stathis.domain.model.profile.uimodel.EmptyWatchlist
 import com.stathis.domain.usecases.follow.FetchMyFollowersUseCase
 import com.stathis.domain.usecases.follow.FetchWhoFollowsMeUseCase
 import com.stathis.domain.usecases.watchlist.FetchWatchlistUseCase
@@ -31,10 +32,10 @@ class ProfileResultsViewModel @Inject constructor(
 
     private val _follows = MutableLiveData<List<OtherUser>>()
 
-    val watchlist: LiveData<List<TvSeries>>
+    val watchlist: LiveData<List<UiModel>>
         get() = _watchlist
 
-    private val _watchlist = MutableLiveData<List<TvSeries>>()
+    private val _watchlist = MutableLiveData<List<UiModel>>()
 
     fun getResults(type: ProfileResultsType) = when (type) {
         ProfileResultsType.FOLLOWING -> getMyFollowingUsers()
@@ -61,7 +62,7 @@ class ProfileResultsViewModel @Inject constructor(
     private fun getMyWatchlist() {
         viewModelScope.launch(dispatcher) {
             fetchWatchlistUseCase.invoke().collect {
-                _watchlist.postValue(it)
+                _watchlist.postValue(it.ifEmpty { listOf(EmptyWatchlist()) })
             }
         }
     }

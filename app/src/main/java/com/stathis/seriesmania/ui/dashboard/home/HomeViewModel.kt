@@ -39,6 +39,9 @@ class HomeViewModel @Inject constructor(
             )
 
             result.watchlist?.let { list.add(it) }
+            result.firstPreference?.let { list.add(it) }
+            result.secondPreference?.let { list.add(it) }
+            result.thirdPreference?.let { list.add(it) }
             _dashboardData.postValue(list)
         }
     }

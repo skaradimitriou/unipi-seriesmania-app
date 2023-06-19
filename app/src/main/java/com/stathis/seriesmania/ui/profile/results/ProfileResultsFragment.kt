@@ -34,11 +34,6 @@ class ProfileResultsFragment :
     private val profileResultsAdapter = ProfileResultsAdapter(this)
 
     override fun init() {
-        arguments?.serializable<ProfileResultsType>(TYPE)?.let { type ->
-            setScreenTitle(type.toScreenTitle(requireContext()))
-            viewModel.getResults(type)
-        }
-
         binding.resultsRecycler.apply {
             adapter = profileResultsAdapter
             addItemDecoration(VerticalItemDecoration(20))
@@ -47,6 +42,11 @@ class ProfileResultsFragment :
     }
 
     override fun startOps() {
+        arguments?.serializable<ProfileResultsType>(TYPE)?.let { type ->
+            setScreenTitle(type.toScreenTitle(requireContext()))
+            viewModel.getResults(type)
+        }
+
         viewModel.follows.observe(viewLifecycleOwner) { follows ->
             profileResultsAdapter.submitList(follows)
         }

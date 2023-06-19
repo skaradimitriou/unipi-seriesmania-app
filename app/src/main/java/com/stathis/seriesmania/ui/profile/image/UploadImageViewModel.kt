@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.domain.model.Result
 import com.stathis.domain.usecases.profile.GetProfileInfoUseCase
 import com.stathis.domain.usecases.profile.UploadProfileImageUseCase
 import com.stathis.seriesmania.di.IoDispatcher
@@ -22,10 +23,10 @@ class UploadImageViewModel @Inject constructor(
     private val getProfileInfoUseCase: GetProfileInfoUseCase
 ) : BaseViewModel(app) {
 
-    val bitmapSaved: LiveData<Boolean>
+    val bitmapSaved: LiveData<Result<Boolean>>
         get() = _bitmapSaved
 
-    private val _bitmapSaved = MutableLiveData<Boolean>()
+    private val _bitmapSaved = MutableLiveData<Result<Boolean>>()
 
     val bitmap: LiveData<Bitmap>
         get() = _bitmap
@@ -58,6 +59,7 @@ class UploadImageViewModel @Inject constructor(
     }
 
     fun saveUserImage() {
+        _bitmapSaved.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             _tempBitmap?.let { bitmap ->
                 val result = uploadImageUseCase.invoke(bitmap)

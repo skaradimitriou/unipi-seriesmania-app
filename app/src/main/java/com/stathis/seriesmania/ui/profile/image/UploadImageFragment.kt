@@ -53,8 +53,19 @@ class UploadImageFragment :
             binding.userImgView.setImageBitmap(bitmap)
         }
 
-        viewModel.bitmapSaved.observe(this) {
-            activityViewModel.navigateToScreen(ProfileAction.PHOTO_UPLOADED)
+        viewModel.bitmapSaved.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is com.stathis.domain.model.Result.Loading -> {
+                    binding.isLoading = true
+                }
+                is com.stathis.domain.model.Result.Success -> {
+                    binding.isLoading = false
+                    activityViewModel.navigateToScreen(ProfileAction.PHOTO_UPLOADED)
+                }
+                is com.stathis.domain.model.Result.Failure -> {
+                    binding.isLoading = false
+                }
+            }
         }
     }
 

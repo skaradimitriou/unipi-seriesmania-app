@@ -10,11 +10,13 @@ import com.stathis.core.adapters.general.SeriesCallback
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
 import com.stathis.core.databinding.HolderEmptyViewBinding
+import com.stathis.core.databinding.HolderEmptyWatchlistBinding
 import com.stathis.core.databinding.HolderSmallUserItemBinding
 import com.stathis.core.databinding.HolderTvSeriesItemBinding
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.OtherUser
+import com.stathis.domain.model.profile.uimodel.EmptyWatchlist
 
 class ProfileResultsAdapter(
     private val callback: ProfileResultsCallback
@@ -28,6 +30,9 @@ class ProfileResultsAdapter(
             R.layout.holder_tv_series_item -> {
                 HolderTvSeriesItemBinding.inflate(inflater, parent, false)
             }
+            R.layout.holder_empty_watchlist -> {
+                HolderEmptyWatchlistBinding.inflate(inflater, parent, false)
+            }
             else -> HolderEmptyViewBinding.inflate(inflater, parent, false)
         }
         return ProfileResultsViewHolder(view, callback)
@@ -40,6 +45,7 @@ class ProfileResultsAdapter(
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
         is OtherUser -> R.layout.holder_small_user_item
         is TvSeries -> R.layout.holder_tv_series_item
+        is EmptyWatchlist -> R.layout.holder_empty_watchlist
         else -> R.layout.holder_empty_view
     }
 }

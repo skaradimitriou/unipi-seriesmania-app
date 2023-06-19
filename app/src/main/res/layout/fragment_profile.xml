@@ -5,14 +5,17 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
-            name="adapter"
-            type="com.stathis.core.adapters.profile.UserProfileAdapter" />
+            name="isLoading"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/sand_bg"
         tools:context=".ui.profile.profile.ProfileFragment">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -20,12 +23,25 @@
             style="@style/AppRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:adapter="@{adapter}"
             android:orientation="vertical"
+            android:visibility="@{isLoading ? View.GONE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="1" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/emptyLottieAnim"
+            android:layout_width="@dimen/dimen_150"
+            android:layout_height="@dimen/dimen_150"
+            android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
