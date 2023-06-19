@@ -11,7 +11,7 @@ import com.stathis.core.util.MODE
 import com.stathis.core.util.THREAD
 import com.stathis.core.util.USER
 import com.stathis.core.util.decorations.VerticalItemDecoration
-import com.stathis.domain.model.forum.Thread
+import com.stathis.domain.model.forum.ForumThread
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentForumBinding
@@ -34,7 +34,7 @@ class ForumFragment : BaseFragment<FragmentForumBinding>(R.layout.fragment_forum
             })
         }
 
-        override fun onThreadClick(model: Thread) {
+        override fun onThreadClick(model: ForumThread) {
             startActivity(Intent(requireContext(), ForumActivity::class.java).apply {
                 putExtra(MODE, ForumAction.THREAD_DETAILS)
                 putExtra(THREAD, model)

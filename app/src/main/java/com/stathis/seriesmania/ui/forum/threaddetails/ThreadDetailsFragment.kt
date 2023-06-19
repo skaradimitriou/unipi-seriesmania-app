@@ -12,7 +12,7 @@ import com.stathis.core.util.MODE
 import com.stathis.core.util.THREAD
 import com.stathis.core.util.USER
 import com.stathis.core.util.decorations.VerticalItemDecoration
-import com.stathis.domain.model.forum.Thread
+import com.stathis.domain.model.forum.ForumThread
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentThreadDetailsBinding
@@ -34,7 +34,7 @@ class ThreadDetailsFragment :
             })
         }
 
-        override fun onThreadClick(model: Thread) {
+        override fun onThreadClick(model: ForumThread) {
             //
         }
     })
@@ -48,7 +48,7 @@ class ThreadDetailsFragment :
             itemAnimator = null
         }
 
-        requireActivity().intent.getParcelable<Thread>(THREAD)?.let {
+        requireActivity().intent.getParcelable<ForumThread>(THREAD)?.let {
             viewModel.getThreadDetails(it)
         }
 

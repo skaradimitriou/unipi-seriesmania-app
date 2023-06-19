@@ -15,7 +15,7 @@ import com.stathis.core.util.decorations.HorizontalItemDecoration
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.TvSeriesWrapper
 import com.stathis.domain.model.UiModel
-import com.stathis.domain.model.profile.OtherUser
+import com.stathis.domain.model.profile.User
 import com.stathis.domain.model.profile.uimodel.EmptyUserPreferences
 import com.stathis.domain.model.profile.uimodel.EmptyWatchlist
 import com.stathis.domain.model.profile.uimodel.UserStatistics
@@ -55,7 +55,7 @@ class OtherUserProfileAdapter(
     }
 
     override fun getItemViewType(position: Int) = when (getItem(position)) {
-        is OtherUser -> R.layout.holder_other_user_item
+        is User -> R.layout.holder_other_user_item
         is UserStatistics -> R.layout.holder_user_statistics_item
         is EmptyUserPreferences -> R.layout.holder_empty_prefs
         is EmptyWatchlist -> R.layout.holder_empty_watchlist
@@ -71,7 +71,7 @@ class OtherUserProfileViewHolder(
 
     override fun present(data: UiModel) {
         when (data) {
-            is OtherUser -> {
+            is User -> {
                 binding.setVariable(BR.model, data)
                 binding.setVariable(BR.callback, callback)
             }
@@ -103,6 +103,6 @@ class OtherUserProfileViewHolder(
 }
 
 interface OtherUserProfileCallback {
-    fun onFollowClick(user: OtherUser)
+    fun onFollowClick(user: User)
     fun onSeriesClick(model: TvSeries)
 }

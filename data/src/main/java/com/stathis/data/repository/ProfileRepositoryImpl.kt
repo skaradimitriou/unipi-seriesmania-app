@@ -6,12 +6,10 @@ import com.google.firebase.storage.StorageReference
 import com.stathis.core.ext.compressBitmap
 import com.stathis.core.util.auth.Authenticator
 import com.stathis.core.util.session.SessionManager
-import com.stathis.data.mappers.OtherUserMapper
 import com.stathis.data.mappers.UserMapper
 import com.stathis.data.model.UserDto
 import com.stathis.data.util.USERS_DB_PATH
 import com.stathis.domain.model.Result
-import com.stathis.domain.model.profile.OtherUser
 import com.stathis.domain.model.profile.User
 import com.stathis.domain.model.profile.uimodel.SeriesPreference
 import com.stathis.domain.repositories.ProfileRepository
@@ -50,17 +48,14 @@ class ProfileRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUserInfo(userId: String): User {
-        val result = firestore.collection(USERS_DB_PATH).document(userId).get().await()
+        val result = firestore
+            .collection(USERS_DB_PATH)
+            .document(userId)
+            .get()
+            .await()
             .toObject(UserDto::class.java)
 
         return UserMapper.toDomainModel(result)
-    }
-
-    override suspend fun getUserById(userId: String): OtherUser {
-        val result = firestore.collection(USERS_DB_PATH).document(userId).get().await()
-            .toObject(UserDto::class.java)
-
-        return OtherUserMapper.toDomainModel(result)
     }
 
     override suspend fun uploadProfileImage(userImage: Bitmap): Result<Boolean> {

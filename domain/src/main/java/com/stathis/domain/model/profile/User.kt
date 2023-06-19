@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
-    val id: String,
+    var id: String,
     val username: String,
     val bio: String,
     val preferences: List<SeriesPreference>,

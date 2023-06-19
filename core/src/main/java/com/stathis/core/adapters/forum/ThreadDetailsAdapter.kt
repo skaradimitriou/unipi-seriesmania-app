@@ -37,7 +37,7 @@ class ThreadDetailsAdapter(
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
-        is com.stathis.domain.model.forum.Thread -> R.layout.holder_thread_item
+        is com.stathis.domain.model.forum.ForumThread -> R.layout.holder_thread_item
         is ThreadReply -> R.layout.holder_thread_reply
         else -> R.layout.holder_empty_view
     }
@@ -50,7 +50,7 @@ class ThreadDetailsViewHolder(
 
     override fun present(data: UiModel) {
         when (data) {
-            is com.stathis.domain.model.forum.Thread -> {
+            is com.stathis.domain.model.forum.ForumThread -> {
                 binding.setVariable(BR.model, data)
                 binding.setVariable(BR.callback, callback)
             }

@@ -2,17 +2,18 @@ package com.stathis.data.mappers
 
 import com.stathis.core.ext.toListOf
 import com.stathis.core.ext.toNotNull
-import com.stathis.data.model.ThreadDto
+import com.stathis.data.model.ForumThreadDto
 import com.stathis.data.model.ThreadReplyDto
-import com.stathis.domain.model.forum.Thread
+import com.stathis.domain.model.forum.ForumThread
 import com.stathis.domain.model.forum.ThreadReply
+import com.stathis.domain.model.profile.User
 
-object SingleThreadMapper : BaseMapper<ThreadDto?, Thread> {
+object SingleThreadMapper : BaseMapper<ForumThreadDto?, ForumThread> {
 
-    override fun toDomainModel(dto: ThreadDto?): Thread = Thread(
+    override fun toDomainModel(dto: ForumThreadDto?): ForumThread = ForumThread(
         title = dto?.title.toNotNull(),
         body = dto?.body.toNotNull(),
-        user = UserMapper.toDomainModel(dto?.user),
+        user = User().apply { id = dto?.userId.toNotNull() },
         threadId = dto?.threadId.toNotNull(),
         replies = dto?.replies.toThreadReplies()
     )
@@ -21,7 +22,7 @@ object SingleThreadMapper : BaseMapper<ThreadDto?, Thread> {
     private fun List<ThreadReplyDto>?.toThreadReplies() = toListOf {
         ThreadReply(
             message = it.message.toNotNull(),
-            user = UserMapper.toDomainModel(it.user)
+            user = User().apply { id = it.userId.toNotNull() }
         )
     }
 }

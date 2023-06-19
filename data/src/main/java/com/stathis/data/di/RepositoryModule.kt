@@ -1,7 +1,6 @@
 package com.stathis.data.di
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.stathis.core.util.auth.Authenticator
 import com.stathis.core.util.session.SessionManager
@@ -56,8 +55,8 @@ class RepositoryModule {
     fun provideForumRepository(
         firestore: FirebaseFirestore,
         authenticator: Authenticator,
-        sessionManager: SessionManager
-    ): ForumRepository = ForumRepositoryImpl(firestore, authenticator, sessionManager)
+        profileRepository: ProfileRepository
+    ): ForumRepository = ForumRepositoryImpl(firestore, authenticator, profileRepository)
 
     @Provides
     @Singleton

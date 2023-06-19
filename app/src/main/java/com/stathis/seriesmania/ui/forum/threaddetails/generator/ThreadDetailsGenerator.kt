@@ -4,10 +4,10 @@ import com.stathis.domain.model.UiModel
 
 object ThreadDetailsGenerator {
 
-    fun generate(thread: com.stathis.domain.model.forum.Thread): List<UiModel> {
+    fun generate(forumThread: com.stathis.domain.model.forum.ForumThread): List<UiModel> {
         val data = mutableListOf<UiModel>()
-        data.add(thread)
-        data.addAll(thread.replies)
+        data.add(forumThread)
+        data.addAll(forumThread.replies)
         return data
     }
 }

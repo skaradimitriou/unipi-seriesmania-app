@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
 import com.stathis.domain.model.UiModel
-import com.stathis.domain.model.forum.Thread
+import com.stathis.domain.model.forum.ForumThread
 import com.stathis.domain.usecases.forum.AddThreadReplyUseCase
 import com.stathis.domain.usecases.forum.FetchForumThreadByIdUseCase
 import com.stathis.seriesmania.di.IoDispatcher
@@ -29,19 +29,19 @@ class ThreadDetailsViewModel @Inject constructor(
 
     private val _details = MutableLiveData<List<UiModel>>()
 
-    private var currentThread: Thread? = null
+    private var currentForumThread: ForumThread? = null
 
     fun addReply(reply: String) {
         viewModelScope.launch(dispatcher) {
-            addReplyUseCase.invoke(reply, currentThread)
-            currentThread?.let { getThreadDetails(it) }
+            addReplyUseCase.invoke(reply, currentForumThread)
+            currentForumThread?.let { getThreadDetails(it) }
         }
     }
 
-    fun getThreadDetails(thread: Thread? = currentThread) {
+    fun getThreadDetails(forumThread: ForumThread? = currentForumThread) {
         viewModelScope.launch(dispatcher) {
-            val result = fetchThreadByIdUseCase.invoke(thread?.threadId)
-            currentThread = result
+            val result = fetchThreadByIdUseCase.invoke(forumThread?.threadId)
+            currentForumThread = result
             val details = ThreadDetailsGenerator.generate(result)
             _details.postValue(details)
         }
