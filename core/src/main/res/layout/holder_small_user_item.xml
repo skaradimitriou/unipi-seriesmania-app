@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.stathis.domain.model.profile.OtherUser" />
+
+        <variable
+            name="callback"
+            type="com.stathis.core.adapters.profile.ProfileResultsCallback" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_m">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userImgView"
+                android:layout_width="@dimen/dimen_2xl"
+                android:layout_height="@dimen/dimen_2xl"
+                android:onClick="@{() -> callback.onUserClick(model)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setProfileImage="@{model.userImg}"
+                tools:src="@drawable/profile_placeholder" />
+
+            <TextView
+                android:id="@+id/userNameTxtView"
+                style="@style/text_18_bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_m"
+                android:text="@{model.username}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/userImgView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/dummy_username" />
+
+            <TextView
+                android:id="@+id/bioTxtView"
+                style="@style/text_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_s"
+                android:text="@{model.bio}"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/userNameTxtView"
+                app:layout_constraintTop_toBottomOf="@id/userNameTxtView"
+                tools:text="@string/dummy_username" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

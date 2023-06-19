@@ -1,5 +1,6 @@
 package com.stathis.seriesmania.ui.forum.threaddetails
 
+import android.content.Intent
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import com.stathis.core.adapters.forum.ThreadDetailsAdapter
@@ -7,12 +8,16 @@ import com.stathis.core.adapters.forum.ThreadsCallback
 import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.getParcelable
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.util.MODE
 import com.stathis.core.util.THREAD
+import com.stathis.core.util.USER
 import com.stathis.core.util.decorations.VerticalItemDecoration
 import com.stathis.domain.model.forum.Thread
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentThreadDetailsBinding
+import com.stathis.seriesmania.ui.profile.ProfileActivity
+import com.stathis.seriesmania.ui.profile.navigator.ProfileAction
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,10 +28,15 @@ class ThreadDetailsFragment :
 
     private val detailsAdapter = ThreadDetailsAdapter(object : ThreadsCallback {
         override fun onAvatarClick(user: User) {
-            //
+            startActivity(Intent(requireContext(), ProfileActivity::class.java).apply {
+                putExtra(MODE, ProfileAction.USER_PROFILE)
+                putExtra(USER, user)
+            })
         }
 
-        override fun onThreadClick(model: Thread) {}
+        override fun onThreadClick(model: Thread) {
+            //
+        }
     })
 
     override fun init() {

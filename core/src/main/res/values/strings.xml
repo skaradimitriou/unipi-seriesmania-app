@@ -56,6 +56,9 @@
     <string name="ask_user_logout">Θέλετε να αποσυνδεθείτε;</string>
     <string name="logout">Αποσύνδεση</string>
 
+    <!-- Upload Profile Image Screen -->
+    <string name="upload_image_title">Φωτογραφία Προφίλ</string>
+
     <!-- Details -->
     <string name="details_screen_title">Πληροφορίες Σειράς</string>
     <string name="dummy_series_name">Wolverine</string>
@@ -86,5 +89,10 @@
     <!-- Watchlist -->
     <string name="my_watchlist">My Watchlist</string>
     <string name="watchlist">Watchlist</string>
+
+    <!-- Other user profile -->
+    <string name="user_empty_prefs_desc">This user hasn\'t added series preferences yet</string>
+    <string name="user_empty_watchlist_desc">This user hasn\'t added series to watchlist yet</string>
+
 
 </resources>

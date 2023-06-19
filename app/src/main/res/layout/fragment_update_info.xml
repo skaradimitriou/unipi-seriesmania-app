@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.stathis.seriesmania.ui.profile.update.UpdateInfoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/sand_bg"
+        android:padding="@dimen/dimen_l"
+        tools:context=".ui.profile.update.UpdateInfoFragment">
+
+        <TextView
+            android:id="@+id/headerTxtView"
+            style="@style/text_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Άλλαξε τα στοιχεία του προφίλ σου"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_l"
+            android:hint="@string/username"
+            app:layout_constraintTop_toBottomOf="@id/headerTxtView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usernameInputTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/bioField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_l"
+            android:hint="Bio"
+            app:layout_constraintTop_toBottomOf="@id/usernameField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bioInputTxt"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_100"
+                android:background="@color/white"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/saveBtn"
+            style="@style/AppButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.buttonState}"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/dimen_10"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

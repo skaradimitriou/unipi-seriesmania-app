@@ -10,5 +10,12 @@ class FetchWatchlistUseCase @Inject constructor(
     private val repo: WatchlistRepository
 ) : BaseUseCase<Flow<List<TvSeries>>> {
 
-    override suspend fun invoke(vararg args: Any?): Flow<List<TvSeries>> = repo.getAllItems()
+    override suspend fun invoke(vararg args: Any?): Flow<List<TvSeries>> {
+        val userId = args.getOrNull(0) as? String ?: ""
+        return if (userId.isEmpty()) {
+            repo.getAllItems()
+        } else {
+            repo.getAllItemsByUserId(userId)
+        }
+    }
 }

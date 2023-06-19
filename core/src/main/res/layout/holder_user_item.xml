@@ -8,13 +8,18 @@
         <variable
             name="model"
             type="com.stathis.domain.model.profile.User" />
+
+        <variable
+            name="callback"
+            type="com.stathis.core.adapters.profile.UserProfileCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dark_blue"
-        android:padding="@dimen/dimen_m">
+        android:paddingHorizontal="@dimen/dimen_m"
+        android:paddingVertical="@dimen/dimen_xl">
 
         <View
             android:id="@+id/profileBgView"
@@ -29,12 +34,26 @@
             android:layout_width="@dimen/dimen_3xl"
             android:layout_height="@dimen/dimen_3xl"
             android:layout_marginTop="@dimen/dimen_m"
+            android:onClick="@{() -> callback.onImageClick()}"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:setProfileImage="@{model.userImg}"
             tools:src="@drawable/profile_placeholder" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/editImgView"
+            android:layout_width="@dimen/dimen_xl"
+            android:layout_height="@dimen/dimen_xl"
+            android:layout_marginTop="@dimen/dimen_m"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/grey_dark_bg"
+            android:onClick="@{() -> callback.onImageClick()}"
+            android:padding="@dimen/dimen_xs"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@id/profileUserImgView"
+            app:layout_constraintEnd_toEndOf="@id/profileUserImgView" />
 
         <TextView
             android:id="@+id/userNameTxtView"
@@ -72,6 +91,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profileEmailTxtView"
             tools:text="@string/lorem_ipsum" />
+
+        <Button
+            android:id="@+id/editUserInfoBtn"
+            style="@style/AppButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_m"
+            android:background="@drawable/round_corners"
+            android:onClick="@{() -> callback.onEditInfoClick()}"
+            android:paddingHorizontal="@dimen/dimen_xl"
+            android:text="Επεξεργασία Προφίλ"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileBioTxtView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

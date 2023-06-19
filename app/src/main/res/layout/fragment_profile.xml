@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.dashboard.profile.ProfileFragment">
+        tools:context=".ui.profile.profile.ProfileFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/profileDetailsRecycler"
@@ -25,8 +25,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="1"
-            tools:listitem="@layout/holder_profile_header" />
+            tools:itemCount="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

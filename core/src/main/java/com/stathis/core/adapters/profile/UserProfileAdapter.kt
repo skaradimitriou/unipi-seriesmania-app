@@ -108,7 +108,12 @@ class UserProfileViewHolder(
 }
 
 interface UserProfileCallback {
+    fun onImageClick()
+    fun onEditInfoClick()
     fun onFollowClick(model: User)
+    fun onMyFollowingUsersClick()
+    fun onMyFollowsClick()
+    fun onWatchlistClick()
     fun onPreferencesClick()
     fun onSeriesClick(model: TvSeries)
     fun onLogoutClick()

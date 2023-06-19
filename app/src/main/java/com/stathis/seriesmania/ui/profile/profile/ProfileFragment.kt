@@ -1,6 +1,7 @@
-package com.stathis.seriesmania.ui.dashboard.profile
+package com.stathis.seriesmania.ui.profile.profile
 
 import android.content.Intent
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.stathis.core.adapters.profile.UserProfileAdapter
 import com.stathis.core.adapters.profile.UserProfileCallback
@@ -14,6 +15,8 @@ import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentProfileBinding
 import com.stathis.seriesmania.ui.onboarding.OnboardingActivity
+import com.stathis.seriesmania.ui.profile.ProfileActivityViewModel
+import com.stathis.seriesmania.ui.profile.navigator.ProfileAction
 import com.stathis.seriesmania.ui.results.ResultsActivity
 import com.stathis.seriesmania.ui.results.navigator.ResultAction
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,16 +27,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
     UserProfileCallback {
 
     private val viewModel: ProfileViewModel by viewModels()
+    private val activityViewModel: ProfileActivityViewModel by activityViewModels()
 
     private val adapter = UserProfileAdapter(this)
 
     override fun init() {
         setScreenTitle(getString(com.stathis.core.R.string.profile_title))
-//        addAppBarMenu(menuId = R.menu.profile_screen_menu) { selectedAction ->
-//            if (selectedAction == R.id.nav_edit_profile) {
-//                startActivity(Intent(requireContext(), EditProfileActivity::class.java))
-//            }
-//        }
         binding.adapter = adapter
     }
 
@@ -52,8 +51,28 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
 
     override fun stopOps() {}
 
+    override fun onImageClick() {
+        activityViewModel.navigateToScreen(ProfileAction.CHANGE_PROFILE_PHOTO)
+    }
+
+    override fun onEditInfoClick() {
+        activityViewModel.navigateToScreen(ProfileAction.UPDATE_PROFILE_INFO)
+    }
+
     override fun onFollowClick(model: User) {
         //handle follow mechanism
+    }
+
+    override fun onMyFollowingUsersClick() {
+        activityViewModel.navigateToScreen(ProfileAction.FOLLOWING)
+    }
+
+    override fun onMyFollowsClick() {
+        activityViewModel.navigateToScreen(ProfileAction.FOLLOWERS)
+    }
+
+    override fun onWatchlistClick() {
+        activityViewModel.navigateToScreen(ProfileAction.WATCHLIST)
     }
 
     override fun onPreferencesClick() {

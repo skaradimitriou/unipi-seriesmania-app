@@ -1,5 +1,6 @@
 package com.stathis.core.ext
 
+import android.graphics.Bitmap
 import android.view.Menu
 import android.view.MenuItem
 import androidx.databinding.ViewDataBinding
@@ -7,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.stathis.core.R
+import java.io.ByteArrayOutputStream
 
 /**
  * Helper method to show a simple [Snackbar].
@@ -50,4 +52,14 @@ fun Menu.getItemOrNull(position: Int): MenuItem? {
     } catch (e: Exception) {
         null
     }
+}
+
+/**
+ * Helper fun to compress a Bitmap.
+ */
+
+fun Bitmap.compressBitmap(): ByteArray {
+    val baos = ByteArrayOutputStream()
+    this.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+    return baos.toByteArray()
 }
