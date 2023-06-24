@@ -7,8 +7,10 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.stathis.core.R
 import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.TvSeriesDetails
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 @BindingAdapter("seriesDescription")
 fun TextView.setSeriesDescription(description: String) {
@@ -26,9 +28,35 @@ fun ImageView.setSeriesImage(series: TvSeries) {
     }
 }
 
+@BindingAdapter("seriesDetailsImage")
+fun ImageView.setSeriesDetailsImage(series: TvSeriesDetails) {
+    try {
+        val url = series.posterPath.ifEmpty { series.backdropPath }
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500$url")
+            .placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(this)
+    } catch (e: Exception) {
+        setImageResource(R.mipmap.ic_launcher)
+    }
+}
+
 @BindingAdapter("seriesRating")
 fun RatingBar.setSeriesRating(vote_average: Double) {
-    rating = vote_average.toFloat()
+    rating = vote_average.toFloat() / 2
+}
+
+@BindingAdapter("seriesRatingTxt")
+fun TextView.seriesRatingTxt(vote_average: Double) {
+    text = (vote_average.roundToInt() / 2.0).toString()
+}
+
+@BindingAdapter("seriesRatingTxtFull")
+fun TextView.seriesRatingTxtFull(vote_average: Double) {
+    text = "${(vote_average.roundToInt() / 2.0)}/5 "
+}
+
+@BindingAdapter("seriesVotes")
+fun TextView.seriesVotes(votes: Int) {
+    text = "$votes votes"
 }
 
 @BindingAdapter("airDate")

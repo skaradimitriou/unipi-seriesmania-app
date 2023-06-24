@@ -32,6 +32,12 @@
     </style>
 
     <!-- Text Styles -->
+    <style name="text_28_bold" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/text_28</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
     <style name="text_24_bold" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/text_24</item>
         <item name="android:textStyle">bold</item>

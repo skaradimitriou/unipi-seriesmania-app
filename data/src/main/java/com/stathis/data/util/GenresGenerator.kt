@@ -4,7 +4,7 @@ import com.stathis.domain.model.genres.Genre
 
 object GenresGenerator {
 
-    fun getGenres() = listOf(
+    val genres = listOf(
         Genre(
             id = 10759,
             name = "Action & Adventure"
@@ -70,4 +70,6 @@ object GenresGenerator {
             name = "Western"
         )
     )
+
+    fun getGenre(id: Int) = genres.find { it.id == id } ?: Genre(0, "Genre Not Available")
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
 import com.stathis.domain.combiners.SeriesDetailsCombiner
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.usecases.watchlist.AddToWatchlistUseCase
@@ -27,15 +28,15 @@ class DetailsViewModel @Inject constructor(
     private val fetchWatchlistUseCase: FetchWatchlistUseCase
 ) : BaseViewModel(app) {
 
-    val details: LiveData<List<UiModel>>
+    val details: LiveData<Result<List<UiModel>>>
         get() = _details
 
-    private val _details = MutableLiveData<List<UiModel>>()
+    private val _details = MutableLiveData<Result<List<UiModel>>>()
 
-    val isFavorite: LiveData<Boolean>
+    val isFavorite: LiveData<Result<Boolean>>
         get() = _isFavorite
 
-    private val _isFavorite = MutableLiveData(false)
+    private val _isFavorite = MutableLiveData<Result<Boolean>>(Result.Success(false))
 
     private var _favoriteState = false
 
@@ -48,10 +49,13 @@ class DetailsViewModel @Inject constructor(
     fun getSeriesInfo(series: TvSeries) {
         viewModelScope.launch(dispatcher) {
             _currentItem = series
-            val list = mutableListOf<UiModel>()
-            list.add(series)
+
+            _details.postValue(Result.Loading())
 
             val result = combiner.invoke(series.id)
+
+            val list = mutableListOf<UiModel>()
+            list.add(result.details)
 
             if (result.cast.results.isNotEmpty()) {
                 list.add(result.cast)
@@ -69,7 +73,7 @@ class DetailsViewModel @Inject constructor(
                 list.add(result.reviews)
             }
 
-            _details.postValue(list)
+            _details.postValue(Result.Success(list))
         }
     }
 
@@ -78,12 +82,13 @@ class DetailsViewModel @Inject constructor(
             fetchWatchlistUseCase.invoke().collect {
                 val isFavorite = it.contains(_currentItem)
                 _favoriteState = isFavorite
-                _isFavorite.postValue(isFavorite)
+                _isFavorite.postValue(Result.Success(isFavorite))
             }
         }
     }
 
     fun favoriteIconClicked() {
+        _isFavorite.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             if (_favoriteState) {
                 removeFromWatchlistUseCase.invoke(_currentItem)

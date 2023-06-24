@@ -17,7 +17,8 @@ data class TvSeries(
     val id: Int,
     val vote_average: Double,
     val overview: String,
-    val poster_path: String
+    val poster_path: String,
+    val genres: String
 ) : UiModel, Parcelable {
     constructor() : this(
         "",
@@ -31,6 +32,7 @@ data class TvSeries(
         "",
         0,
         0.0,
+        "",
         "",
         ""
     )

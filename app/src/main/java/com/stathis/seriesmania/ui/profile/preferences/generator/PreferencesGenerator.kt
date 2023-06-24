@@ -5,7 +5,7 @@ import com.stathis.domain.model.profile.uimodel.SeriesPreference
 
 object PreferencesGenerator {
 
-    fun generatePreferences() = GenresGenerator.getGenres().map {
+    fun generatePreferences() = GenresGenerator.genres.map {
         SeriesPreference(id = it.id, name = it.name)
     }
 }

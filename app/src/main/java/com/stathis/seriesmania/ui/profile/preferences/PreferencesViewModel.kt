@@ -57,7 +57,8 @@ class PreferencesViewModel @Inject constructor(
     fun validateSelection(selection: List<UiModel>) {
         val selectedItems = selection.filter { (it as SeriesPreference).selected }
         selectedPreferences = selectedItems
-        val isValid = selection.isNotEmpty() && selectedItems.size <= 3
+        val isValid =
+            selection.isNotEmpty() && selectedItems.isNotEmpty() && selectedItems.size <= 3
         _buttonState.postValue(isValid)
     }
 

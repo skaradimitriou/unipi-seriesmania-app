@@ -11,7 +11,6 @@ import com.stathis.core.util.MODE
 import com.stathis.core.util.SERIES
 import com.stathis.core.util.USER
 import com.stathis.domain.model.TvSeries
-import com.stathis.domain.model.profile.OtherUser
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentUserProfileBinding
@@ -27,8 +26,8 @@ class UserProfileFragment :
     private val viewModel: UserProfileViewModel by viewModels()
 
     private val adapter = OtherUserProfileAdapter(object : OtherUserProfileCallback {
-        override fun onFollowClick(user: OtherUser) {
-            viewModel.followIconClicked()
+        override fun onFollowClick(user: User) {
+            //
         }
 
         override fun onSeriesClick(model: TvSeries) {

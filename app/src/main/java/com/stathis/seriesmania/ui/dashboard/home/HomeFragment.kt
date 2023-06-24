@@ -7,7 +7,6 @@ import com.stathis.core.ext.setScreenTitle
 import com.stathis.core.util.MODE
 import com.stathis.core.util.RESULT_TYPE
 import com.stathis.core.util.SERIES
-import com.stathis.core.util.USER
 import com.stathis.domain.model.ResultType
 import com.stathis.domain.model.TvSeries
 import com.stathis.seriesmania.R
@@ -58,6 +57,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     override fun openAllAiringTodaySeries() {
         openResults(landingMode = ResultAction.RESULTS, resultType = ResultType.AIRING_TODAY)
+    }
+
+    override fun openMyPreferencesSeries(id: Int) {
+        openResults(landingMode = ResultAction.RESULTS, resultType = ResultType.SPECIFIC_GENRE)
     }
 
     private fun openResults(

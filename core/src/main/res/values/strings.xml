@@ -7,7 +7,7 @@
     <string name="cancel">Άκυρο</string>
     <string name="save">Αποθήκευση</string>
     <string name="no_results_text">Δεν βρέθηκαν αποτελέσματα</string>
-    <string name="no_description_found">Δεν βρέθηκε περιγραφή</string>
+    <string name="no_description_found">Description not found</string>
 
     <!-- Login Screen -->
     <string name="email_hint">E-mail</string>
@@ -75,7 +75,9 @@
     <string name="details_screen_title">Πληροφορίες Σειράς</string>
     <string name="dummy_series_name">Wolverine</string>
     <string name="dummy_series_release_date">2023–11–02</string>
-    <string name="series_details_description">Description</string>
+    <string name="episodes">Episodes</string>
+    <string name="seasons">Seasons</string>
+    <string name="series_details_storyline">Storyline</string>
     <string name="details_cast_title">Cast</string>
     <string name="reviews_header">Reviews</string>
     <string name="similar_series_title">Similar Series</string>
@@ -86,6 +88,14 @@
     <string name="known_for_series">Known for series</string>
     <string name="also_known_as">Also known as: %s</string>
     <string name="not_found">Not found</string>
+    <string name="popularity">Popularity</string>
+    <string name="popularity_placeholder">%1s %</string>
+    <string name="dummy_popularity">100%</string>
+    <string name="birthday">Birthday</string>
+    <string name="dummy_birthday">19/09/1995</string>
+    <string name="place_of_birth">Place of Birth</string>
+    <string name="dummy_place_of_birth">Athens, Greece</string>
+    <string name="biography">Biography</string>
 
     <!-- Add new thread -->
     <string name="new_thread_title">Νέα συζήτηση</string>

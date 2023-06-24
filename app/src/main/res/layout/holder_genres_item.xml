@@ -14,23 +14,29 @@
             type="com.stathis.seriesmania.ui.dashboard.discover.adapter.GenreCallback" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey_bg"
-        android:onClick="@{() -> callback.onGenreTap(model)}">
+        android:onClick="@{() -> callback.onGenreTap(model)}"
+        app:cardCornerRadius="@dimen/dimen_10">
 
-        <TextView
-            style="@style/text_18_bold"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal|center_vertical"
-            android:padding="@dimen/dimen_l"
-            android:text="@{model.name}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Action" />
+            android:background="@color/grey_bg">
+
+            <TextView
+                style="@style/text_18_bold"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:padding="@dimen/dimen_l"
+                android:text="@{model.name}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Action" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

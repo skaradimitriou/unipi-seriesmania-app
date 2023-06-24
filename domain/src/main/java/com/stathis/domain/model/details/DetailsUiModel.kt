@@ -1,19 +1,23 @@
 package com.stathis.domain.model.details
 
 import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.TvSeriesDetails
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.cast.Cast
 import com.stathis.domain.model.reviews.Review
 
 data class DetailsUiModel(
+    val details: TvSeriesDetails,
     val cast: CastModel,
     val reviews: ReviewsModel,
     val similar: SimilarModel,
     val recommendations: RecommendationModel,
 ) : UiModel {
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
-        is DetailsUiModel -> cast == obj.cast && reviews == obj.reviews
-                && similar == obj.similar && recommendations == obj.recommendations
+        is DetailsUiModel -> {
+            details == obj.details && cast == obj.cast && reviews == obj.reviews
+                    && similar == obj.similar && recommendations == obj.recommendations
+        }
         else -> false
     }
 }

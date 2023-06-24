@@ -17,9 +17,8 @@
         <View
             android:id="@+id/bgView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_100"
-            android:background="@drawable/round_corners_bottom"
-            android:backgroundTint="@color/grey_bg"
+            android:layout_height="@dimen/dimen_200"
+            android:background="@color/grey_dark_bg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,62 +27,168 @@
             android:layout_width="@dimen/dimen_1"
             android:layout_height="@dimen/dimen_1"
             app:layout_constraintBottom_toBottomOf="@id/bgView"
+            app:layout_constraintEnd_toEndOf="@id/bgView"
+            app:layout_constraintStart_toStartOf="@id/bgView"
+            app:layout_constraintTop_toTopOf="@id/bgView" />
+
+        <View
+            android:id="@+id/mainView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dimen_l"
+            android:background="@drawable/round_corners_top_smaller"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/bgCenterView" />
+
+        <View
+            android:id="@+id/centerView"
+            android:layout_width="@dimen/dimen_1"
+            android:layout_height="@dimen/dimen_1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mainView" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/actorImgView"
             android:layout_width="@dimen/dimen_3xl"
             android:layout_height="@dimen/dimen_3xl"
             android:contentDescription="@string/app_name"
+            android:elevation="@dimen/dimen_xs"
             android:scaleType="centerCrop"
             app:imageUrl="@{model.profile_path}"
-            app:layout_constraintBottom_toBottomOf="@id/bgCenterView"
-            app:layout_constraintEnd_toEndOf="@id/bgCenterView"
-            app:layout_constraintStart_toStartOf="@id/bgCenterView"
-            app:layout_constraintTop_toTopOf="@id/bgCenterView"
+            app:layout_constraintBottom_toBottomOf="@id/centerView"
+            app:layout_constraintEnd_toEndOf="@id/centerView"
+            app:layout_constraintStart_toStartOf="@id/centerView"
+            app:layout_constraintTop_toTopOf="@id/centerView"
             tools:src="@drawable/profile_placeholder" />
 
-        <TextView
-            android:id="@+id/actorNameTxtView"
-            style="@style/text_18_bold_center"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/dimen_10"
-            android:text="@{model.name}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/actorImgView"
-            app:layout_constraintTop_toBottomOf="@id/actorImgView"
-            tools:text="testopoulos" />
+            android:padding="@dimen/dimen_m"
+            app:layout_constraintTop_toBottomOf="@id/actorImgView">
 
-        <TextView
-            android:id="@+id/alsoKnownAsTxtView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/dimen_10"
-            android:textSize="14sp"
-            android:textStyle="italic"
-            app:knownAs="@{model.also_known_as}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/actorImgView"
-            app:layout_constraintTop_toBottomOf="@id/actorNameTxtView"
-            tools:text="testopoulos" />
+            <TextView
+                android:id="@+id/actorNameTxtView"
+                style="@style/text_20_bold_dark_grey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/dimen_s"
+                android:text="@{model.name}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/profile_dummy_username" />
 
-        <TextView
-            android:id="@+id/descriptionTxtView"
-            style="@style/text_16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="fill_horizontal"
-            android:padding="@dimen/dimen_10"
-            android:text="@{model.biography}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/actorImgView"
-            app:layout_constraintTop_toBottomOf="@id/alsoKnownAsTxtView"
-            tools:text="@string/lorem_ipsum" />
+            <TextView
+                android:id="@+id/knownForTxtView"
+                style="@style/text_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@{model.known_for_department}"
+                android:textColor="@color/grey_bg_darker"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/actorNameTxtView"
+                tools:text="Comedy" />
+
+            <TextView
+                android:id="@+id/popularityTxtView"
+                style="@style/text_16_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_m"
+                android:text="@string/popularity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/knownForTxtView" />
+
+            <TextView
+                android:id="@+id/popularityDescTxtView"
+                style="@style/text_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_xs"
+                android:textColor="@color/light_blue"
+                app:layout_constraintEnd_toEndOf="@id/popularityTxtView"
+                app:layout_constraintStart_toStartOf="@id/popularityTxtView"
+                app:layout_constraintTop_toBottomOf="@+id/popularityTxtView"
+                app:popularity="@{model.popularity}"
+                tools:text="@string/dummy_popularity" />
+
+            <TextView
+                android:id="@+id/dateOfBirthTxtView"
+                style="@style/text_16_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_m"
+                android:text="@string/birthday"
+                app:layout_constraintEnd_toStartOf="@id/placeOfBirthTxtView"
+                app:layout_constraintStart_toEndOf="@id/popularityTxtView"
+                app:layout_constraintTop_toBottomOf="@id/knownForTxtView" />
+
+            <TextView
+                android:id="@+id/dateOfBirthDescTxtView"
+                style="@style/text_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_xs"
+                android:textColor="@color/light_blue"
+                app:birthday="@{model.birthday}"
+                app:layout_constraintEnd_toEndOf="@id/dateOfBirthTxtView"
+                app:layout_constraintStart_toStartOf="@id/dateOfBirthTxtView"
+                app:layout_constraintTop_toBottomOf="@+id/popularityTxtView"
+                tools:text="@string/dummy_birthday" />
+
+            <TextView
+                android:id="@+id/placeOfBirthTxtView"
+                style="@style/text_16_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_m"
+                android:text="@string/place_of_birth"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/knownForTxtView" />
+
+            <TextView
+                android:id="@+id/placeOfBirthDescTxtView"
+                style="@style/text_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_xs"
+                android:textColor="@color/light_blue"
+                app:layout_constraintEnd_toEndOf="@id/placeOfBirthTxtView"
+                app:layout_constraintStart_toStartOf="@id/placeOfBirthTxtView"
+                app:layout_constraintTop_toBottomOf="@+id/placeOfBirthTxtView"
+                app:placeOfBirth="@{model.place_of_birth}"
+                tools:text="@string/dummy_place_of_birth" />
+
+            <TextView
+                android:id="@+id/biographyHeaderTxtView"
+                style="@style/text_18_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_l"
+                android:text="@string/biography"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/placeOfBirthDescTxtView" />
+
+            <TextView
+                android:id="@+id/biographyTxtView"
+                style="@style/text_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_xs"
+                android:alpha="0.7"
+                app:layout_constraintEnd_toEndOf="@id/biographyHeaderTxtView"
+                app:layout_constraintStart_toStartOf="@id/biographyHeaderTxtView"
+                app:layout_constraintTop_toBottomOf="@+id/biographyHeaderTxtView"
+                app:seriesDescription="@{model.biography}"
+                tools:text="@string/lorem_ipsum" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

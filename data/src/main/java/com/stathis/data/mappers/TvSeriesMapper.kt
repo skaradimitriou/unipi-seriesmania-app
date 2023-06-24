@@ -3,6 +3,7 @@ package com.stathis.data.mappers
 import com.stathis.core.ext.toNotNull
 import com.stathis.data.model.TvSeriesDto
 import com.stathis.data.model.TvSeriesFeedDto
+import com.stathis.data.util.GenresGenerator
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.TvSeriesFeed
 
@@ -32,6 +33,9 @@ object TvSeriesMapper : BaseMapper<TvSeriesFeedDto?, TvSeriesFeed> {
         id = this?.id.toNotNull(),
         vote_average = this?.vote_average.toNotNull(),
         overview = this?.overview.toNotNull(),
-        poster_path = this?.poster_path.toNotNull()
+        poster_path = this?.poster_path.toNotNull(),
+        genres = GenresGenerator.getGenre(
+            this?.genre_ids?.getOrNull(0).toNotNull()
+        )?.name.toNotNull()
     )
 }

@@ -140,4 +140,5 @@ interface DashboardCallback {
     fun openAllTopRatedSeries()
     fun openAllTrendingSeries()
     fun openAllAiringTodaySeries()
+    fun openMyPreferencesSeries(id: Int)
 }

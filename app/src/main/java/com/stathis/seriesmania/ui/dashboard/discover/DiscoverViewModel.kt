@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.data.util.GenresGenerator
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.genres.Genre
-import com.stathis.domain.usecases.genres.GetGenresUseCase
 import com.stathis.domain.usecases.search.SearchForSeriesUseCase
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +19,6 @@ import javax.inject.Inject
 class DiscoverViewModel @Inject constructor(
     app: Application,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-    private val genreUseCase: GetGenresUseCase,
     private val searchUseCase: SearchForSeriesUseCase,
 ) : BaseViewModel(app) {
 
@@ -35,7 +34,7 @@ class DiscoverViewModel @Inject constructor(
 
     fun getAvailableGenres() {
         viewModelScope.launch(dispatcher) {
-            val result = genreUseCase.invoke()
+            val result = GenresGenerator.genres
             _genres.postValue(result)
         }
     }

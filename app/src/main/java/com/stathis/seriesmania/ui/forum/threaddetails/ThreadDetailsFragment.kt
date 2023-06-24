@@ -7,6 +7,7 @@ import com.stathis.core.adapters.forum.ThreadDetailsAdapter
 import com.stathis.core.adapters.forum.ThreadsCallback
 import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.getParcelable
+import com.stathis.core.ext.hideKeyboard
 import com.stathis.core.ext.setScreenTitle
 import com.stathis.core.util.MODE
 import com.stathis.core.util.THREAD
@@ -71,6 +72,9 @@ class ThreadDetailsFragment :
         viewModel.details.observe(viewLifecycleOwner) { details ->
             binding.swipeRefreshLayout.isRefreshing = false
             detailsAdapter.submitList(details)
+            binding.threadMessageInput.clearFocus()
+            hideKeyboard()
+            binding.detailsRecycler.smoothScrollToPosition(detailsAdapter.currentList.size)
         }
     }
 

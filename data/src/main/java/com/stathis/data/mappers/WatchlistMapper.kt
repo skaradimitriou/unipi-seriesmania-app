@@ -2,6 +2,7 @@ package com.stathis.data.mappers
 
 import com.stathis.core.ext.toListOf
 import com.stathis.core.ext.toNotNull
+import com.stathis.data.util.GenresGenerator
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.TvSeriesWrapper
 
@@ -22,7 +23,10 @@ object WatchlistMapper : BaseMapper<TvSeriesWrapper?, List<TvSeries>> {
                 id = it.id.toNotNull(),
                 vote_average = it.vote_average.toNotNull(),
                 overview = it.overview.toNotNull(),
-                poster_path = it.poster_path.toNotNull()
+                poster_path = it.poster_path.toNotNull(),
+                genres = GenresGenerator.getGenre(
+                    it.genre_ids.getOrNull(0).toNotNull()
+                )?.name.toNotNull()
             )
         }
     }

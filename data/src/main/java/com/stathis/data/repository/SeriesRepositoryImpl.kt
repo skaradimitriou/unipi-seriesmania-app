@@ -2,10 +2,10 @@ package com.stathis.data.repository
 
 import com.stathis.core.ext.getAndMapResponse
 import com.stathis.data.api.SeriesApi
-import com.stathis.data.mappers.GenresMapper
+import com.stathis.data.mappers.TvSeriesDetailsMapper
 import com.stathis.data.mappers.TvSeriesMapper
 import com.stathis.domain.model.TvSeries
-import com.stathis.domain.model.genres.Genre
+import com.stathis.domain.model.TvSeriesDetails
 import com.stathis.domain.repositories.SeriesRepository
 import javax.inject.Inject
 
@@ -33,11 +33,6 @@ class SeriesRepositoryImpl @Inject constructor(
         mapper = { TvSeriesMapper.toDomainModel(it).results }
     )
 
-    override suspend fun getSeriesGenres(): List<Genre> = getAndMapResponse(
-        call = { api.getSeriesGenres() },
-        mapper = { GenresMapper.toDomainModel(it) }
-    )
-
     override suspend fun getSimilarSeries(seriesId: Int): List<TvSeries> = getAndMapResponse(
         call = { api.getSimilarSeries(seriesId) },
         mapper = { TvSeriesMapper.toDomainModel(it).results }
@@ -56,5 +51,10 @@ class SeriesRepositoryImpl @Inject constructor(
     override suspend fun getSeriesByGenreId(genreId: Int): List<TvSeries> = getAndMapResponse(
         call = { api.getPagedResultsForThisGenre(genreId.toString()) },
         mapper = { TvSeriesMapper.toDomainModel(it).results }
+    )
+
+    override suspend fun getSeriesDetails(seriesId: Int): TvSeriesDetails = getAndMapResponse(
+        call = { api.getSeriesDetails(seriesId.toString()) },
+        mapper = { TvSeriesDetailsMapper.toDomainModel(it) }
     )
 }

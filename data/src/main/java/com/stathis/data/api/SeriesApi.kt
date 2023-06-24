@@ -38,6 +38,11 @@ interface SeriesApi {
         @Query("page") page: Int = 1
     ): Response<TvSeriesFeedDto?>
 
+    @GET("tv/{seriesId}?$API_KEY")
+    suspend fun getSeriesDetails(
+        @Path("seriesId") seriesId: String
+    ): Response<TvSeriesDetailsDto?>
+
     @GET("tv/{tvSeriesId}/credits?$API_KEY")
     suspend fun getCastForSeries(@Path("tvSeriesId") tvSeriesId: Int): Response<CastFeedDto?>
 

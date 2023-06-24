@@ -11,4 +11,5 @@ data class ActorDetailsDto(
     val place_of_birth: String? = null,
     val popularity: Double? = null,
     val profile_path: String? = null,
+    val known_for_department: String
 )

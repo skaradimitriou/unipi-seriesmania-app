@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.*
 import com.stathis.core.util.SERIES
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.cast.Cast
 import com.stathis.seriesmania.R
@@ -57,14 +58,32 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
     }
 
     override fun startOps() {
-        viewModel.details.observe(viewLifecycleOwner) { detail ->
-            adapter.submitList(detail)
+        viewModel.details.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.isLoading = true
+                }
+                is Result.Success -> {
+                    binding.isLoading = false
+                    adapter.submitList(result.data)
+                }
+                is Result.Failure -> Unit
+            }
         }
 
-        viewModel.isFavorite.observe(viewLifecycleOwner) { isFavorite ->
-            val drawable = getAppropriateIcon(isFavorite)
-            menu?.getItemOrNull(0)?.apply {
-                icon = getDrawable(drawable)
+        viewModel.isFavorite.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.isLoading = true
+                }
+                is Result.Success -> {
+                    binding.isLoading = false
+                    val drawable = getAppropriateIcon(result.data.toNotNull())
+                    menu?.getItemOrNull(0)?.apply {
+                        icon = getDrawable(drawable)
+                    }
+                }
+                is Result.Failure -> Unit
             }
         }
     }

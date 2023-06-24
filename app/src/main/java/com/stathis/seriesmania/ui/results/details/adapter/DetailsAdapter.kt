@@ -10,6 +10,7 @@ import com.stathis.core.base.BaseViewHolder
 import com.stathis.core.util.decorations.HorizontalItemDecoration
 import com.stathis.core.util.decorations.VerticalItemDecoration
 import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.TvSeriesDetails
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.cast.Cast
 import com.stathis.domain.model.details.CastModel
@@ -58,10 +59,10 @@ class DetailsAdapter(
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
-        is TvSeries -> R.layout.holder_details_header
+        is TvSeriesDetails -> R.layout.holder_details_header
         is CastModel -> R.layout.holder_cast_parent
-        is ReviewsModel -> R.layout.holder_review_parent
         is SimilarModel -> R.layout.holder_similar_series
+        is ReviewsModel -> R.layout.holder_review_parent
         is RecommendationModel -> R.layout.holder_recommended_series
         else -> R.layout.holder_empty_view
     }
@@ -74,7 +75,7 @@ class DetailsViewHolder(
 
     override fun present(data: UiModel) {
         when (data) {
-            is TvSeries -> binding.setVariable(BR.model, data)
+            is TvSeriesDetails -> binding.setVariable(BR.model, data)
             is CastModel -> {
                 val adapter = CastAdapter(this)
                 val decor = HorizontalItemDecoration(20)

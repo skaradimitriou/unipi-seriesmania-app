@@ -36,9 +36,9 @@ fun <T : RecyclerView> T.removeItemDecorations() {
 
 fun getAppropriateIcon(isFavorite: Boolean): Int {
     return if (isFavorite) {
-        R.drawable.ic_favorite_red
+        R.drawable.ic_bookmark_yellow
     } else {
-        R.drawable.ic_favorite_white
+        R.drawable.ic_bookmark_white
     }
 }
 

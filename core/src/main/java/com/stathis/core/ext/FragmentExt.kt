@@ -12,7 +12,10 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import com.stathis.core.R
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 /**
  * Helper method to set the screen title inside a [Fragment] in a more simple way.
@@ -53,23 +56,38 @@ fun Fragment.addSearchBarMenu(menuId: Int, callback: (String) -> Unit) {
             val item: MenuItem? = menu.findItem(R.id.search)
             val searchView = item?.actionView as SearchView
 
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    callback.invoke(query.toString())
-                    return false
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    callback.invoke(newText.toString())
-                    return false
-                }
-            })
+            lifecycleScope.launch {
+                searchView.getQueryTextChangeStateFlow()
+                    .debounce(500)
+                    .distinctUntilChanged()
+                    .collectLatest {
+                        callback.invoke(it)
+                    }
+            }
         }
 
         override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
             return true
         }
     }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+}
+
+private fun SearchView.getQueryTextChangeStateFlow(): StateFlow<String> {
+    val flow = MutableStateFlow("")
+
+    setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            flow.value = query.toString()
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String): Boolean {
+            flow.value = newText
+            return true
+        }
+    })
+
+    return flow
 }
 
 /**
@@ -120,4 +138,8 @@ fun Fragment.onSuccessCameraResult(data: (Bitmap?) -> Unit) = registerForActivit
 
 fun Fragment.askUserForAction(title: String, btnTitle: String, onPrimaryBtnClick: () -> Unit) {
     requireContext().askUserForAction(title, btnTitle, onPrimaryBtnClick)
+}
+
+fun Fragment.hideKeyboard() {
+    requireView().hideKeyboard()
 }

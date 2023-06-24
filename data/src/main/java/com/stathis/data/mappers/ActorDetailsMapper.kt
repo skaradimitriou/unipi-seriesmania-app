@@ -16,6 +16,7 @@ object ActorDetailsMapper : BaseMapper<ActorDetailsDto?, ActorDetails> {
         name = dto?.name.toNotNull(),
         place_of_birth = dto?.place_of_birth.toNotNull(),
         popularity = dto?.popularity.toNotNull(),
-        profile_path = dto?.profile_path.toNotNull()
+        profile_path = dto?.profile_path.toNotNull(),
+        known_for_department = dto?.known_for_department.toNotNull()
     )
 }

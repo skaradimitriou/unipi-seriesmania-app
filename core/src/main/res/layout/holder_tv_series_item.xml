@@ -69,7 +69,7 @@
                 android:backgroundTint="@color/grey_bg"
                 android:paddingHorizontal="@dimen/dimen_s"
                 android:paddingVertical="@dimen/dimen_s"
-                app:airDate="@{model.first_air_date}"
+                android:text="@{model.genres}"
                 app:layout_constraintStart_toStartOf="@id/tvShowTitleTxtView"
                 app:layout_constraintTop_toBottomOf="@id/showRating"
                 tools:text="ACTION" />
