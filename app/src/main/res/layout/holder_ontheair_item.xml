@@ -33,7 +33,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:seriesImage="@{model}"
-                tools:src="@mipmap/ic_launcher" />
+                tools:src="@mipmap/seriesmania_logo_round" />
 
             <View
                 android:layout_width="0dp"

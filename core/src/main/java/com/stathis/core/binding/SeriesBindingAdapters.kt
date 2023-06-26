@@ -22,9 +22,9 @@ fun ImageView.setSeriesImage(series: TvSeries) {
     try {
         val url = series.poster_path.ifEmpty { series.backdrop_path }
         Glide.with(this).load("https://image.tmdb.org/t/p/w500$url")
-            .placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(this)
+            .placeholder(R.mipmap.seriesmania_logo).error(R.mipmap.seriesmania_logo).into(this)
     } catch (e: Exception) {
-        setImageResource(R.mipmap.ic_launcher)
+        setImageResource(R.mipmap.seriesmania_logo)
     }
 }
 
@@ -33,9 +33,9 @@ fun ImageView.setSeriesDetailsImage(series: TvSeriesDetails) {
     try {
         val url = series.posterPath.ifEmpty { series.backdropPath }
         Glide.with(this).load("https://image.tmdb.org/t/p/w500$url")
-            .placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(this)
+            .placeholder(R.mipmap.seriesmania_logo).error(R.mipmap.seriesmania_logo).into(this)
     } catch (e: Exception) {
-        setImageResource(R.mipmap.ic_launcher)
+        setImageResource(R.mipmap.seriesmania_logo)
     }
 }
 

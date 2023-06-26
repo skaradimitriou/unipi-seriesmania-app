@@ -3,31 +3,31 @@
     <!-- General -->
     <string name="lorem_ipsum_title">Lorem ipsum sit dolor amet. </string>
     <string name="lorem_ipsum">Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. </string>
-    <string name="continue_btn">Συνέχεια</string>
-    <string name="cancel">Άκυρο</string>
-    <string name="save">Αποθήκευση</string>
-    <string name="no_results_text">Δεν βρέθηκαν αποτελέσματα</string>
+    <string name="continue_btn">Continue</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="no_results_text">No results found</string>
     <string name="no_description_found">Description not found</string>
 
     <!-- Login Screen -->
     <string name="email_hint">E-mail</string>
-    <string name="password_hint">Κωδικός Πρόσβασης</string>
-    <string name="login_btn_text">Σύνδεση</string>
-    <string name="register_btn_text">Δεν έχεις λογαριασμό; <b>Εγγραφή</b></string>
+    <string name="password_hint">Password</string>
+    <string name="login_btn_text">Log in</string>
+    <string name="register_btn_text">Create an account today! <b>Register</b></string>
 
     <!-- Register Screen -->
-    <string name="confirm_pass_hint">Επιβεβαίωση Κωδικού Πρόσβασης</string>
-    <string name="register_btn">Εγγραφή</string>
+    <string name="confirm_pass_hint">Confirm Password</string>
+    <string name="register_btn">Register</string>
 
     <!-- Onboarding -->
-    <string name="pre_home_additionals_title">Πρόσθετες Πληροφορίες</string>
-    <string name="additionals_subheader">Συμπλήρωσε τα στοιχεία του προφίλ σου</string>
+    <string name="pre_home_additionals_title">Additional Information</string>
+    <string name="additionals_subheader">What is your profile info</string>
     <string name="username">Username</string>
 
     <!-- Dashboard -->
 
     <!-- Home -->
-    <string name="home_title">Αρχική</string>
+    <string name="home_title">Home</string>
     <string name="top_rated_title">Top Rated Series</string>
     <string name="trending_title">Trending Series</string>
     <string name="airing_today_title">Airing Today Series</string>
@@ -37,15 +37,15 @@
     <string name="dummy_username">testopoulos</string>
 
     <!-- Discover -->
-    <string name="discover_screen_title">Είδη Σειρών</string>
+    <string name="discover_screen_title">Series Genres</string>
     <string name="discover_title">Discover</string>
     <string name="search">Search</string>
 
     <!-- Forum -->
-    <string name="forum_screen_title">Συζητήσεις</string>
+    <string name="forum_screen_title">Discussion</string>
 
     <!-- Profile Screen -->
-    <string name="profile_title">Προφίλ</string>
+    <string name="profile_title">Profile</string>
     <string name="profile_dummy_username">foustanos</string>
     <string name="bio_placeholder">\&quot;%s\&quot;</string>
     <string name="following">Following</string>
@@ -55,24 +55,24 @@
     <string name="profile_prefs_title">Series Preferences</string>
     <string name="profile_prefs_desc">You told us that you enjoy <b>%s</b> series</string>
     <string name="profile_prefs_desc_other_user">This user enjoys <b>%s</b> series</string>
-    <string name="edit"><u>Επεξεργασία</u></string>
-    <string name="edit_profile">Επεξεργασία Προφίλ</string>
+    <string name="edit"><u>Edit</u></string>
+    <string name="edit_profile">Edit Profile</string>
     <string name="profile_empty_watchlist_title">Empty watchlist</string>
     <string name="profile_empty_watchlist_desc">The series that you add to your watchlist will be displayed here</string>
-    <string name="ask_user_logout">Θέλετε να αποσυνδεθείτε;</string>
-    <string name="logout">Αποσύνδεση</string>
+    <string name="ask_user_logout">Do you want to logout?</string>
+    <string name="logout">Logout</string>
 
     <!-- Upload Profile Image Screen -->
-    <string name="upload_image_title">Φωτογραφία Προφίλ</string>
-    <string name="upload_image_header">Ανέβασε μια φωτογραφία στο προφίλ σου</string>
-    <string name="uploading_image">Ανανεώνουμε το προφίλ σου..</string>
+    <string name="upload_image_title">Profile Image</string>
+    <string name="upload_image_header">Upload a new profile image for your account</string>
+    <string name="uploading_image">We are updating your profile..</string>
 
     <!-- User Preferences screen -->
-    <string name="preferences_title">Οι προτιμήσεις μου</string>
-    <string name="preferences_header">Επίλεξε μέχρι τρείς (3) προτιμήσεις σειρών</string>
+    <string name="preferences_title">My preferences</string>
+    <string name="preferences_header">Choose up to three (3) series preferences</string>
 
     <!-- Details -->
-    <string name="details_screen_title">Πληροφορίες Σειράς</string>
+    <string name="details_screen_title">Series Details</string>
     <string name="dummy_series_name">Wolverine</string>
     <string name="dummy_series_release_date">2023–11–02</string>
     <string name="episodes">Episodes</string>
@@ -98,14 +98,14 @@
     <string name="biography">Biography</string>
 
     <!-- Add new thread -->
-    <string name="new_thread_title">Νέα συζήτηση</string>
+    <string name="new_thread_title">New Discussion</string>
     <string name="add_new_thread">Add new</string>
     <string name="thread_title_hint">Thread title</string>
     <string name="add_new_thread_btn">Add new thread</string>
     <string name="thread_message_hint">Type your thread\'s message here…</string>
 
     <!-- Thread details -->
-    <string name="thread_details_screen_title">Πληροφορίες Συζήτησης</string>
+    <string name="thread_details_screen_title">Discussion Details</string>
     <string name="thread_reply_hint">Reply to this forum thread…</string>
 
     <!-- Watchlist -->
@@ -115,6 +115,5 @@
     <!-- Other user profile -->
     <string name="user_empty_prefs_desc">This user hasn\'t added series preferences yet</string>
     <string name="user_empty_watchlist_desc">This user hasn\'t added series to watchlist yet</string>
-
 
 </resources>

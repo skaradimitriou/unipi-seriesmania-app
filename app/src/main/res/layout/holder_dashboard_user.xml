@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:setProfileImage="@{model.userImg}"
-            tools:src="@mipmap/ic_launcher" />
+            tools:src="@mipmap/seriesmania_logo_round" />
 
         <TextView
             android:id="@+id/userGreetingTxtView"

@@ -22,8 +22,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     override fun init() {
         binding.loginBtn.setOnClickListener {
-            val email = binding.emailInputField.text.toString()
-            val pass = binding.passInputField.text.toString()
+            val email = binding.emailField.text.toString()
+            val pass = binding.passField.text.toString()
 
             viewModel.login(email, pass)
         }

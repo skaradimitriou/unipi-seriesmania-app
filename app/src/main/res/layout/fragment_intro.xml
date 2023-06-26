@@ -13,7 +13,7 @@
             android:id="@+id/splashImgView"
             android:layout_width="@dimen/dimen_4xl"
             android:layout_height="@dimen/dimen_4xl"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/seriesmania_logo_round"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

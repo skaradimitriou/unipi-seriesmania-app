@@ -19,11 +19,11 @@ import kotlin.math.abs
 fun ImageView.setImage(url: String) {
     try {
         Glide.with(this).load(url)
-            .placeholder(R.mipmap.ic_launcher)
-            .error(R.mipmap.ic_launcher)
+            .placeholder(R.mipmap.seriesmania_logo)
+            .error(R.mipmap.seriesmania_logo)
             .into(this)
     } catch (e: Exception) {
-        setImageResource(R.mipmap.ic_launcher)
+        setImageResource(R.mipmap.seriesmania_logo)
     }
 }
 
@@ -43,9 +43,9 @@ fun ImageView.setProfileImage(url: String?) {
 fun ImageView.imageUrl(url: String) {
     try {
         Glide.with(this).load("https://image.tmdb.org/t/p/w500$url")
-            .placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(this)
+            .placeholder(R.mipmap.seriesmania_logo).error(R.mipmap.seriesmania_logo).into(this)
     } catch (e: Exception) {
-        setImageResource(R.mipmap.ic_launcher)
+        setImageResource(R.mipmap.seriesmania_logo)
     }
 }
 

@@ -17,7 +17,7 @@
             android:layout_height="@dimen/dimen_70"
             android:layout_marginTop="@dimen/dimen_xl"
             android:contentDescription="@null"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/seriesmania_logo_round"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,62 +33,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/register_img" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailField"
+        <EditText
+            android:id="@+id/email_input_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_l"
+            android:background="@drawable/round_corners"
             android:hint="@string/email_hint"
-            app:layout_constraintTop_toBottomOf="@id/register_app_name">
+            android:padding="@dimen/dimen_m"
+            app:layout_constraintTop_toBottomOf="@id/register_app_name" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email_input_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:inputType="textEmailAddress" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passField"
+        <EditText
+            android:id="@+id/pass_input_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_s"
+            android:background="@drawable/round_corners"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
-            app:layout_constraintTop_toBottomOf="@id/emailField"
-            app:passwordToggleEnabled="true">
+            android:padding="@dimen/dimen_m"
+            app:layout_constraintTop_toBottomOf="@id/email_input_field"
+            app:passwordToggleEnabled="true" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pass_input_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:inputType="textPassword"
-                android:maxLines="1" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passVerifyField"
+        <EditText
+            android:id="@+id/pass_conf_input_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_s"
+            android:background="@drawable/round_corners"
             android:hint="@string/confirm_pass_hint"
             android:inputType="textPassword"
-            app:layout_constraintTop_toBottomOf="@id/passField"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pass_conf_input_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:inputType="textPassword"
-                android:maxLines="1" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:padding="@dimen/dimen_m"
+            app:layout_constraintTop_toBottomOf="@id/pass_input_field"
+            app:passwordToggleEnabled="true" />
 
         <Button
             android:id="@+id/register_btn"
