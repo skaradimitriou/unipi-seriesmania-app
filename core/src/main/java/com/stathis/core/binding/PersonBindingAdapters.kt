@@ -7,8 +7,8 @@ import java.util.*
 import kotlin.math.roundToInt
 
 @BindingAdapter("popularity")
-fun TextView.setPopularity(popularity: Double) {
-    val finalPopularity = (popularity.roundToInt() * 1.0).toString()
+fun TextView.setPopularity(popularity: Double?) {
+    val finalPopularity = ((popularity?.roundToInt() ?: 0) * 1.0).toString()
     text = String.format(resources.getString(R.string.popularity_placeholder), finalPopularity)
 }
 

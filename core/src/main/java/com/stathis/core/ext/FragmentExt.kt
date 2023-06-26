@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
@@ -133,6 +134,14 @@ fun Fragment.onSuccessCameraResult(data: (Bitmap?) -> Unit) = registerForActivit
     if (result.resultCode == Activity.RESULT_OK) {
         val bitmap = result.data?.extras?.get("data") as? Bitmap
         data.invoke(bitmap)
+    }
+}
+
+fun Fragment.onSuccessResult(data: (ActivityResult) -> Unit) = registerForActivityResult(
+    ActivityResultContracts.StartActivityForResult()
+) { result ->
+    if (result.resultCode == Activity.RESULT_OK) {
+        data.invoke(result)
     }
 }
 

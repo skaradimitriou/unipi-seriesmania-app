@@ -26,14 +26,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private val adapter = HomeAdapter(this)
 
     override fun init() {
-        viewModel.getData()
         setScreenTitle(getString(com.stathis.core.R.string.home_title))
         binding.adapter = adapter
     }
 
     override fun startOps() {
-        viewModel.dashboardData.observe(viewLifecycleOwner) { data ->
-            adapter.submitList(data)
+        viewModel.getData()
+
+        viewModel.dashboardData.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is com.stathis.domain.model.Result.Loading -> {
+                    binding.loading = true
+                }
+                is com.stathis.domain.model.Result.Success -> {
+                    binding.loading = false
+                    adapter.submitList(result.data)
+                }
+                is com.stathis.domain.model.Result.Failure -> {
+                    binding.loading = false
+                }
+            }
         }
     }
 

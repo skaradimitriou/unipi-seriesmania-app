@@ -66,6 +66,9 @@
     <string name="upload_image_title">Profile Image</string>
     <string name="upload_image_header">Upload a new profile image for your account</string>
     <string name="uploading_image">We are updating your profile..</string>
+    <string name="bs_title">Upload a new profile image</string>
+    <string name="bs_first_option">Open camera</string>
+    <string name="bs_second_option">Open gallery</string>
 
     <!-- User Preferences screen -->
     <string name="preferences_title">My preferences</string>
@@ -89,7 +92,7 @@
     <string name="also_known_as">Also known as: %s</string>
     <string name="not_found">Not found</string>
     <string name="popularity">Popularity</string>
-    <string name="popularity_placeholder">%1s %</string>
+    <string name="popularity_placeholder">%1s\%%</string>
     <string name="dummy_popularity">100%</string>
     <string name="birthday">Birthday</string>
     <string name="dummy_birthday">19/09/1995</string>

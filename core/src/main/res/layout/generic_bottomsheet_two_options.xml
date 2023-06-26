@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/round_corners_top"
+        android:padding="@dimen/dimen_m">
+
+        <TextView
+            android:id="@+id/headerTxtView"
+            style="@style/text_20_bold_dark_grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/dummy_series_name" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/primaryBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/dimen_l"
+            android:background="@color/dark_blue"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerTxtView"
+            tools:text="@string/continue_btn" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/secondaryBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/dimen_s"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/primaryBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

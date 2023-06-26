@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
 import com.stathis.core.util.session.SessionManager
 import com.stathis.domain.combiners.DashboardDataCombiner
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.UiModel
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,12 +23,13 @@ class HomeViewModel @Inject constructor(
     private val sessionManager: SessionManager
 ) : BaseViewModel(app) {
 
-    val dashboardData: LiveData<List<UiModel>>
+    val dashboardData: LiveData<Result<List<UiModel>>>
         get() = _dashboardData
 
-    private val _dashboardData = MutableLiveData<List<UiModel>>()
+    private val _dashboardData = MutableLiveData<Result<List<UiModel>>>()
 
     fun getData() {
+        _dashboardData.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             val result = homeCombiner.invoke()
             val list = mutableListOf(
@@ -42,7 +44,7 @@ class HomeViewModel @Inject constructor(
             result.firstPreference?.let { list.add(it) }
             result.secondPreference?.let { list.add(it) }
             result.thirdPreference?.let { list.add(it) }
-            _dashboardData.postValue(list)
+            _dashboardData.postValue(Result.Success(list))
         }
     }
 }

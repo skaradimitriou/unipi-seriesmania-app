@@ -30,7 +30,26 @@ class LoginViewModel @Inject constructor(
 
     private val _loginResult = MutableLiveData<Result<Boolean>>()
 
-    fun login(email: String, pass: String) {
+    val btnState: LiveData<UiState>
+        get() = _btnState
+
+    private val _btnState = MutableLiveData<UiState>()
+
+    var email: String = ""
+    var pass: String = ""
+
+    fun validateInput() = when {
+        email.isEmpty() || pass.isEmpty() -> {
+            _btnState.postValue(UiState(btnState = false))
+        }
+
+        else -> {
+            _btnState.postValue(UiState(btnState = true))
+        }
+    }
+
+    fun login() {
+        _loginResult.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             if (email.isNotEmpty() && pass.isNotEmpty()) {
                 val result = loginUseCase.invoke(email, pass)
@@ -40,4 +59,8 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+
+    data class UiState(
+        val btnState: Boolean
+    )
 }
