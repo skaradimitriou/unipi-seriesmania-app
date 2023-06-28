@@ -19,11 +19,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/primaryBtn"
+        style="@style/AppButton"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_l"
-        android:background="@color/dark_blue"
-        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerTxtView"
         tools:text="@string/continue_btn" />

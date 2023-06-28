@@ -17,12 +17,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dimen_m">
+        android:background="@color/grey_bg">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImgView"
             android:layout_width="@dimen/dimen_2xl"
             android:layout_height="@dimen/dimen_2xl"
+            android:layout_margin="@dimen/dimen_m"
             android:onClick="@{() -> callback.onProfileClick()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +40,7 @@
             app:layout_constraintBottom_toTopOf="@+id/usernameTxtView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/userImgView"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/userImgView"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
@@ -49,12 +50,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_m"
             android:text="@{model.username}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/userImgView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/userImgView"
             app:layout_constraintTop_toBottomOf="@+id/userGreetingTxtView"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="@string/dummy_username" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_l"
+            android:layout_marginTop="@dimen/dimen_l"
+            android:background="@drawable/round_corners_top"
+            app:layout_constraintTop_toBottomOf="@id/userImgView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

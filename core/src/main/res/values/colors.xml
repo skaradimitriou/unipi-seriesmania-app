@@ -19,7 +19,8 @@
     <color name="grey_bg">#e5e5e5</color>
     <color name="grey_bg_darker">#c5c5c5</color>
     <color name="grey_dark_bg">#333333</color>
-    <color name="black_opacity_80">#80000000</color>
+    <color name="medium_black">#222222</color>
+    <color name="black_opacity_95">#95000000</color>
     <color name="white_opacity_90">#90FFFFFF</color>
     <color name="green">#4bb543</color>
 

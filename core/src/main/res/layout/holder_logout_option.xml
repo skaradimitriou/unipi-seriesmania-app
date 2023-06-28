@@ -20,11 +20,11 @@
         android:layout_marginTop="@dimen/dimen_l"
         android:paddingHorizontal="@dimen/dimen_10">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginBtn"
             style="@style/AppButton"
             android:layout_width="0dp"
-            android:layout_height="@dimen/button_height"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_l"
             android:onClick="@{() -> callback.onLogoutClick()}"
             android:text="@{model.buttonTxt}"

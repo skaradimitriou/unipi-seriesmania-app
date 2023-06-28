@@ -47,14 +47,12 @@
             android:padding="@dimen/dimen_m"
             app:layout_constraintTop_toBottomOf="@id/usernameInputTxt" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveBtn"
             style="@style/AppButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="@{viewModel.buttonState}"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/dimen_10"
             android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent" />
 

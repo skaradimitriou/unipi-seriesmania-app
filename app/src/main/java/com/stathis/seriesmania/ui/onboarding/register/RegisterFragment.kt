@@ -1,8 +1,10 @@
 package com.stathis.seriesmania.ui.onboarding.register
 
 import android.content.Intent
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import com.stathis.core.base.BaseFragment
+import com.stathis.core.ext.hideKeyboard
 import com.stathis.core.ext.showSnackbar
 import com.stathis.domain.model.Result
 import com.stathis.seriesmania.R
@@ -16,22 +18,44 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
     private val viewModel: RegisterViewModel by viewModels()
 
     override fun init() {
+        binding.viewModel = viewModel
+
+        binding.emailInputField.doAfterTextChanged {
+            viewModel.email = it.toString()
+            viewModel.validateInput()
+        }
+
+        binding.passInputField.doAfterTextChanged {
+            viewModel.pass = it.toString()
+            viewModel.validateInput()
+        }
+
+        binding.confPassInputField.doAfterTextChanged {
+            viewModel.confPass = it.toString()
+            viewModel.validateInput()
+        }
+
         binding.registerBtn.setOnClickListener {
-            val email = binding.emailInputField.text.toString()
-            val pass = binding.passInputField.text.toString()
-            val confirmPass = binding.passConfInputField.text.toString()
-            viewModel.validateData(email, pass, confirmPass)
+            viewModel.validateData()
+            hideKeyboard()
         }
     }
 
     override fun startOps() {
         viewModel.registrationResult.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Result.Loading -> binding.registerBtn.isEnabled = false
-                is Result.Success -> goToAppOnboarding()
-                is Result.Failure -> {
+                is Result.Loading -> {
+                    binding.loading = true
+                }
+
+                is Result.Success -> {
+                    binding.loading = false
+                    goToAppOnboarding()
+                }
+
+                else -> {
+                    binding.loading = false
                     binding.showSnackbar(result.error.toString())
-                    binding.registerBtn.isEnabled = true
                 }
             }
         }
