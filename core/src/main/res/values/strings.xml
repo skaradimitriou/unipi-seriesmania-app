@@ -85,6 +85,9 @@
     <string name="reviews_header">Reviews</string>
     <string name="similar_series_title">Similar Series</string>
     <string name="recommended_series_title">Recommended Series</string>
+    <string name="rating_bs_title">Rate this series</string>
+    <string name="rating_bs_desc">We\'d love to know your opinion on this series. Simply choose the number of stars for this series.</string>
+    <string name="rating_bs_btn">Submit Rating</string>
 
     <!-- Actor Details -->
     <string name="actor_details_title">Actor Details</string>

@@ -9,6 +9,7 @@ import com.stathis.domain.model.reviews.Review
 data class DetailsUiModel(
     val details: TvSeriesDetails,
     val cast: CastModel,
+    val ratingMadeForThisSeries: Boolean,
     val reviews: ReviewsModel,
     val similar: SimilarModel,
     val recommendations: RecommendationModel,
@@ -17,7 +18,9 @@ data class DetailsUiModel(
         is DetailsUiModel -> {
             details == obj.details && cast == obj.cast && reviews == obj.reviews
                     && similar == obj.similar && recommendations == obj.recommendations
+                    && ratingMadeForThisSeries == obj.ratingMadeForThisSeries
         }
+
         else -> false
     }
 }
@@ -27,6 +30,19 @@ data class CastModel(
 ) : UiModel {
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
         is CastModel -> results == obj.results
+        else -> false
+    }
+}
+
+data class RatingPromoModel(
+    val title: String,
+    val description: String,
+    val ctaText: String
+) : UiModel {
+    override fun equalsContent(obj: UiModel): Boolean = when (obj) {
+        is RatingPromoModel -> title == obj.title && description == obj.description
+                && ctaText == obj.ctaText
+
         else -> false
     }
 }

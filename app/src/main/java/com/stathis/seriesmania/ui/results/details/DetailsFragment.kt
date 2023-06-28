@@ -3,8 +3,17 @@ package com.stathis.seriesmania.ui.results.details
 import android.view.Menu
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.stathis.core.adapters.details.DetailsAdapter
+import com.stathis.core.adapters.details.DetailsCallback
 import com.stathis.core.base.BaseFragment
-import com.stathis.core.ext.*
+import com.stathis.core.components.GenericRatingBottomSheet
+import com.stathis.core.ext.getAppropriateIcon
+import com.stathis.core.ext.getDrawable
+import com.stathis.core.ext.getItemOrNull
+import com.stathis.core.ext.getParcelable
+import com.stathis.core.ext.setMenuProvider
+import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.toNotNull
 import com.stathis.core.util.SERIES
 import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeries
@@ -13,8 +22,6 @@ import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentDetailsBinding
 import com.stathis.seriesmania.ui.results.ResultsActivityViewModel
 import com.stathis.seriesmania.ui.results.ResultsSharedViewModel
-import com.stathis.seriesmania.ui.results.details.adapter.DetailsAdapter
-import com.stathis.seriesmania.ui.results.details.adapter.DetailsCallback
 import com.stathis.seriesmania.ui.results.navigator.ResultAction
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +35,8 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
     private var menu: Menu? = null
 
     private val adapter = DetailsAdapter(object : DetailsCallback {
+        override fun onRateClick() = openRatingBottomSheet()
+
         override fun onSeriesClick(series: TvSeries) {
             viewModel.getSeriesInfo(series)
         }
@@ -63,11 +72,20 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
                 is Result.Loading -> {
                     binding.isLoading = true
                 }
+
                 is Result.Success -> {
                     binding.isLoading = false
                     adapter.submitList(result.data)
                 }
+
                 is Result.Failure -> Unit
+            }
+        }
+
+        viewModel.ratingInProgress.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> binding.isLoading = true
+                else -> binding.isLoading = false
             }
         }
 
@@ -76,6 +94,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
                 is Result.Loading -> {
                     binding.isLoading = true
                 }
+
                 is Result.Success -> {
                     binding.isLoading = false
                     val drawable = getAppropriateIcon(result.data.toNotNull())
@@ -83,10 +102,23 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
                         icon = getDrawable(drawable)
                     }
                 }
+
                 is Result.Failure -> Unit
             }
         }
     }
 
     override fun stopOps() {}
+
+    private fun openRatingBottomSheet() {
+        GenericRatingBottomSheet.Builder()
+            .setTitle(getString(com.stathis.core.R.string.rating_bs_title))
+            .setDescription(getString(com.stathis.core.R.string.rating_bs_desc))
+            .setBtnText(getString(com.stathis.core.R.string.rating_bs_btn))
+            .setListener { rating ->
+                viewModel.rateSeries(rating)
+            }
+            .build()
+            .show(requireActivity().supportFragmentManager, GenericRatingBottomSheet.TAG)
+    }
 }

@@ -1,13 +1,13 @@
-package com.stathis.seriesmania.ui.results.details.adapter
+package com.stathis.core.adapters.details
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
+import com.stathis.core.databinding.HolderCastItemBinding
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.cast.Cast
-import com.stathis.seriesmania.databinding.HolderCastItemBinding
 
 class CastAdapter(
     private val callback: CastCallback

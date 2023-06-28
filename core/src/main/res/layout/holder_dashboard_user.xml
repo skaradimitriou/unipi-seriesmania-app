@@ -11,7 +11,7 @@
 
         <variable
             name="callback"
-            type="com.stathis.seriesmania.ui.dashboard.home.adapter.DashboardCallback" />
+            type="com.stathis.core.callbacks.DashboardCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

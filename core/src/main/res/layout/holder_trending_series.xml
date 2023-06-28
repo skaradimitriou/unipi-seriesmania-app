@@ -7,11 +7,15 @@
 
         <variable
             name="adapter"
-            type="com.stathis.seriesmania.ui.results.details.adapter.CastAdapter" />
+            type="com.stathis.core.adapters.general.TrendingSeriesAdapter" />
 
         <variable
             name="decoration"
             type="androidx.recyclerview.widget.RecyclerView.ItemDecoration" />
+
+        <variable
+            name="callback"
+            type="com.stathis.core.callbacks.DashboardCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,12 +29,28 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_m"
             android:layout_marginTop="@dimen/dimen_m"
-            android:text="@string/details_cast_title"
+            android:paddingVertical="@dimen/dimen_s"
+            android:text="@string/trending_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/showAllTxtView"
+            style="@style/text_18_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_m"
+            android:layout_marginTop="@dimen/dimen_m"
+            android:drawablePadding="@dimen/dimen_s"
+            android:onClick="@{() -> callback.openAllTrendingSeries()}"
+            android:paddingVertical="@dimen/dimen_s"
+            android:text="@string/all"
+            app:drawableEndCompat="@drawable/ic_right_arrow_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/castRecycler"
+            android:id="@+id/seriesRecycler"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_s"
@@ -43,7 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleTxtView"
-            tools:listitem="@layout/holder_cast_item" />
+            tools:listitem="@layout/holder_ontheair_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

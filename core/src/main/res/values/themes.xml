@@ -24,6 +24,10 @@
         <item name="colorControlActivated">@color/yellow</item>
     </style>
 
+    <style name="AppRatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/grey_bg</item>
+        <item name="colorControlActivated">@color/yellow</item>
+    </style>
 
     <style name="AppRecycler">
         <item name="android:clipToPadding">false</item>

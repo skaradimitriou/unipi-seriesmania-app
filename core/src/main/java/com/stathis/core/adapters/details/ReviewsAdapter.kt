@@ -1,15 +1,15 @@
-package com.stathis.seriesmania.ui.results.details.adapter
+package com.stathis.core.adapters.details
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.BR
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
+import com.stathis.core.databinding.HolderReviewItemBinding
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.reviews.Review
-import com.stathis.seriesmania.BR
-import com.stathis.seriesmania.databinding.HolderReviewItemBinding
 
 class ReviewsAdapter : ListAdapter<UiModel, ReviewsViewHolder>(BaseDiffUtil<UiModel>()) {
 

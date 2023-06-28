@@ -1,12 +1,22 @@
-package com.stathis.seriesmania.ui.results.details.adapter
+package com.stathis.core.adapters.details
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.BR
+import com.stathis.core.R
 import com.stathis.core.adapters.general.SeriesCallback
+import com.stathis.core.adapters.general.TopRatedSeriesAdapter
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
+import com.stathis.core.databinding.HolderCastParentBinding
+import com.stathis.core.databinding.HolderDetailsHeaderBinding
+import com.stathis.core.databinding.HolderEmptyViewBinding
+import com.stathis.core.databinding.HolderRatingPromoBinding
+import com.stathis.core.databinding.HolderRecommendedSeriesBinding
+import com.stathis.core.databinding.HolderReviewParentBinding
+import com.stathis.core.databinding.HolderSimilarSeriesBinding
 import com.stathis.core.util.decorations.HorizontalItemDecoration
 import com.stathis.core.util.decorations.VerticalItemDecoration
 import com.stathis.domain.model.TvSeries
@@ -14,13 +24,10 @@ import com.stathis.domain.model.TvSeriesDetails
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.cast.Cast
 import com.stathis.domain.model.details.CastModel
+import com.stathis.domain.model.details.RatingPromoModel
 import com.stathis.domain.model.details.RecommendationModel
 import com.stathis.domain.model.details.ReviewsModel
 import com.stathis.domain.model.details.SimilarModel
-import com.stathis.seriesmania.BR
-import com.stathis.seriesmania.R
-import com.stathis.seriesmania.databinding.*
-import com.stathis.seriesmania.ui.dashboard.home.adapter.TopRatedSeriesAdapter
 
 class DetailsAdapter(
     private val callback: DetailsCallback
@@ -35,6 +42,10 @@ class DetailsAdapter(
 
             R.layout.holder_cast_parent -> {
                 HolderCastParentBinding.inflate(inflater, parent, false)
+            }
+
+            R.layout.holder_rating_promo -> {
+                HolderRatingPromoBinding.inflate(inflater, parent, false)
             }
 
             R.layout.holder_review_parent -> {
@@ -61,6 +72,7 @@ class DetailsAdapter(
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
         is TvSeriesDetails -> R.layout.holder_details_header
         is CastModel -> R.layout.holder_cast_parent
+        is RatingPromoModel -> R.layout.holder_rating_promo
         is SimilarModel -> R.layout.holder_similar_series
         is ReviewsModel -> R.layout.holder_review_parent
         is RecommendationModel -> R.layout.holder_recommended_series
@@ -100,6 +112,11 @@ class DetailsViewHolder(
                 binding.setVariable(BR.decoration, decor)
             }
 
+            is RatingPromoModel -> {
+                binding.setVariable(BR.model, data)
+                binding.setVariable(BR.callback, callback)
+            }
+
             is RecommendationModel -> {
                 val adapter = TopRatedSeriesAdapter(this)
                 val decor = HorizontalItemDecoration(20)
@@ -117,6 +134,7 @@ class DetailsViewHolder(
 }
 
 interface DetailsCallback {
+    fun onRateClick()
     fun onSeriesClick(series: TvSeries)
     fun onActorClick(actor: Cast)
 }
