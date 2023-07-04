@@ -1,10 +1,9 @@
 package com.stathis.domain.model.follows
 
 import com.stathis.domain.model.UiModel
-import com.stathis.domain.model.profile.User
 
 data class FollowsWrapper(
-    val follows: List<User>
+    val follows: List<String>
 ) : UiModel {
     constructor() : this(listOf())
 

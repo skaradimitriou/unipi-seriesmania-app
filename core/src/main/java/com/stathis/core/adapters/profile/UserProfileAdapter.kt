@@ -10,13 +10,24 @@ import com.stathis.core.adapters.general.AiringTodaySeriesAdapter
 import com.stathis.core.adapters.general.SeriesCallback
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
-import com.stathis.core.databinding.*
+import com.stathis.core.databinding.HolderEmptyPrefsBinding
+import com.stathis.core.databinding.HolderEmptyViewBinding
+import com.stathis.core.databinding.HolderEmptyWatchlistBinding
+import com.stathis.core.databinding.HolderLogoutOptionBinding
+import com.stathis.core.databinding.HolderPrefsItemBinding
+import com.stathis.core.databinding.HolderSeriesWrapperItemBinding
+import com.stathis.core.databinding.HolderUserItemBinding
+import com.stathis.core.databinding.HolderUserStatisticsItemBinding
 import com.stathis.core.util.decorations.HorizontalItemDecoration
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.TvSeriesWrapper
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.User
-import com.stathis.domain.model.profile.uimodel.*
+import com.stathis.domain.model.profile.uimodel.EmptyUserPreferences
+import com.stathis.domain.model.profile.uimodel.EmptyWatchlist
+import com.stathis.domain.model.profile.uimodel.LogoutOption
+import com.stathis.domain.model.profile.uimodel.UserPreferences
+import com.stathis.domain.model.profile.uimodel.UserStatistics
 
 class UserProfileAdapter(
     private val callback: UserProfileCallback
@@ -28,24 +39,31 @@ class UserProfileAdapter(
             R.layout.holder_user_item -> {
                 HolderUserItemBinding.inflate(inflater, parent, false)
             }
+
             R.layout.holder_user_statistics_item -> {
                 HolderUserStatisticsItemBinding.inflate(inflater, parent, false)
             }
+
             R.layout.holder_empty_prefs -> {
                 HolderEmptyPrefsBinding.inflate(inflater, parent, false)
             }
+
             R.layout.holder_prefs_item -> {
                 HolderPrefsItemBinding.inflate(inflater, parent, false)
             }
+
             R.layout.holder_empty_watchlist -> {
                 HolderEmptyWatchlistBinding.inflate(inflater, parent, false)
             }
+
             R.layout.holder_series_wrapper_item -> {
                 HolderSeriesWrapperItemBinding.inflate(inflater, parent, false)
             }
+
             R.layout.holder_logout_option -> {
                 HolderLogoutOptionBinding.inflate(inflater, parent, false)
             }
+
             else -> HolderEmptyViewBinding.inflate(inflater, parent, false)
         }
         return UserProfileViewHolder(view, callback)
@@ -78,6 +96,7 @@ class UserProfileViewHolder(
                 binding.setVariable(BR.model, data)
                 binding.setVariable(BR.callback, callback)
             }
+
             is UserStatistics -> {
                 binding.setVariable(BR.model, data)
                 binding.setVariable(BR.callback, callback)
@@ -106,6 +125,7 @@ class UserProfileViewHolder(
                 binding.setVariable(BR.model, data)
                 binding.setVariable(BR.callback, callback)
             }
+
             else -> Unit
         }
     }

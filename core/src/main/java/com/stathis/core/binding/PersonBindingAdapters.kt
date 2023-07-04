@@ -21,3 +21,12 @@ fun TextView.setBirthday(birthDate: String) {
 fun TextView.setPlaceOfBirth(placeOfBirth: String) {
     text = placeOfBirth.ifEmpty { resources.getString(R.string.not_found) }
 }
+
+@BindingAdapter("bio")
+fun TextView.setBio(bio: String) {
+    text = if (bio.isNotEmpty()) {
+        String.format(resources.getString(R.string.bio_placeholder), bio)
+    } else {
+        resources.getString(R.string.empty_bio)
+    }
+}

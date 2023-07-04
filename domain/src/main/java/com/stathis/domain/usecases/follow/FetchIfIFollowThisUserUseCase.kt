@@ -4,12 +4,12 @@ import com.stathis.domain.repositories.CommunityRepository
 import com.stathis.domain.usecases.BaseUseCase
 import javax.inject.Inject
 
-class IsUserFollowedByMeUseCase @Inject constructor(
+class FetchIfIFollowThisUserUseCase @Inject constructor(
     private val repo: CommunityRepository
 ) : BaseUseCase<Boolean> {
 
     override suspend fun invoke(vararg args: Any?): Boolean {
         val userId = args.getOrNull(0) as? String ?: ""
-        return repo.isUserFollowedByMe(userId)
+        return repo.fetchIfIFollowThisUser(userId)
     }
 }

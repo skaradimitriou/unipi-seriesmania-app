@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import com.stathis.core.adapters.profile.ProfileResultsAdapter
 import com.stathis.core.adapters.profile.ProfileResultsCallback
 import com.stathis.core.base.BaseFragment
+import com.stathis.core.ext.getParcelable
 import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.serializable
 import com.stathis.core.ext.setScreenTitle
@@ -16,7 +17,7 @@ import com.stathis.core.util.USER
 import com.stathis.core.util.decorations.VerticalItemDecoration
 import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeries
-import com.stathis.domain.model.profile.OtherUser
+import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentProfileResultsBinding
 import com.stathis.seriesmania.ui.profile.ProfileActivity
@@ -47,7 +48,8 @@ class ProfileResultsFragment :
     override fun startOps() {
         arguments?.serializable<ProfileResultsType>(TYPE)?.let { type ->
             setScreenTitle(type.toScreenTitle(requireContext()))
-            viewModel.getResults(type)
+            val userId = requireActivity().intent.getParcelable<User>(USER)
+            viewModel.getResults(type, userId?.id)
         }
 
         viewModel.follows.observe(viewLifecycleOwner) { result ->
@@ -77,7 +79,7 @@ class ProfileResultsFragment :
 
     override fun stopOps() {}
 
-    override fun onUserClick(user: OtherUser) {
+    override fun onUserClick(user: User) {
         startActivity(Intent(requireContext(), ProfileActivity::class.java).apply {
             putExtra(MODE, ProfileAction.USER_PROFILE)
             putExtra(USER, user)

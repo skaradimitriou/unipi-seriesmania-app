@@ -5,11 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.core.util.auth.Authenticator
 import com.stathis.domain.model.Result
 import com.stathis.domain.model.UiModel
-import com.stathis.domain.model.profile.OtherUser
+import com.stathis.domain.model.profile.uimodel.EmptyFollowers
+import com.stathis.domain.model.profile.uimodel.EmptyFollowing
 import com.stathis.domain.model.profile.uimodel.EmptyWatchlist
-import com.stathis.domain.usecases.follow.FetchMyFollowersUseCase
+import com.stathis.domain.usecases.follow.FetchMyFollowersDetailsUseCase
 import com.stathis.domain.usecases.follow.FetchWhoFollowsMeUseCase
 import com.stathis.domain.usecases.watchlist.FetchWatchlistUseCase
 import com.stathis.seriesmania.di.IoDispatcher
@@ -23,49 +25,55 @@ import javax.inject.Inject
 class ProfileResultsViewModel @Inject constructor(
     app: Application,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-    private val fetchMyFollowsUseCase: FetchMyFollowersUseCase,
+    private val fetchMyFollowsUseCase: FetchMyFollowersDetailsUseCase,
     private val fetchWhoFollowsMeUseCase: FetchWhoFollowsMeUseCase,
-    private val fetchWatchlistUseCase: FetchWatchlistUseCase
+    private val fetchWatchlistUseCase: FetchWatchlistUseCase,
+    private val auth: Authenticator
 ) : BaseViewModel(app) {
 
-    val follows: LiveData<Result<List<OtherUser>>>
+    val follows: LiveData<Result<List<UiModel>>>
         get() = _follows
 
-    private val _follows = MutableLiveData<Result<List<OtherUser>>>()
+    private val _follows = MutableLiveData<Result<List<UiModel>>>()
 
     val watchlist: LiveData<Result<List<UiModel>>>
         get() = _watchlist
 
     private val _watchlist = MutableLiveData<Result<List<UiModel>>>()
 
-    fun getResults(type: ProfileResultsType) = when (type) {
-        ProfileResultsType.FOLLOWING -> getMyFollowingUsers()
-        ProfileResultsType.FOLLOWERS -> getWhoFollowsMe()
-        ProfileResultsType.WATCHLIST -> getMyWatchlist()
+    fun getResults(
+        type: ProfileResultsType,
+        userId: String? = auth.getActiveUserId()
+    ) = when (type) {
+        ProfileResultsType.FOLLOWING -> getMyFollowingUsers(userId)
+        ProfileResultsType.FOLLOWERS -> getWhoFollowsMe(userId)
+        ProfileResultsType.WATCHLIST -> getMyWatchlist(userId)
     }
 
-    private fun getMyFollowingUsers() {
+    private fun getMyFollowingUsers(userId: String?) {
         _follows.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
-            fetchMyFollowsUseCase.invoke().collect {
-                _follows.postValue(Result.Success(it))
+            fetchMyFollowsUseCase.invoke(userId).collect {
+                val data = it.ifEmpty { listOf(EmptyFollowing()) }
+                _follows.postValue(Result.Success(data))
             }
         }
     }
 
-    private fun getWhoFollowsMe() {
+    private fun getWhoFollowsMe(userId: String?) {
         _follows.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
-            fetchWhoFollowsMeUseCase.invoke().collect {
-                _follows.postValue(Result.Success(it))
+            fetchWhoFollowsMeUseCase.invoke(userId).collect {
+                val data = it.ifEmpty { listOf(EmptyFollowers()) }
+                _follows.postValue(Result.Success(data))
             }
         }
     }
 
-    private fun getMyWatchlist() {
+    private fun getMyWatchlist(userId: String?) {
         _watchlist.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
-            fetchWatchlistUseCase.invoke().collect {
+            fetchWatchlistUseCase.invoke(userId).collect {
                 val data = it.ifEmpty { listOf(EmptyWatchlist()) }
                 _watchlist.postValue(Result.Success(data))
             }

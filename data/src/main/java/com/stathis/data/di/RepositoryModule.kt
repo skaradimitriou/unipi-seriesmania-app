@@ -1,6 +1,5 @@
 package com.stathis.data.di
 
-import com.stathis.domain.repositories.SettingsRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
 import com.stathis.core.util.auth.Authenticator
@@ -81,8 +80,9 @@ class RepositoryModule {
     @Singleton
     fun provideCommunityRepository(
         firestore: FirebaseFirestore,
-        authenticator: Authenticator
-    ): CommunityRepository = CommunityRepositoryImpl(firestore, authenticator)
+        authenticator: Authenticator,
+        profileRepository: ProfileRepository
+    ): CommunityRepository = CommunityRepositoryImpl(firestore, authenticator, profileRepository)
 
     @Provides
     @Singleton

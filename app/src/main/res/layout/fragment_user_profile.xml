@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.profile.user.UserProfileFragment">
+        tools:context=".ui.profile.otheruser.UserProfileFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/profileDetailsRecycler"

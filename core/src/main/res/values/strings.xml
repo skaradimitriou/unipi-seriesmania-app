@@ -49,6 +49,7 @@
     <string name="profile_title">Profile</string>
     <string name="profile_dummy_username">foustanos</string>
     <string name="bio_placeholder">\&quot;%s\&quot;</string>
+    <string name="empty_bio">This user hasn\'t written a bio yet.</string>
     <string name="following">Following</string>
     <string name="followers">Followers</string>
     <string name="profile_empty_prefs_title">Empty preferences</string>
@@ -60,6 +61,13 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="profile_empty_watchlist_title">Empty watchlist</string>
     <string name="profile_empty_watchlist_desc">The series that you add to your watchlist will be displayed here</string>
+    <string name="profile_empty_following_title">Empty Following</string>
+    <string name="profile_empty_following_desc">Once you start following a user, you can find him/her here</string>
+    <string name="profile_empty_followers_title">Empty Followers</string>
+    <string name="profile_empty_followers_desc">Once you someone starts following you, you can find him/her here</string>
+
+
+
     <string name="ask_user_logout">Do you want to logout?</string>
     <string name="logout">Logout</string>
 
@@ -126,9 +134,9 @@
     <string name="watchlist">Watchlist</string>
 
     <!-- Other user profile -->
+    <string name="follow">Follow</string>
     <string name="user_empty_prefs_desc">This user hasn\'t added series preferences yet</string>
     <string name="user_empty_watchlist_desc">This user hasn\'t added series to watchlist yet</string>
-
 
     <!-- Settings Intro Screen -->
     <string name="additional_actions_title">Additional Actions</string>

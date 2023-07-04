@@ -16,76 +16,97 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/dark_blue"
-        android:padding="@dimen/dimen_m">
+        android:layout_height="wrap_content">
 
-        <View
-            android:id="@+id/profileBgView"
+        <ImageView
+            android:id="@+id/bgImgView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/series_profile_bg"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileUserImgView"
-            android:layout_width="@dimen/dimen_3xl"
-            android:layout_height="@dimen/dimen_3xl"
-            android:layout_marginTop="@dimen/dimen_m"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
+        <View
+            android:id="@+id/profileBgOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:alpha="0.5"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/bgImgView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:setProfileImage="@{model.userImg}"
-            tools:src="@drawable/profile_placeholder" />
+            app:layout_constraintTop_toTopOf="@id/bgImgView" />
 
-        <TextView
-            android:id="@+id/userNameTxtView"
-            style="@style/text_22_bold_white"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_m"
-            android:text="@{model.username}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileUserImgView"
-            tools:text="testopoulos" />
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/dimen_m"
+            android:paddingVertical="@dimen/dimen_xl">
 
-        <TextView
-            android:id="@+id/profileEmailTxtView"
-            style="@style/text_16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@{model.email}"
-            android:textColor="@color/grey_bg"
-            app:layout_constraintTop_toBottomOf="@id/userNameTxtView"
-            tools:text="testopoulos@gmail.com" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileUserImgView"
+                android:layout_width="@dimen/dimen_3xl"
+                android:layout_height="@dimen/dimen_3xl"
+                android:layout_marginTop="@dimen/dimen_m"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setProfileImage="@{model.userImg}"
+                tools:src="@drawable/profile_placeholder" />
 
-        <TextView
-            android:id="@+id/profileBioTxtView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_l"
-            android:ellipsize="end"
-            android:gravity="center_horizontal"
-            android:maxLines="4"
-            android:text="@{model.bio}"
-            android:textColor="@color/white"
-            android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileEmailTxtView"
-            tools:text="@string/lorem_ipsum" />
+            <TextView
+                android:id="@+id/userNameTxtView"
+                style="@style/text_22_bold_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_m"
+                android:text="@{model.username}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileUserImgView"
+                tools:text="testopoulos" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/followButton"
-            style="@style/AppButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_m"
-            android:onClick="@{() -> callback.onFollowClick(model)}"
-            android:text="Follow"
-            app:layout_constraintTop_toBottomOf="@id/profileBioTxtView" />
+            <TextView
+                android:id="@+id/profileEmailTxtView"
+                style="@style/text_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@{model.email}"
+                android:textColor="@color/grey_bg"
+                app:layout_constraintTop_toBottomOf="@id/userNameTxtView"
+                tools:text="testopoulos@gmail.com" />
 
+            <TextView
+                android:id="@+id/profileBioTxtView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_l"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:maxLines="4"
+                app:bio="@{model.bio}"
+                android:textColor="@color/white"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profileEmailTxtView"
+                tools:text="@string/lorem_ipsum" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/editUserInfoBtn"
+                style="@style/AppButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_m"
+                android:onClick="@{() -> callback.onFollowClick(model)}"
+                android:paddingHorizontal="@dimen/dimen_xl"
+                android:text="@{model.following ? @string/following : @string/follow}"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profileBioTxtView"
+                tools:text="@string/follow" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
