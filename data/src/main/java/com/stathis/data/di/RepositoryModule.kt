@@ -1,5 +1,6 @@
 package com.stathis.data.di
 
+import com.stathis.domain.repositories.SettingsRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
 import com.stathis.core.util.auth.Authenticator
@@ -89,4 +90,10 @@ class RepositoryModule {
         api: SeriesApi,
         sessionManager: SessionManager
     ): SessionRepository = SessionRepositoryImpl(api, sessionManager)
+
+    @Provides
+    @Singleton
+    fun provideSettingsRepository(
+        firestore: FirebaseFirestore
+    ): SettingsRepository = SettingsRepositoryImpl(firestore)
 }

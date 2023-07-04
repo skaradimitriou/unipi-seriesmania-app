@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.stathis.core.adapters.settings.intro.SettingsIntroItem" />
+
+        <variable
+            name="callback"
+            type="com.stathis.core.adapters.settings.intro.SettingsIntroCallback" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/faqCardStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> callback.onItemClick(model)}"
+        android:tag="@{model}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/ribbonView"
+                android:layout_width="@dimen/dimen_xs"
+                android:layout_height="0dp"
+                android:background="@color/dark_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titleTxtView"
+                style="@style/text_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_l"
+                android:text="@{model.title}"
+                app:layout_constraintEnd_toStartOf="@id/arrowImgView"
+                app:layout_constraintStart_toEndOf="@id/ribbonView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Test title" />
+
+            <ImageView
+                android:id="@+id/arrowImgView"
+                android:layout_width="@dimen/dimen_xl"
+                android:layout_height="@dimen/dimen_xl"
+                android:background="@drawable/ic_chevron_right"
+                android:backgroundTint="@color/dark_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

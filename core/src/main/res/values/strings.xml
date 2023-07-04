@@ -28,6 +28,7 @@
 
     <!-- Home -->
     <string name="home_title">Home</string>
+    <string name="more">More</string>
     <string name="top_rated_title">Top Rated Series</string>
     <string name="trending_title">Trending Series</string>
     <string name="airing_today_title">Airing Today Series</string>
@@ -121,5 +122,22 @@
     <!-- Other user profile -->
     <string name="user_empty_prefs_desc">This user hasn\'t added series preferences yet</string>
     <string name="user_empty_watchlist_desc">This user hasn\'t added series to watchlist yet</string>
+
+
+    <!-- Settings Intro Screen -->
+    <string name="additional_actions_title">Additional Actions</string>
+
+
+    <!-- Analytics Screen -->
+    <string name="analytics_title">Analytics</string>
+
+    <!-- FAQ Screen -->
+    <string name="faq_long_title">Faq (Frequently Asked Questions)</string>
+    <string name="faq_brief_title">FAQs</string>
+
+
+    <!-- About Screen -->
+    <string name="about_app_title">About the app</string>
+    <string name="about_app">This application was developed from Efstathios Karadimitriou as a part of his dissertation for his Master\'s degree in Informatics in University of Piraeus. \n \n The dissertation\'s title was "Development of a tv series application with personalized content and user interaction with other users (Android)". \n \n In this app, the user can: \n \n - Create an account and sign in \n - View &amp; Search tv series per category \n - Read about a specific tv series or actor \n - Rate a series \n - Start discussions with other users (Forum) \n - Personalize the user\'s profile \n - Follow other users inside the app \n \nThe supervisor of this dissertation was mr. Alepis Efthymios</string>
 
 </resources>
