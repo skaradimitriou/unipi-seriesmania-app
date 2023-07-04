@@ -71,6 +71,11 @@
     <string name="bs_first_option">Open camera</string>
     <string name="bs_second_option">Open gallery</string>
 
+    <!-- Update Profile Info Screen -->
+    <string name="update_info_title">Edit Profile Info</string>
+    <string name="update_info_header">Update your profile information here</string>
+    <string name="bio">Bio</string>
+
     <!-- User Preferences screen -->
     <string name="preferences_title">My preferences</string>
     <string name="preferences_header">Choose up to three (3) series preferences</string>
@@ -88,6 +93,7 @@
     <string name="recommended_series_title">Recommended Series</string>
     <string name="rating_bs_title">Rate this series</string>
     <string name="rating_bs_desc">We\'d love to know your opinion on this series. Simply choose the number of stars for this series.</string>
+    <string name="type_your_review_here_optional">Type your review here (optional)..</string>
     <string name="rating_bs_btn">Submit Rating</string>
 
     <!-- Actor Details -->
@@ -135,9 +141,9 @@
     <string name="faq_long_title">Faq (Frequently Asked Questions)</string>
     <string name="faq_brief_title">FAQs</string>
 
-
     <!-- About Screen -->
     <string name="about_app_title">About the app</string>
     <string name="about_app">This application was developed from Efstathios Karadimitriou as a part of his dissertation for his Master\'s degree in Informatics in University of Piraeus. \n \n The dissertation\'s title was "Development of a tv series application with personalized content and user interaction with other users (Android)". \n \n In this app, the user can: \n \n - Create an account and sign in \n - View &amp; Search tv series per category \n - Read about a specific tv series or actor \n - Rate a series \n - Start discussions with other users (Forum) \n - Personalize the user\'s profile \n - Follow other users inside the app \n \nThe supervisor of this dissertation was mr. Alepis Efthymios</string>
+
 
 </resources>

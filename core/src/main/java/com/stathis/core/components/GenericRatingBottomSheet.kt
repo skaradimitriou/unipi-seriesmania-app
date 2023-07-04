@@ -7,15 +7,22 @@ import com.stathis.core.R
 import com.stathis.core.base.BaseBottomSheet
 import com.stathis.core.databinding.GenericRatingBottomsheetBinding
 import com.stathis.core.ext.serializable
+import com.stathis.core.ext.setFullScreenBottomSheet
 
 class GenericRatingBottomSheet :
     BaseBottomSheet<GenericRatingBottomsheetBinding>(R.layout.generic_rating_bottomsheet) {
+
+    override fun onCreateDialog(savedInstanceState: Bundle?) = setFullScreenBottomSheet()
 
     override fun init() {
         val title = arguments?.getString(TITLE_ARG) ?: ""
         val description = arguments?.getString(DESC_ARG) ?: ""
         val btnText = arguments?.getString(BTN_ARG) ?: ""
         val listener = arguments?.serializable(LISTENER_ARG) as? Listener
+
+        binding.closeImgView.setOnClickListener {
+            dismiss()
+        }
 
         binding.headerTxtView.apply {
             text = title
@@ -37,7 +44,8 @@ class GenericRatingBottomSheet :
             visibility = if (btnText.isNotEmpty()) View.VISIBLE else View.GONE
             setOnClickListener {
                 val rating = binding.ratingBar.rating.toDouble() * 2
-                listener?.onRateBtnClick(rating)
+                val review = binding.reviewBodyEditTxt.text.toString()
+                listener?.onRateBtnClick(rating, review)
                 dismiss()
             }
         }
@@ -68,7 +76,7 @@ class GenericRatingBottomSheet :
     }
 
     fun interface Listener : java.io.Serializable {
-        fun onRateBtnClick(rating: Double)
+        fun onRateBtnClick(rating: Double, review: String)
     }
 
     companion object {

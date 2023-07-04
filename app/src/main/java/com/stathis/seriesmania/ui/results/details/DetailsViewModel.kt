@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
-import com.stathis.core.util.auth.Authenticator
+import com.stathis.core.util.session.SessionManager
 import com.stathis.domain.combiners.SeriesDetailsCombiner
 import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeries
@@ -31,7 +31,7 @@ class DetailsViewModel @Inject constructor(
     private val removeFromWatchlistUseCase: DeleteItemFromWatchlistUseCase,
     private val fetchWatchlistUseCase: FetchWatchlistUseCase,
     private val addNewRatingUseCase: AddNewRatingUseCase,
-    private val auth: Authenticator
+    private val sessionManager: SessionManager
 ) : BaseViewModel(app) {
 
     val details: LiveData<Result<List<UiModel>>>
@@ -124,17 +124,22 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    fun rateSeries(rating: Double) {
+    fun rateSeries(rating: Double, reviewBody: String) {
         _ratingInProgress.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
-            val data = Rating(
-                userId = auth.getActiveUserId(),
-                seriesId = _currentItem?.id.toString(),
-                value = rating
-            )
+            sessionManager.retrieveUserData().collect { user ->
+                val data = Rating(
+                    userId = user.id,
+                    username = user.username,
+                    seriesId = _currentItem?.id.toString(),
+                    value = rating,
+                    review = reviewBody
+                )
 
-            addNewRatingUseCase.invoke(data).collect {
-                _ratingInProgress.postValue(Result.Success(it))
+                addNewRatingUseCase.invoke(data).collect {
+                    _ratingInProgress.postValue(Result.Success(it))
+                    _currentItem?.let { series -> getSeriesInfo(series) }
+                }
             }
         }
     }

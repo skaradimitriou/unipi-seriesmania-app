@@ -8,10 +8,6 @@
         <variable
             name="viewModel"
             type="com.stathis.seriesmania.ui.onboarding.register.RegisterViewModel" />
-
-        <variable
-            name="loading"
-            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,13 +89,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/emailInputField"
             app:layout_constraintStart_toStartOf="@id/emailInputField" />
-
-        <include
-            layout="@layout/loading_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:isLoading="@{loading}"
-            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

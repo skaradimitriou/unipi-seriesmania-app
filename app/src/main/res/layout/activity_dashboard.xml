@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="loading"
+            type="Boolean" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,6 +26,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/dashboard_nav" />
 
+        <include
+            layout="@layout/loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:isLoading="@{loading}"
+            app:layout_constraintBottom_toBottomOf="@id/nav_host_fragment"
+            app:layout_constraintTop_toTopOf="@id/nav_host_fragment"
+            tools:visibility="gone" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_menu"
             android:layout_width="match_parent"
@@ -27,7 +43,6 @@
             app:itemPadding="@dimen/dimen_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/dashboard_menu" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

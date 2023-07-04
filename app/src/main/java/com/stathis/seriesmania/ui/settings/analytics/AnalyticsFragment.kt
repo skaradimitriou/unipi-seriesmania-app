@@ -4,8 +4,11 @@ import androidx.fragment.app.viewModels
 import com.stathis.core.adapters.analytics.AnalyticsAdapter
 import com.stathis.core.adapters.analytics.AnalyticsCallback
 import com.stathis.core.base.BaseFragment
+import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.showLoader
 import com.stathis.core.util.decorations.VerticalItemDecoration
+import com.stathis.domain.model.Result
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentAnalyticsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,8 +33,16 @@ class AnalyticsFragment : BaseFragment<FragmentAnalyticsBinding>(R.layout.fragme
     override fun startOps() {
         viewModel.fetchAppAnalytics()
 
-        viewModel.analytics.observe(viewLifecycleOwner) { uiList ->
-            analyticsAdapter.submitList(uiList)
+        viewModel.analytics.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> showLoader()
+                is Result.Success -> {
+                    hideLoader()
+                    analyticsAdapter.submitList(result.data)
+                }
+
+                is Result.Failure -> hideLoader()
+            }
         }
     }
 

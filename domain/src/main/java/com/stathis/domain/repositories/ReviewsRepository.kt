@@ -10,5 +10,7 @@ interface ReviewsRepository {
 
     suspend fun getMyRatings(): Flow<List<Rating>>
 
+    suspend fun getRatingsBySeriesId(seriesId: Int): Flow<List<Rating>>
+
     suspend fun getReviewsForSeries(seriesId: Int): List<Review>
 }

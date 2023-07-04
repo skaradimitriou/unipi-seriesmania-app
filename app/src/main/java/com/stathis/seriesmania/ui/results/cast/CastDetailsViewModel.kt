@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
 import com.stathis.domain.combiners.ActorDetailsCombiner
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.UiModel
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,15 +20,16 @@ class CastDetailsViewModel @Inject constructor(
     private val detailsCombiner: ActorDetailsCombiner
 ) : BaseViewModel(app) {
 
-    val details: MutableLiveData<List<UiModel>>
+    val details: MutableLiveData<Result<List<UiModel>>>
         get() = _details
 
-    private val _details = MutableLiveData<List<UiModel>>()
+    private val _details = MutableLiveData<Result<List<UiModel>>>()
 
     fun getData(personId: Int) {
+        _details.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             val result = detailsCombiner.invoke(personId)
-            _details.postValue(result)
+            _details.postValue(Result.Success(result))
         }
     }
 }

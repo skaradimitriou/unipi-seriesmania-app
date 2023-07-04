@@ -25,4 +25,12 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     override fun stopOps() {
         //
     }
+
+    override fun showLoader() {
+        binding.loading = true
+    }
+
+    override fun hideLoader() {
+        binding.loading = false
+    }
 }

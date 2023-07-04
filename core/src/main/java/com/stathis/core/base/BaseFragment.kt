@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.stathis.core.ext.hideLoader
 
 abstract class BaseFragment<VB : ViewDataBinding>(private val layoutId: Int) : Fragment() {
 
@@ -39,6 +40,7 @@ abstract class BaseFragment<VB : ViewDataBinding>(private val layoutId: Int) : F
 
     override fun onStop() {
         stopOps()
+        hideLoader()
         binding.unbind()
         super.onStop()
     }

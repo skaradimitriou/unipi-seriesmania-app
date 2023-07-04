@@ -10,8 +10,10 @@ object RatingsMapper : BaseMapper<List<RatingDto>?, List<Rating>> {
     override fun toDomainModel(dto: List<RatingDto>?) = dto?.toListOf {
         Rating(
             userId = it.userId.toNotNull(),
+            username = it.username.toNotNull(),
             seriesId = it.seriesId.toNotNull(),
-            value = it.value.toNotNull()
+            value = it.value.toNotNull(),
+            review = it.review.toNotNull()
         )
     } ?: listOf()
 }

@@ -13,7 +13,6 @@ import com.stathis.data.model.RatingDto
 import com.stathis.data.model.UpdateRatingRequest
 import com.stathis.data.util.RATINGS_DB_PATH
 import com.stathis.domain.model.reviews.Rating
-import com.stathis.domain.model.reviews.Review
 import com.stathis.domain.repositories.ReviewsRepository
 import com.stathis.domain.repositories.SessionRepository
 import kotlinx.coroutines.flow.Flow
@@ -52,8 +51,7 @@ class ReviewsRepositoryImpl @Inject constructor(
     }
 
     private suspend fun saveRatingToDb(rating: Rating) {
-        val uuid = auth.getActiveUserId()
-        firestore.collection(RATINGS_DB_PATH).document(uuid).set(rating).await()
+        firestore.collection(RATINGS_DB_PATH).document().set(rating).await()
     }
 
     override suspend fun getMyRatings(): Flow<List<Rating>> = flow {
@@ -67,10 +65,20 @@ class ReviewsRepositoryImpl @Inject constructor(
         emit(data)
     }
 
-    override suspend fun getReviewsForSeries(seriesId: Int): List<Review> {
-        return getAndMapResponse(
-            call = { api.getReviewsForSeries(seriesId) },
-            mapper = { ReviewsMapper.toDomainModel(it) }
-        )
+    override suspend fun getRatingsBySeriesId(seriesId: Int) = flow {
+        val result = firestore.collection(RATINGS_DB_PATH)
+            .whereEqualTo("userId", auth.getActiveUserId())
+            .whereEqualTo("seriesId", seriesId.toString())
+            .get()
+            .await()
+            .toListOf<RatingDto>()
+
+        val data = RatingsMapper.toDomainModel(result)
+        emit(data)
     }
+
+    override suspend fun getReviewsForSeries(seriesId: Int) = getAndMapResponse(
+        call = { api.getReviewsForSeries(seriesId) },
+        mapper = { ReviewsMapper.toDomainModel(it) }
+    )
 }

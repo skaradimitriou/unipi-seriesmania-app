@@ -35,6 +35,14 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
         viewModel.navigatorState.removeObservers(this)
     }
 
+    override fun showLoader() {
+        binding.loading = true
+    }
+
+    override fun hideLoader() {
+        binding.loading = false
+    }
+
     override fun onBackPressed() {
         navigator.goBack()
         viewModel.resetNavigation()

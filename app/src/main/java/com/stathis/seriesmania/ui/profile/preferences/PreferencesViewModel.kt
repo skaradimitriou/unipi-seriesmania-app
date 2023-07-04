@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.uimodel.SeriesPreference
 import com.stathis.domain.usecases.profile.GetProfileInfoUseCase
@@ -24,10 +25,10 @@ class PreferencesViewModel @Inject constructor(
     private val savePreferencesUseCase: SaveSeriesPreferenceUseCase
 ) : BaseViewModel(app) {
 
-    val preferencesSaved: LiveData<Boolean>
+    val preferencesSaved: LiveData<Result<Boolean>>
         get() = _preferencesSaved
 
-    private val _preferencesSaved = MutableLiveData<Boolean>()
+    private val _preferencesSaved = MutableLiveData<Result<Boolean>>()
 
     val preferences: LiveData<List<SeriesPreference>>
         get() = _preferences
@@ -63,9 +64,10 @@ class PreferencesViewModel @Inject constructor(
     }
 
     fun saveSelection() {
+        _preferencesSaved.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             val result = savePreferencesUseCase.invoke(selectedPreferences)
-            _preferencesSaved.postValue(result)
+            _preferencesSaved.postValue(Result.Success(result))
         }
     }
 }

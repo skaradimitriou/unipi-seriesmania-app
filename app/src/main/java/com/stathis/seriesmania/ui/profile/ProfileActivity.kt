@@ -46,6 +46,14 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
         viewModel.navigatorState.removeObservers(this)
     }
 
+    override fun showLoader() {
+        binding.loading = true
+    }
+
+    override fun hideLoader() {
+        binding.loading = false
+    }
+
     override fun onBackPressed() {
         navigator.goBack()
         viewModel.resetNavigation()

@@ -6,16 +6,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/round_corners_top"
-        android:padding="@dimen/dimen_m">
+        android:background="@color/sand_bg"
+        android:padding="@dimen/dimen_l">
+
+        <ImageView
+            android:id="@+id/closeImgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_close"
+            android:backgroundTint="@color/dark_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/headerTxtView"
             style="@style/text_20_bold_dark_grey"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/closeImgView"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="This is a title" />
 
@@ -34,18 +44,41 @@
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dimen_l"
+            android:layout_marginTop="@dimen/dimen_l"
             android:numStars="5"
             android:theme="@style/AppRatingBar"
-            app:layout_constraintBottom_toTopOf="@id/rateBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/descTxtView" />
 
+        <EditText
+            android:id="@+id/reviewBodyEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_200"
+            android:layout_marginTop="@dimen/dimen_m"
+            android:background="@drawable/round_corners"
+            android:gravity="top"
+            android:hint="@string/type_your_review_here_optional"
+            android:imeOptions="actionDone"
+            android:padding="@dimen/dimen_m"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ratingBar" />
+
+        <TextView
+            android:id="@+id/ratingOverviewTxtView"
+            style="@style/text_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_m"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerTxtView"
+            tools:text="This is a desc" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/rateBtn"
             style="@style/AppButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_m"
             android:enabled="false"

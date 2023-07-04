@@ -1,4 +1,4 @@
-package com.stathis.seriesmania.ui.results.cast
+package com.stathis.seriesmania.ui.results.cast.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
