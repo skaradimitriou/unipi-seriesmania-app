@@ -1,13 +1,19 @@
 package com.stathis.domain.combiners
 
-import com.stathis.domain.model.details.*
+import com.stathis.domain.model.details.CastModel
+import com.stathis.domain.model.details.DetailsUiModel
+import com.stathis.domain.model.details.RecommendationModel
+import com.stathis.domain.model.details.ReviewsModel
+import com.stathis.domain.model.details.SimilarModel
 import com.stathis.domain.usecases.cast.GetCastForSeriesUseCase
 import com.stathis.domain.usecases.general.GetRecommendedSeriesUseCase
 import com.stathis.domain.usecases.general.GetSimilarSeriesUseCase
+import com.stathis.domain.usecases.ratings.FetchIfUserHasRatedSeriesUseCase
 import com.stathis.domain.usecases.reviews.GetReviewsForSeriesUseCase
 import com.stathis.domain.usecases.series.FetchSeriesDetailsUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class SeriesDetailsCombiner @Inject constructor(
@@ -16,6 +22,7 @@ class SeriesDetailsCombiner @Inject constructor(
     private val reviewsUseCase: GetReviewsForSeriesUseCase,
     private val similarSeriesUseCase: GetSimilarSeriesUseCase,
     private val recommendedUseCase: GetRecommendedSeriesUseCase,
+    private val fetchIfIHaveRatedThisSeries: FetchIfUserHasRatedSeriesUseCase
 ) : BaseCombiner<DetailsUiModel> {
 
     override suspend fun invoke(vararg args: Any?): DetailsUiModel = coroutineScope {
@@ -26,6 +33,7 @@ class SeriesDetailsCombiner @Inject constructor(
         val cast = CastModel(
             async { castUseCase.invoke(seriesId) }.await()
         )
+
         val reviews = ReviewsModel(
             async { reviewsUseCase.invoke(seriesId) }.await()
         )
@@ -39,6 +47,7 @@ class SeriesDetailsCombiner @Inject constructor(
         return@coroutineScope DetailsUiModel(
             details,
             cast,
+            fetchIfIHaveRatedThisSeries.invoke(seriesId.toString()).first(),
             reviews,
             similarSeries,
             recommendedSeries

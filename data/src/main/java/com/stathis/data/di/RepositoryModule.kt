@@ -1,5 +1,6 @@
 package com.stathis.data.di
 
+import com.stathis.domain.repositories.SettingsRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
 import com.stathis.core.util.auth.Authenticator
@@ -20,8 +21,9 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideOnboardingRepository(
-        authenticator: Authenticator
-    ): OnboardingRepository = OnboardingRepositoryImpl(authenticator)
+        authenticator: Authenticator,
+        sessionRepository: SessionRepository
+    ): OnboardingRepository = OnboardingRepositoryImpl(authenticator, sessionRepository)
 
     @Provides
     @Singleton
@@ -47,8 +49,18 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideReviewsRepository(
-        api: SeriesApi
-    ): ReviewsRepository = ReviewsRepositoryImpl(api)
+        api: SeriesApi,
+        firestore: FirebaseFirestore,
+        authenticator: Authenticator,
+        sessionRepository: SessionRepository,
+        sessionManager: SessionManager
+    ): ReviewsRepository = ReviewsRepositoryImpl(
+        api,
+        firestore,
+        authenticator,
+        sessionRepository,
+        sessionManager
+    )
 
     @Provides
     @Singleton
@@ -71,4 +83,17 @@ class RepositoryModule {
         firestore: FirebaseFirestore,
         authenticator: Authenticator
     ): CommunityRepository = CommunityRepositoryImpl(firestore, authenticator)
+
+    @Provides
+    @Singleton
+    fun provideSessionRepository(
+        api: SeriesApi,
+        sessionManager: SessionManager
+    ): SessionRepository = SessionRepositoryImpl(api, sessionManager)
+
+    @Provides
+    @Singleton
+    fun provideSettingsRepository(
+        firestore: FirebaseFirestore
+    ): SettingsRepository = SettingsRepositoryImpl(firestore)
 }

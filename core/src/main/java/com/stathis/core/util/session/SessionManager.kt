@@ -1,5 +1,6 @@
 package com.stathis.core.util.session
 
+import com.stathis.domain.model.GuestSessionResponse
 import com.stathis.domain.model.profile.User
 import kotlinx.coroutines.flow.Flow
 
@@ -27,4 +28,10 @@ interface SessionManager {
      */
 
     suspend fun clearUserData()
+
+    suspend fun storeGuestSessionData(data: GuestSessionResponse)
+
+    suspend fun retrieveGuestSessionData(): Flow<GuestSessionResponse>
+
+    suspend fun clearGuestSessionData()
 }

@@ -5,10 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.core.util.auth.Authenticator
 import com.stathis.domain.combiners.SeriesDetailsCombiner
 import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.UiModel
+import com.stathis.domain.model.details.RatingPromoModel
+import com.stathis.domain.model.reviews.Rating
+import com.stathis.domain.usecases.ratings.AddNewRatingUseCase
 import com.stathis.domain.usecases.watchlist.AddToWatchlistUseCase
 import com.stathis.domain.usecases.watchlist.DeleteItemFromWatchlistUseCase
 import com.stathis.domain.usecases.watchlist.FetchWatchlistUseCase
@@ -25,7 +29,9 @@ class DetailsViewModel @Inject constructor(
     private val combiner: SeriesDetailsCombiner,
     private val addToWatchlistUseCase: AddToWatchlistUseCase,
     private val removeFromWatchlistUseCase: DeleteItemFromWatchlistUseCase,
-    private val fetchWatchlistUseCase: FetchWatchlistUseCase
+    private val fetchWatchlistUseCase: FetchWatchlistUseCase,
+    private val addNewRatingUseCase: AddNewRatingUseCase,
+    private val auth: Authenticator
 ) : BaseViewModel(app) {
 
     val details: LiveData<Result<List<UiModel>>>
@@ -33,13 +39,17 @@ class DetailsViewModel @Inject constructor(
 
     private val _details = MutableLiveData<Result<List<UiModel>>>()
 
+    val ratingInProgress: LiveData<Result<Boolean>>
+        get() = _ratingInProgress
+
+    private val _ratingInProgress = MutableLiveData<Result<Boolean>>()
+
     val isFavorite: LiveData<Result<Boolean>>
         get() = _isFavorite
 
     private val _isFavorite = MutableLiveData<Result<Boolean>>(Result.Success(false))
 
     private var _favoriteState = false
-
     private var _currentItem: TvSeries? = null
 
     init {
@@ -47,15 +57,29 @@ class DetailsViewModel @Inject constructor(
     }
 
     fun getSeriesInfo(series: TvSeries) {
+        _details.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             _currentItem = series
 
-            _details.postValue(Result.Loading())
-
             val result = combiner.invoke(series.id)
-
             val list = mutableListOf<UiModel>()
             list.add(result.details)
+
+            val model = if (result.ratingMadeForThisSeries) {
+                RatingPromoModel(
+                    title = "Rate your experience",
+                    description = "You've already rated ${series.name}, but we'd love to know if your opinion has changed since then.",
+                    ctaText = "Rate again"
+                )
+            } else {
+                RatingPromoModel(
+                    title = "Rate your experience",
+                    description = "Help us improve by sharing your thoughts on the series your just watched.",
+                    ctaText = "Rate now"
+                )
+            }
+
+            list.add(model)
 
             if (result.cast.results.isNotEmpty()) {
                 list.add(result.cast)
@@ -96,6 +120,21 @@ class DetailsViewModel @Inject constructor(
             } else {
                 addToWatchlistUseCase.invoke(_currentItem)
                 fetchUserWatchlist()
+            }
+        }
+    }
+
+    fun rateSeries(rating: Double) {
+        _ratingInProgress.postValue(Result.Loading())
+        viewModelScope.launch(dispatcher) {
+            val data = Rating(
+                userId = auth.getActiveUserId(),
+                seriesId = _currentItem?.id.toString(),
+                value = rating
+            )
+
+            addNewRatingUseCase.invoke(data).collect {
+                _ratingInProgress.postValue(Result.Success(it))
             }
         }
     }

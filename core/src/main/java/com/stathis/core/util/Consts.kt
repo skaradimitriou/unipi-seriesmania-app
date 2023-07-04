@@ -3,6 +3,7 @@ package com.stathis.core.util
 const val GENERIC_ERROR = "Κάτι πήγε στραβά"
 
 const val USER_PROFILE = "USER"
+const val GUEST_USER_SESSION = "GUEST_USER_SESSION"
 
 /**
  * Intent Keys

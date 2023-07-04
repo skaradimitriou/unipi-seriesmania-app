@@ -3,7 +3,9 @@ package com.stathis.data.api
 import com.stathis.data.model.*
 import com.stathis.data.util.API_KEY
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -28,9 +30,6 @@ interface SeriesApi {
     suspend fun getTrendingSeries(
         @Query("page") page: Int = 1
     ): Response<TvSeriesFeedDto?>
-
-    @GET("genre/tv/list?$API_KEY")
-    suspend fun getSeriesGenres(): Response<GenresFeedDto?>
 
     @GET("discover/tv?$API_KEY")
     suspend fun getPagedResultsForThisGenre(
@@ -66,4 +65,14 @@ interface SeriesApi {
 
     @GET("person/{person_id}/tv_credits?$API_KEY")
     suspend fun getActorsKnownMovies(@Path("person_id") person_id: Int): Response<KnownSeriesFeedDto?>
+
+    @GET("authentication/guest_session/new?$API_KEY")
+    suspend fun createGuesSession(): Response<GuestSessionResponseDto?>
+
+    @POST("tv/{tvSeriesId}/rating?$API_KEY")
+    suspend fun addRatingForSeries(
+        @Path("tvSeriesId") series_id: String,
+        @Query("guest_session_id") sessionId: String,
+        @Body ratingRequest: UpdateRatingRequest
+    ): Response<RatingResponseDto?>
 }

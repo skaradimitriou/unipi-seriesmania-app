@@ -4,11 +4,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.R
 import com.stathis.core.adapters.general.AiringTodaySeriesAdapter
+import com.stathis.core.adapters.general.PopularSeriesAdapter
 import com.stathis.core.adapters.general.SeriesCallback
+import com.stathis.core.adapters.general.TopRatedSeriesAdapter
+import com.stathis.core.adapters.general.TrendingSeriesAdapter
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
+import com.stathis.core.callbacks.DashboardCallback
+import com.stathis.core.databinding.HolderAiringTodaySeriesBinding
+import com.stathis.core.databinding.HolderDashboardUserBinding
+import com.stathis.core.databinding.HolderEmptyViewBinding
+import com.stathis.core.databinding.HolderPopularSeriesBinding
 import com.stathis.core.databinding.HolderSeriesWrapperItemBinding
+import com.stathis.core.databinding.HolderTopRatedSeriesBinding
+import com.stathis.core.databinding.HolderTrendingSeriesBinding
 import com.stathis.core.util.decorations.HorizontalItemDecoration
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.TvSeriesWrapper
@@ -19,8 +30,6 @@ import com.stathis.domain.model.dashboard.TopRatedSeries
 import com.stathis.domain.model.dashboard.TrendingSeries
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.BR
-import com.stathis.seriesmania.R
-import com.stathis.seriesmania.databinding.*
 
 class HomeAdapter(
     private val callback: DashboardCallback
@@ -49,7 +58,7 @@ class HomeAdapter(
                 HolderAiringTodaySeriesBinding.inflate(inflater, parent, false)
             }
 
-            com.stathis.core.R.layout.holder_series_wrapper_item -> {
+            R.layout.holder_series_wrapper_item -> {
                 HolderSeriesWrapperItemBinding.inflate(inflater, parent, false)
             }
 
@@ -68,7 +77,7 @@ class HomeAdapter(
         is TopRatedSeries -> R.layout.holder_top_rated_series
         is TrendingSeries -> R.layout.holder_trending_series
         is AiringTodaySeries -> R.layout.holder_airing_today_series
-        is TvSeriesWrapper -> com.stathis.core.R.layout.holder_series_wrapper_item
+        is TvSeriesWrapper -> R.layout.holder_series_wrapper_item
         else -> R.layout.holder_empty_view
     }
 }
@@ -132,13 +141,4 @@ class HomeViewHolder(
     override fun onSeriesClick(model: TvSeries) {
         callback.onSeriesClick(model)
     }
-}
-
-interface DashboardCallback {
-    fun onProfileClick()
-    fun onSeriesClick(model: TvSeries)
-    fun openAllTopRatedSeries()
-    fun openAllTrendingSeries()
-    fun openAllAiringTodaySeries()
-    fun openMyPreferencesSeries(id: Int)
 }
