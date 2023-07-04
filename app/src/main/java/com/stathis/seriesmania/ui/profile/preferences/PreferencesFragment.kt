@@ -3,8 +3,11 @@ package com.stathis.seriesmania.ui.profile.preferences
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.stathis.core.base.BaseFragment
+import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.showLoader
 import com.stathis.core.util.decorations.VerticalItemDecoration
+import com.stathis.domain.model.Result
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentPreferencesBinding
 import com.stathis.seriesmania.ui.profile.ProfileActivityViewModel
@@ -44,8 +47,16 @@ class PreferencesFragment :
             preferencesAdapter.submitList(preferences)
         }
 
-        viewModel.preferencesSaved.observe(viewLifecycleOwner) {
-            activityViewModel.navigateToScreen(ProfileAction.PREFERENCES_UPDATED)
+        viewModel.preferencesSaved.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> showLoader()
+                is Result.Success -> {
+                    hideLoader()
+                    activityViewModel.navigateToScreen(ProfileAction.PREFERENCES_UPDATED)
+                }
+
+                is Result.Failure -> hideLoader()
+            }
         }
     }
 

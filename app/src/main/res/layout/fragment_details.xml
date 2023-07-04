@@ -5,12 +5,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
-        <variable
-            name="isLoading"
-            type="Boolean" />
-
         <variable
             name="adapter"
             type="com.stathis.core.adapters.details.DetailsAdapter" />
@@ -29,13 +23,6 @@
             android:adapter="@{adapter}"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        <include
-            layout="@layout/loading_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:isLoading="@{isLoading}"
-            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

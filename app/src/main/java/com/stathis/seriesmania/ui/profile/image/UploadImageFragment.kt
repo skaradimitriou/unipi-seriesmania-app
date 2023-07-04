@@ -8,9 +8,11 @@ import com.stathis.core.base.BaseFragment
 import com.stathis.core.binding.setImage
 import com.stathis.core.components.GenericBottomSheet
 import com.stathis.core.components.GenericBottomSheet.Companion.GENERIC_BS_TAG
+import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.onSuccessCameraResult
 import com.stathis.core.ext.onSuccessResult
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.showLoader
 import com.stathis.core.ext.toBitmap
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentUploadImageBinding
@@ -83,16 +85,13 @@ class UploadImageFragment :
 
         viewModel.bitmapSaved.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is com.stathis.domain.model.Result.Loading -> {
-                    binding.isLoading = true
-                }
+                is com.stathis.domain.model.Result.Loading -> showLoader()
                 is com.stathis.domain.model.Result.Success -> {
-                    binding.isLoading = false
+                    hideLoader()
                     activityViewModel.navigateToScreen(ProfileAction.PHOTO_UPLOADED)
                 }
-                is com.stathis.domain.model.Result.Failure -> {
-                    binding.isLoading = false
-                }
+
+                is com.stathis.domain.model.Result.Failure -> hideLoader()
             }
         }
     }

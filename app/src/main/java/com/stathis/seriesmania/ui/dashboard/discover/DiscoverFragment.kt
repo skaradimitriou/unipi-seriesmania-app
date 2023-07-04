@@ -73,7 +73,7 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding>(R.layout.fragment
         binding.discoverRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
             removeItemDecorations()
-            VerticalItemDecoration(15)
+            addItemDecoration(VerticalItemDecoration(15))
             adapter = searchAdapter
         }
     }

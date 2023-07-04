@@ -12,6 +12,9 @@ abstract class BaseActivity<VB : ViewDataBinding>(private val layoutId: Int) : A
     abstract fun startOps()
     abstract fun stopOps()
 
+    abstract fun showLoader()
+    abstract fun hideLoader()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId)

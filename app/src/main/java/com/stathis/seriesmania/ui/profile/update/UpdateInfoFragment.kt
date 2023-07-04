@@ -18,7 +18,7 @@ class UpdateInfoFragment : BaseFragment<FragmentUpdateInfoBinding>(R.layout.frag
     private val activityViewModel: ProfileActivityViewModel by activityViewModels()
 
     override fun init() {
-        setScreenTitle("Επεξεργασία Προφίλ")
+        setScreenTitle(getString(com.stathis.core.R.string.update_info_title))
         binding.viewModel = viewModel
 
         binding.usernameInputTxt.doAfterTextChanged {

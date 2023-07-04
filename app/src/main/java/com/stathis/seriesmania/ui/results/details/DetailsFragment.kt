@@ -11,8 +11,10 @@ import com.stathis.core.ext.getAppropriateIcon
 import com.stathis.core.ext.getDrawable
 import com.stathis.core.ext.getItemOrNull
 import com.stathis.core.ext.getParcelable
+import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.setMenuProvider
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.showLoader
 import com.stathis.core.ext.toNotNull
 import com.stathis.core.util.SERIES
 import com.stathis.domain.model.Result
@@ -69,54 +71,52 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
     override fun startOps() {
         viewModel.details.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Result.Loading -> {
-                    binding.isLoading = true
-                }
+                is Result.Loading -> showLoader()
 
                 is Result.Success -> {
-                    binding.isLoading = false
+                    hideLoader()
                     adapter.submitList(result.data)
                 }
 
-                is Result.Failure -> Unit
+                is Result.Failure -> hideLoader()
             }
         }
 
         viewModel.ratingInProgress.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Result.Loading -> binding.isLoading = true
-                else -> binding.isLoading = false
+                is Result.Loading -> showLoader()
+                else -> hideLoader()
             }
         }
 
         viewModel.isFavorite.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Result.Loading -> {
-                    binding.isLoading = true
-                }
+                is Result.Loading -> showLoader()
 
                 is Result.Success -> {
-                    binding.isLoading = false
+                    hideLoader()
                     val drawable = getAppropriateIcon(result.data.toNotNull())
                     menu?.getItemOrNull(0)?.apply {
                         icon = getDrawable(drawable)
                     }
                 }
 
-                is Result.Failure -> Unit
+                is Result.Failure -> hideLoader()
             }
         }
     }
 
-    override fun stopOps() {}
+    override fun stopOps() {
+        activityViewModel.resetNavigation()
+    }
 
     private fun openRatingBottomSheet() {
         GenericRatingBottomSheet.Builder()
             .setTitle(getString(com.stathis.core.R.string.rating_bs_title))
             .setDescription(getString(com.stathis.core.R.string.rating_bs_desc))
             .setBtnText(getString(com.stathis.core.R.string.rating_bs_btn))
-            .setListener { rating ->
-                viewModel.rateSeries(rating)
+            .setListener { rating, reviewBody ->
+                viewModel.rateSeries(rating, reviewBody)
             }
             .build()
             .show(requireActivity().supportFragmentManager, GenericRatingBottomSheet.TAG)

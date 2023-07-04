@@ -6,11 +6,14 @@ import com.stathis.core.adapters.forum.ThreadsAdapter
 import com.stathis.core.adapters.forum.ThreadsCallback
 import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.addAppBarMenu
+import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.showLoader
 import com.stathis.core.util.MODE
 import com.stathis.core.util.THREAD
 import com.stathis.core.util.USER
 import com.stathis.core.util.decorations.VerticalItemDecoration
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.forum.ForumThread
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.R
@@ -64,9 +67,17 @@ class ForumFragment : BaseFragment<FragmentForumBinding>(R.layout.fragment_forum
 
     override fun startOps() {
         viewModel.fetchThreads()
-        viewModel.threads.observe(viewLifecycleOwner) { data ->
-            binding.swipeRefreshLayout.isRefreshing = false
-            adapter.submitList(data)
+        viewModel.threads.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> showLoader()
+                is Result.Success -> {
+                    hideLoader()
+                    binding.swipeRefreshLayout.isRefreshing = false
+                    adapter.submitList(result.data)
+                }
+
+                is Result.Failure -> hideLoader()
+            }
         }
     }
 

@@ -5,13 +5,16 @@ import androidx.fragment.app.viewModels
 import com.stathis.core.adapters.profile.ProfileResultsAdapter
 import com.stathis.core.adapters.profile.ProfileResultsCallback
 import com.stathis.core.base.BaseFragment
+import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.serializable
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.showLoader
 import com.stathis.core.util.MODE
 import com.stathis.core.util.SERIES
 import com.stathis.core.util.TYPE
 import com.stathis.core.util.USER
 import com.stathis.core.util.decorations.VerticalItemDecoration
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.profile.OtherUser
 import com.stathis.seriesmania.R
@@ -47,12 +50,28 @@ class ProfileResultsFragment :
             viewModel.getResults(type)
         }
 
-        viewModel.follows.observe(viewLifecycleOwner) { follows ->
-            profileResultsAdapter.submitList(follows)
+        viewModel.follows.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> showLoader()
+                is Result.Success -> {
+                    hideLoader()
+                    profileResultsAdapter.submitList(result.data)
+                }
+
+                is Result.Failure -> hideLoader()
+            }
         }
 
-        viewModel.watchlist.observe(viewLifecycleOwner) { watchlist ->
-            profileResultsAdapter.submitList(watchlist)
+        viewModel.watchlist.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> showLoader()
+                is Result.Success -> {
+                    hideLoader()
+                    profileResultsAdapter.submitList(result.data)
+                }
+
+                is Result.Failure -> hideLoader()
+            }
         }
     }
 

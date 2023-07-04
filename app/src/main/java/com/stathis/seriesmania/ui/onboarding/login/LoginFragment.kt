@@ -6,6 +6,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.hideKeyboard
+import com.stathis.core.ext.hideLoader
+import com.stathis.core.ext.showLoader
 import com.stathis.core.ext.showSnackbar
 import com.stathis.domain.model.Result
 import com.stathis.seriesmania.R
@@ -48,15 +50,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     override fun startOps() {
         viewModel.loginResult.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Result.Loading -> {
-                    binding.loading = true
-                }
+                is Result.Loading -> showLoader()
                 is Result.Success -> {
-                    binding.loading = false
+                    hideLoader()
                     goToDashboard()
                 }
+
                 is Result.Failure -> {
-                    binding.loading = false
+                    hideLoader()
                     binding.showSnackbar(result.error.toString())
                 }
             }

@@ -15,7 +15,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.stathis.core.R
-import kotlinx.coroutines.flow.*
+import com.stathis.core.base.BaseActivity
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /**
@@ -152,3 +157,6 @@ fun Fragment.askUserForAction(title: String, btnTitle: String, onPrimaryBtnClick
 fun Fragment.hideKeyboard() {
     requireView().hideKeyboard()
 }
+
+fun Fragment.showLoader() = (requireActivity() as BaseActivity<*>).showLoader()
+fun Fragment.hideLoader() = (requireActivity() as BaseActivity<*>).hideLoader()

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.faq.Faq
 import com.stathis.domain.usecases.settings.FetchFaqsUseCase
 import com.stathis.seriesmania.di.IoDispatcher
@@ -20,15 +21,16 @@ class FaqViewModel @Inject constructor(
     private val fetchFaqsUseCase: FetchFaqsUseCase
 ) : BaseViewModel(app) {
 
-    val faqs: LiveData<List<Faq>>
+    val faqs: LiveData<Result<List<Faq>>>
         get() = _faqs
 
-    private val _faqs = MutableLiveData<List<Faq>>()
+    private val _faqs = MutableLiveData<Result<List<Faq>>>()
 
     fun fetchFaqs() {
+        _faqs.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             fetchFaqsUseCase.invoke().collect {
-                _faqs.postValue(it)
+                _faqs.postValue(Result.Success(it))
             }
         }
     }

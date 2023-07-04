@@ -8,11 +8,14 @@ import com.stathis.core.adapters.forum.ThreadsCallback
 import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.getParcelable
 import com.stathis.core.ext.hideKeyboard
+import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.showLoader
 import com.stathis.core.util.MODE
 import com.stathis.core.util.THREAD
 import com.stathis.core.util.USER
 import com.stathis.core.util.decorations.VerticalItemDecoration
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.forum.ForumThread
 import com.stathis.domain.model.profile.User
 import com.stathis.seriesmania.R
@@ -35,9 +38,7 @@ class ThreadDetailsFragment :
             })
         }
 
-        override fun onThreadClick(model: ForumThread) {
-            //
-        }
+        override fun onThreadClick(model: ForumThread) {}
     })
 
     override fun init() {
@@ -69,12 +70,20 @@ class ThreadDetailsFragment :
     }
 
     override fun startOps() {
-        viewModel.details.observe(viewLifecycleOwner) { details ->
-            binding.swipeRefreshLayout.isRefreshing = false
-            detailsAdapter.submitList(details)
-            binding.threadMessageInput.clearFocus()
-            hideKeyboard()
-            binding.detailsRecycler.smoothScrollToPosition(detailsAdapter.currentList.size)
+        viewModel.details.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> showLoader()
+                is Result.Success -> {
+                    hideLoader()
+                    binding.swipeRefreshLayout.isRefreshing = false
+                    detailsAdapter.submitList(result.data)
+                    binding.threadMessageInput.clearFocus()
+                    hideKeyboard()
+                    binding.detailsRecycler.smoothScrollToPosition(detailsAdapter.currentList.size)
+                }
+
+                is Result.Failure -> hideLoader()
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.domain.model.Result
 import com.stathis.domain.usecases.forum.AddNewThreadUseCase
 import com.stathis.seriesmania.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,10 +20,10 @@ class AddThreadViewModel @Inject constructor(
     private val useCase: AddNewThreadUseCase
 ) : BaseViewModel(app) {
 
-    val threadAdded: LiveData<Boolean>
+    val threadAdded: LiveData<com.stathis.domain.model.Result<Boolean>>
         get() = _threadAdded
 
-    private val _threadAdded = MutableLiveData<Boolean>()
+    private val _threadAdded = MutableLiveData<com.stathis.domain.model.Result<Boolean>>()
 
     val validation: LiveData<Result>
         get() = _validation
@@ -33,9 +34,10 @@ class AddThreadViewModel @Inject constructor(
     var body: String = ""
 
     fun saveNewThread(title: String, body: String) {
+        _threadAdded.postValue(com.stathis.domain.model.Result.Loading())
         viewModelScope.launch(dispatcher) {
             val result = useCase.invoke(title, body)
-            _threadAdded.postValue(result)
+            _threadAdded.postValue(com.stathis.domain.model.Result.Success(result))
         }
     }
 

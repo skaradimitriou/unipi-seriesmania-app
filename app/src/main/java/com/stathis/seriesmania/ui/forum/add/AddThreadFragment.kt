@@ -3,7 +3,10 @@ package com.stathis.seriesmania.ui.forum.add
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import com.stathis.core.base.BaseFragment
+import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.showLoader
+import com.stathis.domain.model.Result
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentAddNewThreadBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,10 +42,18 @@ class AddThreadFragment :
             binding.isEnabled = result.ctaEnabled
         }
 
-        viewModel.threadAdded.observe(viewLifecycleOwner) {
-            binding.threadTitleInput.text.clear()
-            binding.threadBodyInput.text.clear()
-            requireActivity().finish()
+        viewModel.threadAdded.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> showLoader()
+                is Result.Success -> {
+                    hideLoader()
+                    binding.threadTitleInput.text.clear()
+                    binding.threadBodyInput.text.clear()
+                    requireActivity().finish()
+                }
+
+                is Result.Failure -> hideLoader()
+            }
         }
     }
 

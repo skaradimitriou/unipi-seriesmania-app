@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.OtherUser
 import com.stathis.domain.model.profile.uimodel.EmptyWatchlist
@@ -27,15 +28,15 @@ class ProfileResultsViewModel @Inject constructor(
     private val fetchWatchlistUseCase: FetchWatchlistUseCase
 ) : BaseViewModel(app) {
 
-    val follows: LiveData<List<OtherUser>>
+    val follows: LiveData<Result<List<OtherUser>>>
         get() = _follows
 
-    private val _follows = MutableLiveData<List<OtherUser>>()
+    private val _follows = MutableLiveData<Result<List<OtherUser>>>()
 
-    val watchlist: LiveData<List<UiModel>>
+    val watchlist: LiveData<Result<List<UiModel>>>
         get() = _watchlist
 
-    private val _watchlist = MutableLiveData<List<UiModel>>()
+    private val _watchlist = MutableLiveData<Result<List<UiModel>>>()
 
     fun getResults(type: ProfileResultsType) = when (type) {
         ProfileResultsType.FOLLOWING -> getMyFollowingUsers()
@@ -44,25 +45,29 @@ class ProfileResultsViewModel @Inject constructor(
     }
 
     private fun getMyFollowingUsers() {
+        _follows.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             fetchMyFollowsUseCase.invoke().collect {
-                _follows.postValue(it)
+                _follows.postValue(Result.Success(it))
             }
         }
     }
 
     private fun getWhoFollowsMe() {
+        _follows.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             fetchWhoFollowsMeUseCase.invoke().collect {
-                _follows.postValue(it)
+                _follows.postValue(Result.Success(it))
             }
         }
     }
 
     private fun getMyWatchlist() {
+        _watchlist.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             fetchWatchlistUseCase.invoke().collect {
-                _watchlist.postValue(it.ifEmpty { listOf(EmptyWatchlist()) })
+                val data = it.ifEmpty { listOf(EmptyWatchlist()) }
+                _watchlist.postValue(Result.Success(data))
             }
         }
     }

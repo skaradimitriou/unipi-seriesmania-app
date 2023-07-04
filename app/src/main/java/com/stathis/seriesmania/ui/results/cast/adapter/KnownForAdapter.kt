@@ -1,14 +1,14 @@
-package com.stathis.seriesmania.ui.results.cast
+package com.stathis.seriesmania.ui.results.cast.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.stathis.core.adapters.general.SeriesCallback
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
+import com.stathis.core.databinding.HolderTvSeriesItemBinding
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.UiModel
-import com.stathis.core.adapters.general.SeriesCallback
-import com.stathis.core.databinding.HolderTvSeriesItemBinding
 
 class KnownForAdapter(
     private val callback: SeriesCallback

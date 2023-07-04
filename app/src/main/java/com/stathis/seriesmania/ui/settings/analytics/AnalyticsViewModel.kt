@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.adapters.analytics.AnalyticsGenerator
 import com.stathis.core.base.BaseViewModel
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.usecases.settings.FetchAppAnalyticsUseCase
 import com.stathis.seriesmania.di.IoDispatcher
@@ -21,16 +22,17 @@ class AnalyticsViewModel @Inject constructor(
     private val fetchAppAnalyticsUseCase: FetchAppAnalyticsUseCase
 ) : BaseViewModel(app) {
 
-    val analytics: LiveData<List<UiModel>>
+    val analytics: LiveData<Result<List<UiModel>>>
         get() = _analytics
 
-    private val _analytics = MutableLiveData<List<UiModel>>()
+    private val _analytics = MutableLiveData<Result<List<UiModel>>>()
 
     fun fetchAppAnalytics() {
+        _analytics.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             fetchAppAnalyticsUseCase.invoke().collect { response ->
                 val data = AnalyticsGenerator.generate(response)
-                _analytics.postValue(data)
+                _analytics.postValue(Result.Success(data))
             }
         }
     }

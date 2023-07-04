@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.forum.ForumThread
 import com.stathis.domain.usecases.forum.AddThreadReplyUseCase
@@ -24,10 +25,10 @@ class ThreadDetailsViewModel @Inject constructor(
     private val fetchThreadByIdUseCase: FetchForumThreadByIdUseCase
 ) : BaseViewModel(app) {
 
-    val details: LiveData<List<UiModel>>
+    val details: LiveData<Result<List<UiModel>>>
         get() = _details
 
-    private val _details = MutableLiveData<List<UiModel>>()
+    private val _details = MutableLiveData<Result<List<UiModel>>>()
 
     private var currentForumThread: ForumThread? = null
 
@@ -39,11 +40,12 @@ class ThreadDetailsViewModel @Inject constructor(
     }
 
     fun getThreadDetails(forumThread: ForumThread? = currentForumThread) {
+        _details.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             val result = fetchThreadByIdUseCase.invoke(forumThread?.threadId)
             currentForumThread = result
             val details = ThreadDetailsGenerator.generate(result)
-            _details.postValue(details)
+            _details.postValue(Result.Success(details))
         }
     }
 }

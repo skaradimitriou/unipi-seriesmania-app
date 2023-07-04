@@ -32,12 +32,11 @@
 
             <TextView
                 android:id="@+id/faqTitleTxtView"
+                style="@style/text_16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_l"
                 android:text="@{model.title}"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@id/iconMoreImgView"
                 app:layout_constraintStart_toEndOf="@id/ribbonView"
                 app:layout_constraintTop_toTopOf="parent"

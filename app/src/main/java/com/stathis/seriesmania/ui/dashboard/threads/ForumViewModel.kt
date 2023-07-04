@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
+import com.stathis.domain.model.Result
 import com.stathis.domain.model.forum.ForumThread
 import com.stathis.domain.usecases.forum.FetchForumThreadsUseCase
 import com.stathis.seriesmania.di.IoDispatcher
@@ -19,15 +20,16 @@ class ForumViewModel @Inject constructor(
     private val threadsCombiner: FetchForumThreadsUseCase
 ) : BaseViewModel(app) {
 
-    val threads: MutableLiveData<List<ForumThread>>
+    val threads: MutableLiveData<Result<List<ForumThread>>>
         get() = _threads
 
-    private val _threads = MutableLiveData<List<ForumThread>>()
+    private val _threads = MutableLiveData<Result<List<ForumThread>>>()
 
     fun fetchThreads() {
+        _threads.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             val result = threadsCombiner.invoke()
-            _threads.postValue(result)
+            _threads.postValue(Result.Success(result))
         }
     }
 }

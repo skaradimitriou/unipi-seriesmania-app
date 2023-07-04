@@ -7,7 +7,9 @@ import com.stathis.core.adapters.profile.UserProfileAdapter
 import com.stathis.core.adapters.profile.UserProfileCallback
 import com.stathis.core.base.BaseFragment
 import com.stathis.core.ext.askUserForAction
+import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.setScreenTitle
+import com.stathis.core.ext.showLoader
 import com.stathis.core.util.MODE
 import com.stathis.core.util.SERIES
 import com.stathis.domain.model.Result
@@ -45,18 +47,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
 
         viewModel.userInfo.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Result.Loading -> {
-                    binding.isLoading = true
-                }
-
+                is Result.Loading -> showLoader()
                 is Result.Success -> {
-                    binding.isLoading = false
+                    hideLoader()
                     profileAdapter.submitList(result.data)
                 }
 
-                is Result.Failure -> {
-                    binding.isLoading = false
-                }
+                is Result.Failure -> hideLoader()
             }
         }
 
