@@ -8,12 +8,15 @@ import com.stathis.core.ext.addAppBarMenu
 import com.stathis.core.ext.hideLoader
 import com.stathis.core.ext.setScreenTitle
 import com.stathis.core.ext.showLoader
+import com.stathis.core.util.GENRE
+import com.stathis.core.util.GenresGenerator
 import com.stathis.core.util.MODE
 import com.stathis.core.util.RESULT_TYPE
 import com.stathis.core.util.SERIES
 import com.stathis.domain.model.Result
 import com.stathis.domain.model.ResultType
 import com.stathis.domain.model.TvSeries
+import com.stathis.domain.model.genres.Genre
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentHomeBinding
 import com.stathis.seriesmania.ui.dashboard.home.adapter.HomeAdapter
@@ -82,18 +85,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     override fun openMyPreferencesSeries(id: Int) {
-        openResults(landingMode = ResultAction.RESULTS, resultType = ResultType.SPECIFIC_GENRE)
+        val genre = GenresGenerator.getGenre(id)
+        openResults(
+            landingMode = ResultAction.RESULTS,
+            resultType = ResultType.SPECIFIC_GENRE,
+            genre = genre
+        )
     }
 
     private fun openResults(
         landingMode: ResultAction,
         resultType: ResultType? = null,
-        model: TvSeries? = null
+        model: TvSeries? = null,
+        genre: Genre? = null
     ) {
         startActivity(Intent(requireContext(), ResultsActivity::class.java).apply {
             putExtra(MODE, landingMode)
             putExtra(RESULT_TYPE, resultType)
             putExtra(SERIES, model)
+            putExtra(GENRE, genre)
         })
     }
 }

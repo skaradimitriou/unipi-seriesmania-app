@@ -1,8 +1,16 @@
 package com.stathis.domain.combiners
 
 import com.stathis.domain.model.TvSeriesWrapper
-import com.stathis.domain.model.dashboard.*
-import com.stathis.domain.usecases.dashboard.*
+import com.stathis.domain.model.dashboard.AiringTodaySeries
+import com.stathis.domain.model.dashboard.DashboardUiModel
+import com.stathis.domain.model.dashboard.PopularSeries
+import com.stathis.domain.model.dashboard.TopRatedSeries
+import com.stathis.domain.model.dashboard.TrendingSeries
+import com.stathis.domain.usecases.dashboard.GetAiringTodaySeriesUseCase
+import com.stathis.domain.usecases.dashboard.GetPopularSeriesUseCase
+import com.stathis.domain.usecases.dashboard.GetSeriesByGenreIdUseCase
+import com.stathis.domain.usecases.dashboard.GetTopRatedSeriesUseCase
+import com.stathis.domain.usecases.dashboard.GetTrendingSeriesUseCase
 import com.stathis.domain.usecases.profile.GetProfileInfoUseCase
 import com.stathis.domain.usecases.watchlist.FetchWatchlistUseCase
 import kotlinx.coroutines.async
@@ -46,19 +54,34 @@ class DashboardDataCombiner @Inject constructor(
 
         val firstPreference = async {
             profile.preferences.getOrNull(0)?.let {
-                TvSeriesWrapper(seriesByGenreIdUseCase.invoke(it.id), "${it.name} series")
+                TvSeriesWrapper(
+                    series = seriesByGenreIdUseCase.invoke(it.id),
+                    title = "${it.name} series",
+                    btnTitle = "ALL",
+                    genreId = it.id
+                )
             }
         }.await()
 
         val secondPreference = async {
             profile.preferences.getOrNull(1)?.let {
-                TvSeriesWrapper(seriesByGenreIdUseCase.invoke(it.id), "${it.name} series")
+                TvSeriesWrapper(
+                    series = seriesByGenreIdUseCase.invoke(it.id),
+                    title = "${it.name} series",
+                    btnTitle = "ALL",
+                    genreId = it.id
+                )
             }
         }.await()
 
         val thirdPreference = async {
             profile.preferences.getOrNull(2)?.let {
-                TvSeriesWrapper(seriesByGenreIdUseCase.invoke(it.id), "${it.name} series")
+                TvSeriesWrapper(
+                    series = seriesByGenreIdUseCase.invoke(it.id),
+                    title = "${it.name} series",
+                    btnTitle = "ALL",
+                    genreId = it.id
+                )
             }
         }.await()
 

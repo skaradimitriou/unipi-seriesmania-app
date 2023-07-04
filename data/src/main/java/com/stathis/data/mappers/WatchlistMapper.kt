@@ -2,7 +2,7 @@ package com.stathis.data.mappers
 
 import com.stathis.core.ext.toListOf
 import com.stathis.core.ext.toNotNull
-import com.stathis.data.util.GenresGenerator
+import com.stathis.core.util.GenresGenerator
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.TvSeriesWrapper
 

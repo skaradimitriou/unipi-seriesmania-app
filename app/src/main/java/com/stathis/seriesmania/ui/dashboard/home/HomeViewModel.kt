@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
-import com.stathis.core.util.session.SessionManager
 import com.stathis.domain.combiners.DashboardDataCombiner
 import com.stathis.domain.model.Result
 import com.stathis.domain.model.UiModel
@@ -19,8 +18,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     app: Application,
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-    private val homeCombiner: DashboardDataCombiner,
-    private val sessionManager: SessionManager
+    private val homeCombiner: DashboardDataCombiner
 ) : BaseViewModel(app) {
 
     val dashboardData: LiveData<Result<List<UiModel>>>

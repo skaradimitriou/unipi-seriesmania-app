@@ -1,5 +1,6 @@
 package com.stathis.seriesmania.ui.results.details
 
+import android.content.Intent
 import android.view.Menu
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,12 +17,14 @@ import com.stathis.core.ext.setMenuProvider
 import com.stathis.core.ext.setScreenTitle
 import com.stathis.core.ext.showLoader
 import com.stathis.core.ext.toNotNull
+import com.stathis.core.util.MODE
 import com.stathis.core.util.SERIES
 import com.stathis.domain.model.Result
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.cast.Cast
 import com.stathis.seriesmania.R
 import com.stathis.seriesmania.databinding.FragmentDetailsBinding
+import com.stathis.seriesmania.ui.results.ResultsActivity
 import com.stathis.seriesmania.ui.results.ResultsActivityViewModel
 import com.stathis.seriesmania.ui.results.ResultsSharedViewModel
 import com.stathis.seriesmania.ui.results.navigator.ResultAction
@@ -40,7 +43,10 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_d
         override fun onRateClick() = openRatingBottomSheet()
 
         override fun onSeriesClick(series: TvSeries) {
-            viewModel.getSeriesInfo(series)
+            startActivity(Intent(requireContext(), ResultsActivity::class.java).apply {
+                putExtra(MODE, ResultAction.DETAILS)
+                putExtra(SERIES, series)
+            })
         }
 
         override fun onActorClick(actor: Cast) {

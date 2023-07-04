@@ -1,4 +1,4 @@
-package com.stathis.data.util
+package com.stathis.core.util
 
 import com.stathis.domain.model.genres.Genre
 

@@ -13,6 +13,7 @@ import com.stathis.core.adapters.general.TrendingSeriesAdapter
 import com.stathis.core.base.BaseDiffUtil
 import com.stathis.core.base.BaseViewHolder
 import com.stathis.core.callbacks.DashboardCallback
+import com.stathis.core.callbacks.PreferencesCallback
 import com.stathis.core.databinding.HolderAiringTodaySeriesBinding
 import com.stathis.core.databinding.HolderDashboardUserBinding
 import com.stathis.core.databinding.HolderEmptyViewBinding
@@ -85,7 +86,7 @@ class HomeAdapter(
 class HomeViewHolder(
     private val binding: ViewDataBinding,
     private val callback: DashboardCallback
-) : BaseViewHolder(binding), SeriesCallback {
+) : BaseViewHolder(binding), SeriesCallback, PreferencesCallback {
 
     override fun present(data: UiModel) {
         when (data) {
@@ -134,11 +135,16 @@ class HomeViewHolder(
                 binding.setVariable(BR.adapter, adapter)
                 binding.setVariable(BR.decoration, decor)
                 binding.setVariable(BR.model, data)
+                binding.setVariable(BR.callback, this)
             }
         }
     }
 
     override fun onSeriesClick(model: TvSeries) {
         callback.onSeriesClick(model)
+    }
+
+    override fun onGenreClick(id: Int) {
+        callback.openMyPreferencesSeries(id)
     }
 }

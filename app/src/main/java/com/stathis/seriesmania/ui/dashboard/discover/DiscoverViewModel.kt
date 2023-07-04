@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.stathis.core.base.BaseViewModel
-import com.stathis.data.util.GenresGenerator
+import com.stathis.core.util.GenresGenerator
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.genres.Genre
 import com.stathis.domain.usecases.search.SearchForSeriesUseCase

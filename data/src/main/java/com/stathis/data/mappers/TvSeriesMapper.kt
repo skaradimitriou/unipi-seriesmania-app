@@ -1,9 +1,9 @@
 package com.stathis.data.mappers
 
 import com.stathis.core.ext.toNotNull
+import com.stathis.core.util.GenresGenerator
 import com.stathis.data.model.TvSeriesDto
 import com.stathis.data.model.TvSeriesFeedDto
-import com.stathis.data.util.GenresGenerator
 import com.stathis.domain.model.TvSeries
 import com.stathis.domain.model.TvSeriesFeed
 
