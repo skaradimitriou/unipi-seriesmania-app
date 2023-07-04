@@ -19,6 +19,14 @@ class EmptyWatchlist : UiModel {
     override fun equalsContent(obj: UiModel): Boolean = true
 }
 
+class EmptyFollowing : UiModel {
+    override fun equalsContent(obj: UiModel): Boolean = true
+}
+
+class EmptyFollowers : UiModel {
+    override fun equalsContent(obj: UiModel): Boolean = true
+}
+
 data class UserStatistics(
     val followers: String,
     val following: String,

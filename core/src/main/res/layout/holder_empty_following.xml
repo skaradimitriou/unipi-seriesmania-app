@@ -3,23 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="isOtherUser"
-            type="Boolean" />
-
-        <variable
-            name="preferences"
-            type="String" />
-
-        <variable
-            name="callback"
-            type="com.stathis.core.adapters.profile.UserProfileCallback" />
-    </data>
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,15 +15,15 @@
             android:background="@drawable/dashed_bg"
             android:padding="@dimen/dimen_l">
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/emptyImgView"
                 android:layout_width="@dimen/dimen_3xl"
                 android:layout_height="@dimen/dimen_3xl"
-                android:background="@drawable/ic_series_filter"
-                android:backgroundTint="@color/dark_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_rawRes="@raw/no_results" />
 
             <TextView
                 android:id="@+id/emptyTitleTxtView"
@@ -48,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/dimen_s"
-                android:text="@string/profile_prefs_title"
+                android:text="@string/profile_empty_following_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/emptyImgView" />
 
@@ -58,25 +41,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@{isOtherUser ? @string/profile_prefs_desc_other_user(preferences) : @string/profile_prefs_desc(preferences)}"
+                android:text="@string/profile_empty_following_desc"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/emptyTitleTxtView"
-                tools:text="@string/profile_prefs_desc" />
-
-            <TextView
-                android:id="@+id/editTxtView"
-                style="@style/text_16_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_m"
-                android:onClick="@{() -> callback.onPreferencesClick()}"
-                android:text="@string/edit"
-                android:textColor="@color/dark_blue"
-                android:visibility="@{isOtherUser ? View.GONE : View.VISIBLE}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/emptyDescTxtView" />
+                tools:text="@string/profile_empty_following_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
 </layout>

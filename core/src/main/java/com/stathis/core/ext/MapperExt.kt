@@ -1,8 +1,6 @@
 package com.stathis.core.ext
 
 import com.google.firebase.firestore.QuerySnapshot
-import com.stathis.domain.model.profile.OtherUser
-import com.stathis.domain.model.profile.User
 import retrofit2.Response
 
 fun String?.toNotNull() = this ?: ""

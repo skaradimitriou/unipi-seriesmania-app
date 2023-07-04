@@ -3,6 +3,7 @@ package com.stathis.domain.model.profile
 import android.os.Parcelable
 import com.stathis.domain.model.UiModel
 import com.stathis.domain.model.profile.uimodel.SeriesPreference
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -14,12 +15,13 @@ data class User(
     val email: String,
     val userImg: String
 ) : UiModel, Parcelable {
+    @IgnoredOnParcel
+    var following: Boolean = false
+
     constructor() : this("", "", "", listOf(), "", "")
 
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
-        is User -> userImg == obj.userImg && username == obj.username
+        is User -> userImg == obj.userImg && username == obj.username && following == obj.following
         else -> false
     }
 }
-
-fun User.toOtherUser() = OtherUser(id, username, bio, preferences, email, userImg)

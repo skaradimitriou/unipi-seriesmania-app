@@ -31,8 +31,8 @@
             android:id="@+id/profileBgOverlay"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/black"
             android:alpha="0.5"
+            android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/bgImgView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/bgImgView" />
@@ -99,9 +99,9 @@
                 android:ellipsize="end"
                 android:gravity="center_horizontal"
                 android:maxLines="4"
-                android:text="@{@string/bio_placeholder(model.bio)}"
                 android:textColor="@color/white"
                 android:textStyle="italic"
+                app:bio="@{model.bio}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profileEmailTxtView"
                 tools:text="@string/lorem_ipsum" />

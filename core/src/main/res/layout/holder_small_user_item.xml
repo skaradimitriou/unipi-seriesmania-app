@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.stathis.domain.model.profile.OtherUser" />
+            type="com.stathis.domain.model.profile.User" />
 
         <variable
             name="callback"
