@@ -12,7 +12,7 @@ import com.stathis.core.util.GENRE
 import com.stathis.core.util.MODE
 import com.stathis.core.util.RESULT_TYPE
 import com.stathis.core.util.SERIES
-import com.stathis.core.util.decorations.VerticalItemDecoration
+import com.stathis.core.util.decorations.ResultsItemDecoration
 import com.stathis.domain.model.ResultType
 import com.stathis.domain.model.genres.Genre
 import com.stathis.seriesmania.R
@@ -27,7 +27,7 @@ class ResultsFragment : BaseFragment<FragmentResultsBinding>(R.layout.fragment_r
 
     private val viewModel: ResultsViewModel by viewModels()
 
-    private val adapter = ResultsPagingAdapter {
+    private val resultsAdapter = ResultsPagingAdapter {
         startActivity(Intent(requireContext(), ResultsActivity::class.java).apply {
             putExtra(MODE, ResultAction.DETAILS)
             putExtra(SERIES, it)
@@ -35,8 +35,10 @@ class ResultsFragment : BaseFragment<FragmentResultsBinding>(R.layout.fragment_r
     }
 
     override fun init() {
-        binding.adapter = adapter
-        binding.detailsRecycler.addItemDecoration(VerticalItemDecoration(20))
+        binding.detailsRecycler.apply {
+            addItemDecoration(ResultsItemDecoration(30))
+            adapter = resultsAdapter
+        }
 
         requireActivity().intent.getSerializable<ResultType>(RESULT_TYPE)?.let { type ->
             val genre = requireActivity().intent.getParcelable<Genre>(GENRE)
@@ -59,7 +61,7 @@ class ResultsFragment : BaseFragment<FragmentResultsBinding>(R.layout.fragment_r
     override fun startOps() {
         viewModel.data.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
-                adapter.submitData(it)
+                resultsAdapter.submitData(it)
             }
         }
     }

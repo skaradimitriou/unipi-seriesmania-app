@@ -27,11 +27,16 @@ class AnalyticsViewModel @Inject constructor(
 
     private val _analytics = MutableLiveData<Result<List<UiModel>>>()
 
+    private val app = getApplication<Application>()
+
     fun fetchAppAnalytics() {
         _analytics.postValue(Result.Loading())
         viewModelScope.launch(dispatcher) {
             fetchAppAnalyticsUseCase.invoke().collect { response ->
-                val data = AnalyticsGenerator.generate(response)
+                val data = AnalyticsGenerator.generate(
+                    data = response,
+                    context = app.applicationContext
+                )
                 _analytics.postValue(Result.Success(data))
             }
         }

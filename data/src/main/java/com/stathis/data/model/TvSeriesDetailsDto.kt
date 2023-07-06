@@ -12,4 +12,6 @@ data class TvSeriesDetailsDto(
     val poster_path: String,
     val vote_average: Double,
     val vote_count: Int
-)
+) {
+    constructor() : this("", "", listOf(), 0, "", 0, 0, "", "", 0.0, 0)
+}

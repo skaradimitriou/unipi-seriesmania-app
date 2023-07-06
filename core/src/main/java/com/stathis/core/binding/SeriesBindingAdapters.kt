@@ -28,6 +28,17 @@ fun ImageView.setSeriesImage(series: TvSeries) {
     }
 }
 
+@BindingAdapter("seriesImageDetails")
+fun ImageView.setSeriesImage(series: TvSeriesDetails) {
+    try {
+        val url = series.posterPath.ifEmpty { series.backdropPath }
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500$url")
+            .placeholder(R.mipmap.seriesmania_logo).error(R.mipmap.seriesmania_logo).into(this)
+    } catch (e: Exception) {
+        setImageResource(R.mipmap.seriesmania_logo)
+    }
+}
+
 @BindingAdapter("seriesDetailsImage")
 fun ImageView.setSeriesDetailsImage(series: TvSeriesDetails) {
     try {

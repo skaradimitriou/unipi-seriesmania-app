@@ -7,35 +7,113 @@
 
         <variable
             name="model"
-            type="com.stathis.core.adapters.analytics.uimodel.AnalyticsDetail" />
+            type="com.stathis.core.adapters.analytics.uimodel.AnalyticsGeneralItem" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/dimen_m"
-        android:paddingVertical="@dimen/dimen_m">
+        android:layout_margin="@dimen/dimen_m"
+        app:cardCornerRadius="@dimen/dimen_10">
 
-        <TextView
-            android:id="@+id/detailTitleTxtView"
-            style="@style/text_18"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{model.title}"
-            app:layout_constraintBottom_toBottomOf="@id/detailDescTxtView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/detailDescTxtView"
-            tools:text="lorem ipsum sit dolor amet" />
+            android:padding="@dimen/dimen_m">
 
-        <TextView
-            android:id="@+id/detailDescTxtView"
-            style="@style/text_18_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{model.value}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="5" />
+            <TextView
+                android:id="@+id/generalHeaderTxtView"
+                style="@style/text_20_bold_dark_grey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/general"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/usersInAppHeaderTxtView"
+                style="@style/text_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_l"
+                android:text="@string/users_in_app"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/generalHeaderTxtView" />
+
+            <TextView
+                android:id="@+id/detailDescTxtView"
+                style="@style/text_18_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.howManyUsers}"
+                app:layout_constraintBottom_toBottomOf="@id/usersInAppHeaderTxtView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/usersInAppHeaderTxtView"
+                tools:text="5" />
+
+            <TextView
+                android:id="@+id/discussionsInAppHeaderTxtView"
+                style="@style/text_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_m"
+                android:text="@string/forum_discussions_in_app"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/usersInAppHeaderTxtView" />
+
+            <TextView
+                android:id="@+id/discussionsDescTxtView"
+                style="@style/text_18_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.howManyForumDiscussions}"
+                app:layout_constraintBottom_toBottomOf="@id/discussionsInAppHeaderTxtView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/discussionsInAppHeaderTxtView"
+                tools:text="5" />
+
+            <TextView
+                android:id="@+id/ratingsInAppHeaderTxtView"
+                style="@style/text_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_m"
+                android:text="@string/ratings_made_in_app"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/discussionsInAppHeaderTxtView" />
+
+            <TextView
+                android:id="@+id/ratingsDescTxtView"
+                style="@style/text_18_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.howManyRatingMade}"
+                app:layout_constraintBottom_toBottomOf="@id/ratingsInAppHeaderTxtView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ratingsInAppHeaderTxtView"
+                tools:text="5" />
+
+            <TextView
+                android:id="@+id/reviewsInAppHeaderTxtView"
+                style="@style/text_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_m"
+                android:text="@string/reviews_made_in_app"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ratingsInAppHeaderTxtView" />
+
+            <TextView
+                android:id="@+id/reviewsDescTxtView"
+                style="@style/text_18_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.howManyReviewsMade}"
+                app:layout_constraintBottom_toBottomOf="@id/reviewsInAppHeaderTxtView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/reviewsInAppHeaderTxtView"
+                tools:text="5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
