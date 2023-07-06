@@ -72,7 +72,7 @@ class ProfileCombiner @Inject constructor(
             list.add(EmptyWatchlist())
         }
 
-        list.add(LogoutOption(buttonTxt = "Αποσύνδεση"))
+        list.add(LogoutOption(buttonTxt = "Logout"))
 
         return@coroutineScope Result.Success(list)
     }

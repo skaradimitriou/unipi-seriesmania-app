@@ -1,14 +1,13 @@
 package com.stathis.core.adapters.analytics.uimodel
 
-import com.stathis.domain.model.TvSeriesDetails
 import com.stathis.domain.model.UiModel
+import com.stathis.domain.model.forum.ForumThread
 
-data class AnalyticsSeriesItem(
-    val series: List<TvSeriesDetails>
+data class AnalyticsThreadItem(
+    val thread: ForumThread
 ) : UiModel {
     override fun equalsContent(obj: UiModel) = when (obj) {
-        is AnalyticsSeriesItem -> series == obj.series
-
+        is AnalyticsThreadItem -> thread == obj.thread
         else -> false
     }
 }

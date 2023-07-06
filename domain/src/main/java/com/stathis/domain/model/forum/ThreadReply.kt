@@ -10,6 +10,8 @@ data class ThreadReply(
     val message: String,
     var user: User
 ) : Parcelable, UiModel {
+    constructor() : this("", User())
+
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
         is ThreadReply -> message == obj.message && user == obj.user
         else -> false

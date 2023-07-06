@@ -13,6 +13,8 @@ data class ForumThread(
     val threadId: String,
     var replies: List<ThreadReply>
 ) : UiModel, Parcelable {
+    constructor() : this("", "", User(), "", listOf())
+
     override fun equalsContent(obj: UiModel): Boolean = when (obj) {
         is ForumThread -> threadId == obj.threadId && title == obj.title && body == obj.body && replies == obj.replies
         else -> false

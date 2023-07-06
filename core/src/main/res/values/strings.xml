@@ -67,7 +67,6 @@
     <string name="profile_empty_followers_desc">Once you someone starts following you, you can find him/her here</string>
 
 
-
     <string name="ask_user_logout">Do you want to logout?</string>
     <string name="logout">Logout</string>
 
@@ -144,6 +143,21 @@
 
     <!-- Analytics Screen -->
     <string name="analytics_title">Analytics</string>
+    <string name="general">General</string>
+    <string name="users_in_app">Users in app</string>
+    <string name="forum_discussions_in_app">Forum Discussions in app</string>
+    <string name="ratings_made_in_app">Ratings Made in app</string>
+    <string name="reviews_made_in_app">Reviews Made in app</string>
+    <string name="most_ratings_made_by">Most ratings made by</string>
+    <string name="user_biggest_watchlist">User with the biggest watchlist</string>
+    <string name="user_most_followers">Users with most followers</string>
+    <string name="most_thread_replies_user">Most thread replies made by</string>
+    <string name="top_rated_series_in_app">Top rated series in app</string>
+    <string name="most_popular_forum_discussion">Most Popular Forum Discussion</string>
+    <string name="users">Users</string>
+    <string name="top_users_preferences">Top User\'s Preferences</string>
+    <string name="top_users_prefs_disclamer">(This is calculated based on the preferences of the user\'s profile)</string>
+
 
     <!-- FAQ Screen -->
     <string name="faq_long_title">Faq (Frequently Asked Questions)</string>
