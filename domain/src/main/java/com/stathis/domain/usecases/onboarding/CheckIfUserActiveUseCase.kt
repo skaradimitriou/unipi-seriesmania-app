@@ -8,7 +8,5 @@ class CheckIfUserActiveUseCase @Inject constructor(
     private val repo: OnboardingRepository
 ) : BaseUseCase<Boolean> {
 
-    override suspend fun invoke(vararg args: Any?): Boolean {
-        return repo.checkIfUserActive()
-    }
+    override suspend fun invoke(vararg args: Any?) = repo.checkIfUserActive()
 }

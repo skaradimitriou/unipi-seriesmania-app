@@ -28,6 +28,8 @@ class AuthenticatorImpl @Inject constructor(
             }
         } catch (e: FirebaseAuthException) {
             return Result.Failure(e.localizedMessage ?: GENERIC_ERROR)
+        } catch (e: Exception) {
+            return Result.Failure(e.localizedMessage ?: GENERIC_ERROR)
         }
     }
 
@@ -45,12 +47,18 @@ class AuthenticatorImpl @Inject constructor(
             }
         } catch (e: FirebaseAuthException) {
             return Result.Failure(e.localizedMessage ?: GENERIC_ERROR)
+        } catch (e: Exception) {
+            return Result.Failure(e.localizedMessage ?: GENERIC_ERROR)
         }
     }
 
     override fun isUserActive(): Boolean = auth.currentUser != null
 
-    override fun getActiveUser(): FirebaseUser? = auth.currentUser
+    override fun getActiveUser(): FirebaseUser? = try {
+        auth.currentUser
+    } catch (e: Exception) {
+        null
+    }
 
     override fun getActiveUserId(): String = auth.currentUser?.uid.toString()
 

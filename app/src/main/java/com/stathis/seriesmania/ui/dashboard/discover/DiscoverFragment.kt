@@ -54,8 +54,6 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding>(R.layout.fragment
     }
 
     override fun startOps() {
-        viewModel.getAvailableGenres()
-
         viewModel.genres.observe(viewLifecycleOwner) { genres ->
             setupGridList()
             genresAdapter.submitList(genres)

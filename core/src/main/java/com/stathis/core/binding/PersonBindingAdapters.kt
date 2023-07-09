@@ -3,6 +3,7 @@ package com.stathis.core.binding
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.stathis.core.R
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -14,7 +15,14 @@ fun TextView.setPopularity(popularity: Double?) {
 
 @BindingAdapter("birthday")
 fun TextView.setBirthday(birthDate: String) {
-    text = birthDate.ifEmpty { resources.getString(R.string.not_found) }
+    text = try {
+        val inputDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = inputDate.parse(birthDate)
+        val outputDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        outputDate.format(date)
+    } catch (e: Exception) {
+        birthDate.ifEmpty { resources.getString(R.string.not_found) }
+    }
 }
 
 @BindingAdapter("placeOfBirth")

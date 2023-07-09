@@ -54,6 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_10"
                 android:ellipsize="end"
+                android:maxLines="2"
+                android:singleLine="false"
                 android:text="@{model.body}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/forumTitleTxtView"

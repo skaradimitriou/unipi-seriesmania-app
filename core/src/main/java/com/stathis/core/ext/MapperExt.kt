@@ -28,10 +28,14 @@ suspend fun <DataModel, DomainModel> getAndMapResponse(
     call: suspend () -> Response<DataModel?>,
     mapper: suspend (DataModel?) -> DomainModel
 ): DomainModel {
-    val result = call.invoke()
-    return if (result.isSuccessful) {
-        mapper.invoke(result.body())
-    } else {
+    return try {
+        val result = call.invoke()
+        return if (result.isSuccessful) {
+            mapper.invoke(result.body())
+        } else {
+            mapper.invoke(null)
+        }
+    } catch (e: Exception) {
         mapper.invoke(null)
     }
 }

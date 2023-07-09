@@ -58,9 +58,7 @@ class UpdateInfoViewModel @Inject constructor(
             tempUsername = username
         }
 
-        if (!bio.isNullOrEmpty() && bio != tempBio) {
-            tempBio = bio
-        }
+        tempBio = bio
     }
 
     data class UpdateInfoModel(val username: String, val bio: String)
